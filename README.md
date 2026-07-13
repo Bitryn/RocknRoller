@@ -1,5 +1,6 @@
-I’ve come to make an announcement: 
+Organizacja folderow:
 
-Shadow the Hedgehog’s a bitch-ass motherfucker
-
-
+Wszystko co stosuje sie wprost do glownego bohatera -> mainCharacter
+Scrypty i sceny do Wrogow -> enemy
+inne obrazki nie teksturowe -> img
+Wszystko co stosuje sie wprost do Rollera -> Roller
