@@ -1,0 +1,235 @@
+[gd_scene format=3 uid="uid://8ae5vsbtlh46"]
+
+[ext_resource type="Texture2D" uid="uid://du74t0td7q8wu" path="res://enemy/Bird/Body.png" id="1_fkcbc"]
+[ext_resource type="Texture2D" uid="uid://c4ecnyx7ulc6c" path="res://enemy/Bird/Head.png" id="1_hb0qm"]
+[ext_resource type="Script" uid="uid://cvjjejm2qivgq" path="res://enemy/Bird/big_bird_enemy.gd" id="1_uwmcv"]
+[ext_resource type="Texture2D" uid="uid://cji64ow8qij8i" path="res://enemy/Bird/WingFull.png" id="3_pk4of"]
+[ext_resource type="PackedScene" uid="uid://bye1hfamha4vd" path="res://enemy/Bird/BirdIdle.blend" id="4_pk4of"]
+
+[sub_resource type="Animation" id="Animation_uwmcv"]
+resource_name = "Idle"
+loop_mode = 1
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.4966656, 0.35741794, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WR:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(3.1415927, 0, 0), Vector3(-7.1789465e-08, 3.1415925, -2.5342646)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WR:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.3151213, 0.26032555, -0.31757188)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WL:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WL:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.07897681, 0.2843807, -0.10255605)]
+}
+
+[sub_resource type="Animation" id="Animation_a3xto"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.4966656, 0.35741794, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WR:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.1415927, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WR:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.3151213, 0.26032555, -0.31757188)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WL:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WL:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.07897681, 0.2843807, -0.10255605)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mcxwg"]
+_data = {
+&"Idle": SubResource("Animation_uwmcv"),
+&"RESET": SubResource("Animation_a3xto")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uyufj"]
+render_priority = 1
+transparency = 1
+albedo_texture = ExtResource("1_hb0qm")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i1acx"]
+orientation = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65sfv"]
+render_priority = 1
+transparency = 1
+albedo_texture = ExtResource("1_fkcbc")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c304g"]
+transparency = 1
+albedo_texture = ExtResource("3_pk4of")
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i1acx"]
+
+[node name="BigBirdEnemy" type="Area3D" unique_id=1484725836]
+script = ExtResource("1_uwmcv")
+
+[node name="AnimP" type="AnimationPlayer" parent="." unique_id=782486088]
+libraries/ = SubResource("AnimationLibrary_mcxwg")
+
+[node name="Head" type="MeshInstance3D" parent="." unique_id=634254553]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4966656, 0.35741794, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_uyufj")
+mesh = SubResource("PlaneMesh_i1acx")
+
+[node name="Body" type="MeshInstance3D" parent="." unique_id=1376802359]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.16823381)
+visible = false
+material_override = SubResource("StandardMaterial3D_65sfv")
+mesh = SubResource("PlaneMesh_i1acx")
+
+[node name="WR" type="Node3D" parent="." unique_id=1722082620]
+transform = Transform3D(-1, 0, 0, 0, 1, -8.742278e-08, 0, 8.742278e-08, 1, -0.3151213, 0.26032555, -0.31757188)
+visible = false
+
+[node name="WingR" type="MeshInstance3D" parent="WR" unique_id=293016321]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.68466216, 0.012844861, 0)
+material_override = SubResource("StandardMaterial3D_c304g")
+mesh = SubResource("PlaneMesh_i1acx")
+
+[node name="WL" type="Node3D" parent="." unique_id=384244296]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07897681, 0.2843807, -0.10255605)
+visible = false
+
+[node name="WingL" type="MeshInstance3D" parent="WL" unique_id=575713065]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7129738, 0.006575525, -0.21501583)
+material_override = SubResource("StandardMaterial3D_c304g")
+mesh = SubResource("PlaneMesh_i1acx")
+
+[node name="BirdIdle" parent="." unique_id=1352622653 instance=ExtResource("4_pk4of")]
+
+[node name="Coll" type="CollisionShape3D" parent="." unique_id=320531323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13942528, 0.23191392, 0)
+shape = SubResource("BoxShape3D_i1acx")
+
+[node name="Flapper" type="Timer" parent="." unique_id=1134986741]
+wait_time = 1.5
+autostart = true
+
+[connection signal="timeout" from="Flapper" to="." method="_on_flapper_timeout"]
