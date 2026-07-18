@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://sf8alihp1r1c"]
+
+[ext_resource type="Script" uid="uid://dl6n3pu1bq2kf" path="res://glob_sig.gd" id="1_e10bx"]
+
+[node name="GlobSig" type="Node" unique_id=2099993599]
+script = ExtResource("1_e10bx")

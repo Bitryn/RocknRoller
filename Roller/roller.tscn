@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://c2t50hms4g7k1"]
+
+[ext_resource type="Texture2D" uid="uid://bte48c48udugn" path="res://Roller/CutoutRollerBlueprint.png" id="1_qvt2u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1vlh"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_qvt2u")
+
+[sub_resource type="QuadMesh" id="QuadMesh_i1acx"]
+size = Vector2(50, 50)
+
+[sub_resource type="Animation" id="Animation_qvt2u"]
+resource_name = "LightWave"
+length = 3.0000000000000004
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FrontSpotLight:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.6, 1.6333333, 2.3666666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -1.5707964, 0), Vector3(0, -1.5707964, -1.8395771), Vector3(0, -1.5707964, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3lxdo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FrontSpotLight:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.5707964, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_odgv0"]
+_data = {
+&"LightWave": SubResource("Animation_qvt2u"),
+&"RESET": SubResource("Animation_3lxdo")
+}
+
+[node name="Roller" type="CharacterBody3D" unique_id=128118887]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=34097537]
+material_override = SubResource("StandardMaterial3D_m1vlh")
+mesh = SubResource("QuadMesh_i1acx")
+
+[node name="GeneralLight" type="SpotLight3D" parent="." unique_id=1668611118]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.924088)
+light_energy = 2.0
+spot_range = 11.265303
+spot_attenuation = 0.2
+spot_angle = 51.74
+
+[node name="LeftColl" type="CollisionPolygon3D" parent="." unique_id=1977555035]
+depth = 0.1
+polygon = PackedVector2Array(-0.3597108, -0.093505636, -0.33116245, -0.09418535, -0.3393191, -0.03844803, -0.1462776, -0.040487207, -0.120448135, -0.1037015, -0.11908867, -0.12749182, -0.10345503, -0.1268121, -0.10481446, -0.10234204, -0.03140431, -0.1037015, -0.014411233, -0.11933513, 0.08210955, -0.1179757, 0.08210955, -0.10845955, -0.0062545463, -0.10845955, -0.007614009, -0.05340194, 0.08210955, -0.054081686, 0.08278922, -0.045245253, -0.013731532, -0.045245253, -0.015770696, -0.03097107, -0.03140431, -0.03368997, -0.048397414, -0.07583283, -0.10345503, -0.07583283, -0.105494194, -0.03708858, -0.08850112, -0.03844803, -0.05995273, 0.0057339966, -0.040240727, 0.006413728, -0.039560996, 0.037681013, 0.04404501, 0.039040454, 0.046763875, 0.06758884, -0.08442276, 0.06758884, -0.13880068, -0.018736053, -0.37126613, -0.018056322)
+debug_color = Color(0, 0.6, 0.69803923, 0.74509805)
+
+[node name="BottomColl" type="CollisionPolygon3D" parent="." unique_id=1672247048]
+depth = 0.1
+polygon = PackedVector2Array(-0.35014775, -0.17169176, -0.34131134, -0.19208351, -0.09864958, -0.19412269, -0.09049289, -0.21791305, 0.23237635, -0.21791305, 0.2412128, -0.1975213, -0.057866115, -0.19412269, -0.08777399, -0.17305122)
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="RightColl" type="CollisionPolygon3D" parent="." unique_id=1528492718]
+depth = 0.1
+polygon = PackedVector2Array(0.27074137, -0.14041516, 0.24423203, -0.1397354, 0.25646713, -0.117984205, 0.112365335, -0.11866393, 0.11304504, -0.10642888, 0.24559149, -0.109827496, 0.24355236, -0.053410295, 0.11372477, -0.053410295, 0.1144045, -0.04457384, 0.29249254, -0.045933302, 0.2992898, -0.03437797, 0.31900188, -0.03369825, 0.35094896, 0.030875675, 0.33803412, 0.04039184, 0.08585602, 0.04039184, 0.087895185, 0.066901125, 0.37813798, 0.06826058)
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="FrontSpotLight" type="SpotLight3D" parent="." unique_id=11137498]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.2464275, -0.8170309, 0.3832047)
+rotation_order = 4
+light_color = Color(0.93333334, 1, 0.6392157, 1)
+spot_range = 16.36689
+spot_angle = 30.0
+
+[node name="Anim" type="AnimationPlayer" parent="." unique_id=740022905]
+libraries/ = SubResource("AnimationLibrary_odgv0")

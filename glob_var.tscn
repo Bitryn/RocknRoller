@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d00jsos72jppq"]
+
+[ext_resource type="Script" uid="uid://bdv6yo1l4gaqi" path="res://glob_var.gd" id="1_6m7h7"]
+
+[node name="GlobVar" type="Node" unique_id=1571700069]
+script = ExtResource("1_6m7h7")
