@@ -229,7 +229,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13942528, 0.23191392, 0)
 shape = SubResource("BoxShape3D_i1acx")
 
 [node name="Flapper" type="Timer" parent="." unique_id=1134986741]
-wait_time = 1.5
+wait_time = 0.5
 autostart = true
 
 [connection signal="timeout" from="Flapper" to="." method="_on_flapper_timeout"]

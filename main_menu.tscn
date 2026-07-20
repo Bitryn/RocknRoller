@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://6l5fmph1mxho"]
+
+[node name="MainMenu" type="Node3D" unique_id=890310024]
+
+[node name="Label" type="Label" parent="." unique_id=131989162]
+offset_left = 446.0
+offset_top = 30.0
+offset_right = 647.0
+offset_bottom = 53.0
+text = "MainMenu of Rock&Roller"
