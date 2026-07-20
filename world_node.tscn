@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://ctr7as4tr4vbc" path="res://test_route.tscn" id="1_ugkh2"]
 [ext_resource type="PackedScene" uid="uid://c2t50hms4g7k1" path="res://Roller/roller.tscn" id="2_am32a"]
 [ext_resource type="Material" uid="uid://csckqvmoko0lv" path="res://shader/PlaceholderMat.tres" id="3_msjbx"]
+[ext_resource type="PackedScene" uid="uid://bs1jk53335xue" path="res://mainCharacter/main_character.tscn" id="4_msjbx"]
+[ext_resource type="PackedScene" uid="uid://by70dultb3ln0" path="res://mainCharacter/player_cam.tscn" id="5_ym0nx"]
 
 [sub_resource type="Environment" id="Environment_i1acx"]
 background_mode = 1
@@ -19,7 +21,8 @@ environment = SubResource("Environment_i1acx")
 [node name="TestRoute" parent="." unique_id=1114604292 instance=ExtResource("1_ugkh2")]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1667462565]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.704856, 8.648867)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.704856, 28.544239)
+fov = 60.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1353875520]
 transform = Transform3D(0.47463256, 0.3586984, -0.80377835, 0, 0.9131934, 0.4075265, 0.8801841, -0.19342531, 0.43343136, 0, 9.22435, 0)
@@ -31,3 +34,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.990994, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83479965, 1.3820825)
 material_override = ExtResource("3_msjbx")
 mesh = SubResource("BoxMesh_i1acx")
+
+[node name="MainCharacter" parent="." unique_id=892675896 instance=ExtResource("4_msjbx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.717182, 1.2651589, 0)
+
+[node name="PlayerCam" parent="." unique_id=1450766968 instance=ExtResource("5_ym0nx")]

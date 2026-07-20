@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ctr7as4tr4vbc"]
 
 [ext_resource type="PackedScene" uid="uid://8ae5vsbtlh46" path="res://enemy/Bird/big_bird_enemy.tscn" id="1_aeo23"]
+[ext_resource type="PackedScene" uid="uid://bkw1658hm6l7v" path="res://models/BambooTree01.blend" id="2_wbrl3"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_i1acx"]
 
@@ -35,4 +36,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.11812, 4.082614, -7.29588
 mesh = SubResource("PrismMesh_i1acx")
 
 [node name="BigBirdEnemy" parent="." unique_id=1484725836 instance=ExtResource("1_aeo23")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5345993, -5.5497713)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.836733, 17.66849, -1.8927298)
+
+[node name="BambooTree01" parent="." unique_id=1892265954 instance=ExtResource("2_wbrl3")]
+transform = Transform3D(0.5102223, 0, -0.8600426, 0, 1, 0, 0.8600426, 0, 0.5102223, 0, 0, -13.853254)
+
+[node name="BambooTree02" parent="." unique_id=920055296 instance=ExtResource("2_wbrl3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.698395, 0, -24.176817)
+
+[node name="BambooTree03" parent="." unique_id=502721792 instance=ExtResource("2_wbrl3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5075226, 0, -25.004824)
+
+[node name="BambooTree04" parent="." unique_id=1263423528 instance=ExtResource("2_wbrl3")]
+transform = Transform3D(-0.47240582, 0, -0.88138115, 0, 1, 0, 0.88138115, 0, -0.47240582, 25.995796, 0, -15.003431)
+
+[node name="BambooTree05" parent="." unique_id=36869026 instance=ExtResource("2_wbrl3")]
+transform = Transform3D(0.51560724, 0, -0.85682505, 0, 1, 0, 0.85682505, 0, 0.51560724, -18.513344, 3.8146973e-06, -7.665754)
+
+[node name="BambooTree06" parent="." unique_id=214166587 instance=ExtResource("2_wbrl3")]
+transform = Transform3D(0.6853677, 0, 0.72819716, 0, 1, 0, -0.72819716, 0, 0.6853677, 21.845573, 3.8146973e-06, -11.714045)

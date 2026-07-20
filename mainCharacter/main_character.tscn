@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bs1jk53335xue"]
+
+[ext_resource type="Script" uid="uid://dt3nh78u2ij16" path="res://mainCharacter/main_character.gd" id="1_2g3ql"]
+[ext_resource type="Texture2D" uid="uid://dlk3sdd2no45r" path="res://mainCharacter/test sprite.png" id="2_exv1e"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i1acx"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i1acx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_exv1e")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="MainCharacter" type="CharacterBody3D" unique_id=892675896]
+script = ExtResource("1_2g3ql")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1909443715]
+shape = SubResource("CapsuleShape3D_i1acx")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1021115676]
+transform = Transform3D(3.3, 0, 0, 0, 3.3, 0, 0, 0, 3.3, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_i1acx")
+animation = &"Idle"
