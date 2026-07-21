@@ -20,10 +20,6 @@ environment = SubResource("Environment_i1acx")
 
 [node name="TestRoute" parent="." unique_id=1114604292 instance=ExtResource("1_ugkh2")]
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1667462565]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.704856, 28.544239)
-fov = 60.0
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1353875520]
 transform = Transform3D(0.47463256, 0.3586984, -0.80377835, 0, 0.9131934, 0.4075265, 0.8801841, -0.19342531, 0.43343136, 0, 9.22435, 0)
 
