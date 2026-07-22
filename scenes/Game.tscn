@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://c5d6h5nssb5og"]
 
 [ext_resource type="Script" uid="uid://dgyyicddslgwl" path="res://scenes/world_scripts/barrier.gd" id="2_qbsmt"]
-[ext_resource type="PackedScene" uid="uid://bvatvy0m7vyin" path="res://player/Player.tscn" id="4_78awf"]
+[ext_resource type="PackedScene" uid="uid://by70dultb3ln0" path="res://mainCharacter/player_cam.tscn" id="3_78awf"]
+[ext_resource type="PackedScene" uid="uid://bs1jk53335xue" path="res://mainCharacter/main_character.tscn" id="3_cpr0p"]
 
 [sub_resource type="Gradient" id="Gradient_78awf"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -75,9 +76,6 @@ size = Vector3(10.2022705, 6.126404, 1)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=565781727]
 transform = Transform3D(1, 0, 0, 0, 0.9077775, 0.4194521, 0, -0.4194521, 0.9077775, 0, 0, 0)
 
-[node name="Player" parent="." unique_id=1513762278 instance=ExtResource("4_78awf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.390983, 0)
-
 [node name="Terrain3D" type="Terrain3D" parent="." unique_id=2021345251]
 data_directory = "res://dd"
 material = SubResource("Terrain3DMaterial_kiw3p")
@@ -89,7 +87,7 @@ metadata/_edit_lock_ = true
 
 [node name="Barrier" type="Node3D" parent="." unique_id=1193536106]
 script = ExtResource("2_qbsmt")
-player = NodePath("../Player")
+player = NodePath("../MainCharacter")
 barrier = NodePath(".")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Barrier" unique_id=229708003]
@@ -105,3 +103,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.1)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Barrier/StaticBody3D2" unique_id=493862840]
 shape = SubResource("BoxShape3D_mbwms")
 debug_color = Color(0.0014741134, 11.815647, 13.012639, 1)
+
+[node name="MainCharacter" parent="." unique_id=892675896 instance=ExtResource("3_cpr0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.391, 0)
+
+[node name="PlayerCam" parent="." unique_id=1450766968 instance=ExtResource("3_78awf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9227884, 20.164457, 15.474763)

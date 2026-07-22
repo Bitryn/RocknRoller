@@ -1,9 +1,10 @@
 extends Camera3D
 
+
 var ZoomDist = 0 #BIT distance of camera from a players 'plane' changes for drama and spyglass usage
 var Cam2PlayerPos = Vector3(0,0,0) #BIT difference of positions Player <-> Camera
 var CamSpeed = 3
-var CamMode = "spy" 
+var CamMode = "track" 
 var InputDir = Vector2(0,0)
 ####Modes:   #####
 #  track -- camera going after the player
