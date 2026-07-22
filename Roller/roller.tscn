@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://c2t50hms4g7k1"]
 
+[ext_resource type="Script" uid="uid://crsiejxmel3i6" path="res://Roller/roller.gd" id="1_odgv0"]
 [ext_resource type="Texture2D" uid="uid://bte48c48udugn" path="res://Roller/CutoutRollerBlueprint.png" id="1_qvt2u"]
 [ext_resource type="PackedScene" uid="uid://d2i6is72locan" path="res://Roller/Big Wheel.blend" id="2_3lxdo"]
+[ext_resource type="PackedScene" uid="uid://bhomf8ijx6vfi" path="res://Roller/ladder/ladder.tscn" id="4_ls1n8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1vlh"]
 transparency = 1
@@ -11,6 +13,16 @@ albedo_texture = ExtResource("1_qvt2u")
 
 [sub_resource type="QuadMesh" id="QuadMesh_i1acx"]
 size = Vector2(50, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w63q2"]
+albedo_color = Color(1, 0.6392157, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mbwms"]
+material = SubResource("StandardMaterial3D_w63q2")
+size = Vector3(3.925, 0.13, 2.795044)
+
+[sub_resource type="BoxMesh" id="BoxMesh_w63q2"]
+size = Vector3(3.682495, 0.09716797, 1)
 
 [sub_resource type="Animation" id="Animation_qvt2u"]
 resource_name = "LightWave"
@@ -51,6 +63,7 @@ _data = {
 }
 
 [node name="Roller" type="CharacterBody3D" unique_id=128118887]
+script = ExtResource("1_odgv0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=34097537]
 material_override = SubResource("StandardMaterial3D_m1vlh")
@@ -67,19 +80,38 @@ spot_angle = 51.74
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
 depth = 0.1
 polygon = PackedVector2Array(-0.3597108, -0.093505636, -0.33116245, -0.09418535, -0.3393191, -0.03844803, -0.1462776, -0.040487207, -0.120448135, -0.1037015, -0.11908867, -0.12749182, -0.10345503, -0.1268121, -0.10481446, -0.10234204, -0.03140431, -0.1037015, -0.014411233, -0.11933513, 0.08210955, -0.1179757, 0.08210955, -0.10845955, -0.0062545463, -0.10845955, -0.007614009, -0.05340194, 0.08210955, -0.054081686, 0.08278922, -0.045245253, -0.013731532, -0.045245253, -0.015770696, -0.03097107, -0.03140431, -0.03368997, -0.048397414, -0.07583283, -0.10345503, -0.07583283, -0.105494194, -0.03708858, -0.08850112, -0.03844803, -0.05995273, 0.0057339966, -0.040240727, 0.006413728, -0.039560996, 0.037681013, 0.04404501, 0.039040454, 0.046763875, 0.06758884, -0.08442276, 0.06758884, -0.13880068, -0.018736053, -0.37126613, -0.018056322)
-debug_color = Color(0, 0.6, 0.69803923, 0.74509805)
+debug_color = Color(12.623979, 9.10253, 12.905694, 0.74509805)
 
 [node name="BottomColl" type="CollisionPolygon3D" parent="." unique_id=1672247048]
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
 depth = 0.1
 polygon = PackedVector2Array(-0.35014775, -0.17169176, -0.34131134, -0.19208351, -0.09864958, -0.19412269, -0.09049289, -0.21791305, 0.23237635, -0.21791305, 0.2412128, -0.1975213, -0.057866115, -0.19412269, -0.08777399, -0.17305122)
-debug_color = Color(0, 0.6, 0.69803923, 1)
+debug_color = Color(1, 1, 1, 1)
 
 [node name="RightColl" type="CollisionPolygon3D" parent="." unique_id=1528492718]
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
 depth = 0.1
 polygon = PackedVector2Array(0.27074137, -0.14041516, 0.24423203, -0.1397354, 0.25646713, -0.117984205, 0.112365335, -0.11866393, 0.11304504, -0.10642888, 0.24559149, -0.109827496, 0.24355236, -0.053410295, 0.11372477, -0.053410295, 0.1144045, -0.04457384, 0.29249254, -0.045933302, 0.2992898, -0.03437797, 0.31900188, -0.03369825, 0.35094896, 0.030875675, 0.33803412, 0.04039184, 0.08585602, 0.04039184, 0.087895185, 0.066901125, 0.37813798, 0.06826058)
-debug_color = Color(0, 0.6, 0.69803923, 1)
+debug_color = Color(1, 1, 1, 1)
+
+[node name="RightRamp" type="CollisionPolygon3D" parent="." unique_id=812694263]
+transform = Transform3D(0.9077722, 0.41946343, 0, -0.41946343, 0.9077722, 0, 0, 0, 1, 11.874058, -9.940987, 0)
+polygon = PackedVector2Array(4.4010963, 0.11307049, 0.074064255, 0.13329029, 0.074064255, -0.19022655)
+debug_color = Color(1, 1, 1, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RightRamp" unique_id=433806945]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.379301, 0.03555298, 0.8824463)
+mesh = SubResource("BoxMesh_mbwms")
+
+[node name="LeftRamp" type="CollisionPolygon3D" parent="." unique_id=102477205]
+transform = Transform3D(0.8636175, -0.50414765, 0, 0.50414765, 0.8636175, 0, 0, 0, 1, -17.458078, -8.591124, 0)
+depth = 5.0
+polygon = PackedVector2Array(-0.25421524, 0.05612564, -6.1388283, -0.06553173, -0.1484108, -0.13968849)
+debug_color = Color(1, 1, 1, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LeftRamp" unique_id=183134052]
+transform = Transform3D(1.6146704, -0.020857602, 0, 0.033685565, 0.99978256, 0, 0, 0, 1, -3.1670551, -0.058655262, 0)
+mesh = SubResource("BoxMesh_w63q2")
 
 [node name="FrontSpotLight" type="SpotLight3D" parent="." unique_id=11137498]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.2464275, -0.8170309, 0.3832047)
@@ -99,3 +131,20 @@ transform = Transform3D(0.48, 0, 0, 0, 0.48, 0, 0, 0, 0.48, 10.27875, -10.200675
 
 [node name="Big Wheel3" parent="." unique_id=797300000 instance=ExtResource("2_3lxdo")]
 transform = Transform3D(0.48, 0, 0, 0, 0.48, 0, 0, 0, 0.48, 13.605305, -5.3252487, 3.30486)
+
+[node name="CollisonZones" type="Node3D" parent="." unique_id=1492759582]
+
+[node name="Area3D" type="Area3D" parent="CollisonZones" unique_id=329131756]
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="CollisonZones/Area3D" unique_id=535016495]
+depth = 4.905
+polygon = PackedVector2Array(-4.951135, -9.512336, -16.967539, -9.665087, -18.698715, -0.9073703, -17.222122, 8.563183, 9.000109, 10.599861, 22.085768, 10.498028, 10.934954, -10.683425, -4.4419665, -10.8870945)
+
+[node name="ladder" parent="." unique_id=1206924096 instance=ExtResource("4_ls1n8")]
+transform = Transform3D(1, 0, 0, 0, 7.2200093, 0, 0, 0, 1, 4.979, -5.778, 0)
+
+[node name="ladder2" parent="." unique_id=1824545240 instance=ExtResource("4_ls1n8")]
+transform = Transform3D(1, 0, 0, 0, 5.2849693, 0, 0, 0, 1, 3.279, 0.923, 0)
+
+[connection signal="area_entered" from="CollisonZones/Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="body_entered" from="CollisonZones/Area3D" to="." method="_on_area_3d_body_entered"]
