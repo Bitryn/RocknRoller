@@ -27,12 +27,16 @@ func _physics_process(delta: float) -> void:
 	var direction := (transform.basis * Vector3(input_dir.x, 0, 0)).normalized()
 	if direction and is_on_floor() and not climbing:
 		velocity.x = direction.x * speed
-	elif is_on_floor() and not climbing:
+	elif direction and climbing:
+		velocity.x = direction.x * speed/3
+	elif is_on_floor() or climbing:
 		velocity.x = move_toward(velocity.x, 0,  0.11*speed)
 	
 	# Add the gravity.
 	if not is_on_floor():
+		if not climbing:
 			velocity.y += get_gravity().y * delta
+			print("dol")
 		
 	
 	# sprint
@@ -50,10 +54,12 @@ func _physics_process(delta: float) -> void:
 	
 	# Climbing
 	if Input.is_action_pressed("move_up") and climbing:
-		position.y += 0.1 
-	elif Input.is_action_pressed("move_down") and climbing:
-		position.y -= 0.1 
-	elif climbing:
+		if velocity.y < 3:
+			velocity.y += 1 
+	if Input.is_action_pressed("move_down") and climbing:
+		if velocity.y < 0.1:
+			velocity.y -= 0.1
+	if !Input.is_action_pressed("move_up") and !Input.is_action_pressed("move_down") and climbing:
 		velocity.y = 0
 	
 	

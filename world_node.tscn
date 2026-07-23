@@ -24,7 +24,7 @@ environment = SubResource("Environment_i1acx")
 transform = Transform3D(0.47463256, 0.3586984, -0.80377835, 0, 0.9131934, 0.4075265, 0.8801841, -0.19342531, 0.43343136, 0, 9.22435, 0)
 
 [node name="Roller" parent="." unique_id=128118887 instance=ExtResource("2_am32a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.713999, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.359762, 0)
 
 [node name="Ruler" type="MeshInstance3D" parent="." unique_id=289820452]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83479965, 1.3820825)

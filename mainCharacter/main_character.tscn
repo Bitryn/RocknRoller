@@ -20,6 +20,7 @@ animations = [{
 
 [node name="MainCharacter" type="CharacterBody3D" unique_id=892675896 node_paths=PackedStringArray("Player_Sprite")]
 wall_min_slide_angle = 0.7853982
+floor_max_angle = 1.0471976
 floor_snap_length = 1.0
 script = ExtResource("1_2g3ql")
 Player_Sprite = NodePath("AnimatedSprite3D")
