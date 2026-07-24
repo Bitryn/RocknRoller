@@ -27,7 +27,9 @@ func _physics_process(delta: float) -> void:
 	var direction := (transform.basis * Vector3(input_dir.x, 0, 0)).normalized()
 	if direction and is_on_floor() and not climbing:
 		velocity.x = direction.x * speed
-	elif direction and climbing:
+	elif direction and is_on_floor() and  climbing:
+		velocity.x = direction.x * speed
+	elif direction and climbing and !is_on_floor():
 		velocity.x = direction.x * speed/3
 	elif is_on_floor() or climbing:
 		velocity.x = move_toward(velocity.x, 0,  0.11*speed)

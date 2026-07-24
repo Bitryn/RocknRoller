@@ -1,6 +1,6 @@
 extends Area3D
 
-@export var Roller:CharacterBody3D
+@export var Roller:RigidBody3D
 
 var can_use = false
 var using = false
@@ -49,8 +49,8 @@ func _process(delta: float) -> void:
 	
 	# dostowanie mocy 
 	if Input.is_action_pressed("move_up") and using:
-		if max_speed < 10:
+		if max_speed < 4000:
 			max_speed += 1
 	if Input.is_action_pressed("move_down") and using:
-		if max_speed > -5:
+		if max_speed > -20:
 			max_speed -= 1

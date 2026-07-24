@@ -5,11 +5,12 @@ var world
 
 var running = false
 var speed = 0
+var force = 0
 
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	#if not is_on_floor():
+	force = move_toward(force, speed, 15 * delta)
+	apply_central_force(transform.basis.x * force)
 	pass
 
 

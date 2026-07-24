@@ -118,6 +118,12 @@ use={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="other"
+3d_physics/layer_2="player"
+3d_physics/layer_3="roller"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
