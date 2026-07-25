@@ -14,13 +14,13 @@ size = Vector3(3.285, 7.575, 2.265)
 [node name="TestRoute" type="Node3D" unique_id=1114604292]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1998157216]
-transform = Transform3D(30.650497, 0, 0, 0, 9.77954, 0, 0, 0, 8.142629, 0, 0, 0)
+transform = Transform3D(34.399673, 0, 0, 0, 9.77954, 0, 0, 0, 8.142629, 0, 0, 0)
 mesh = SubResource("PlaneMesh_i1acx")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2102429042]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1554719061]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+transform = Transform3D(25.535616, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 shape = SubResource("BoxShape3D_i1acx")
 
 [node name="exampleMesh" type="MeshInstance3D" parent="." unique_id=1899103884]

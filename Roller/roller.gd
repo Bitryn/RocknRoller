@@ -7,9 +7,16 @@ var running = false
 var speed = 0
 var force = 0
 
+var poz = 0
+
+func _ready() -> void:
+	poz = position.z
+
+#func _process(delta: float) -> void:
+	#position.z = poz
 
 func _physics_process(delta: float) -> void:
-	force = move_toward(force, speed, 15 * delta)
+	force = move_toward(force, speed, 100 * delta)
 	apply_central_force(transform.basis.x * force)
 	pass
 

@@ -66,12 +66,9 @@ _data = {
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_w63q2"]
 radius = 4.0351563
 
-[node name="Roller" type="RigidBody3D" unique_id=766146336]
+[node name="Roller" type="RigidBody3D" unique_id=1376312120]
 collision_layer = 4
-mass = 98.296
-gravity_scale = 2.0
-center_of_mass_mode = 1
-center_of_mass = Vector3(0, -10, 0)
+mass = 100.0
 script = ExtResource("1_odgv0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=34097537]

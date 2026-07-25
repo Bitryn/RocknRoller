@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c5d6h5nssb5og"]
 
 [ext_resource type="Script" uid="uid://dgyyicddslgwl" path="res://scenes/world_scripts/barrier.gd" id="2_qbsmt"]
-[ext_resource type="PackedScene" uid="uid://by70dultb3ln0" path="res://mainCharacter/player_cam.tscn" id="3_78awf"]
 [ext_resource type="PackedScene" uid="uid://bs1jk53335xue" path="res://mainCharacter/main_character.tscn" id="3_cpr0p"]
+[ext_resource type="PackedScene" uid="uid://c2t50hms4g7k1" path="res://Roller/roller.tscn" id="4_78awf"]
 
 [sub_resource type="Gradient" id="Gradient_78awf"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -105,7 +105,10 @@ shape = SubResource("BoxShape3D_mbwms")
 debug_color = Color(0.0014741134, 11.815647, 13.012639, 1)
 
 [node name="MainCharacter" parent="." unique_id=892675896 instance=ExtResource("3_cpr0p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.391, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.391, 85.59041)
 
-[node name="PlayerCam" parent="." unique_id=1450766968 instance=ExtResource("3_78awf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9227884, 20.164457, 15.474763)
+[node name="Camera3D" type="Camera3D" parent="MainCharacter" unique_id=1750741855]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20.024063)
+
+[node name="Roller" parent="." unique_id=1376312120 instance=ExtResource("4_78awf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.826687, 18.231663, 85.59041)

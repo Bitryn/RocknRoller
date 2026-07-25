@@ -7,9 +7,13 @@ const JUMP_VELOCITY = 6
 var speed = 10
 var input_dir
 var climbing = false
+var player_z = 0
 
 @export var Player_Sprite: AnimatedSprite3D
 
+func _ready() -> void:
+	player_z = position.z
+	
 func _process(delta: float) -> void:
 	GlobVar.PlayerPos = position
 	#input_dir = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -18,6 +22,8 @@ func _process(delta: float) -> void:
 		Player_Sprite.flip_h = false
 	elif Input.is_action_just_pressed("move_left") :
 		Player_Sprite.flip_h = true
+		
+	position.z = player_z
 
 func _physics_process(delta: float) -> void:
 	
@@ -38,7 +44,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		if not climbing:
 			velocity.y += get_gravity().y * delta
-			print("dol")
+			
 		
 	
 	# sprint

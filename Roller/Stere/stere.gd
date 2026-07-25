@@ -43,14 +43,14 @@ func _process(delta: float) -> void:
 		using = false
 	
 	if engine_runnning:
-		print("brrrr  power: " + str(max_speed))
+		#print("brrrr  power: " + str(max_speed))
 		Roller.speed = max_speed
 		
 	
 	# dostowanie mocy 
 	if Input.is_action_pressed("move_up") and using:
-		if max_speed < 4000:
-			max_speed += 1
+		if max_speed < 10000:
+			max_speed += .5
 	if Input.is_action_pressed("move_down") and using:
-		if max_speed > -20:
-			max_speed -= 1
+		if max_speed > -10000:
+			max_speed -= .5
