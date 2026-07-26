@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cu5oig6wg03wy"]
+
+[ext_resource type="Script" uid="uid://c3h7gb43tgx8x" path="res://Roller/Stere/stere.gd" id="1_6jtmw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mbwms"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mbwms"]
+
+[node name="Stere" type="Area3D" unique_id=1826960928]
+script = ExtResource("1_6jtmw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1821719876]
+shape = SubResource("BoxShape3D_mbwms")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=1842847748]
+mesh = SubResource("BoxMesh_mbwms")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

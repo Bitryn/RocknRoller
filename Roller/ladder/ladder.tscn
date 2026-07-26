@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bhomf8ijx6vfi"]
+
+[ext_resource type="Script" uid="uid://sa53m06vdkm3" path="res://Roller/ladder/ladder.gd" id="1_watv4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mbwms"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mbwms"]
+size = Vector3(1, 1, 0.12695313)
+
+[node name="ladder" type="Area3D" unique_id=1206924096]
+script = ExtResource("1_watv4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=609346524]
+shape = SubResource("BoxShape3D_mbwms")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=786838199]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.07523152)
+mesh = SubResource("BoxMesh_mbwms")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
