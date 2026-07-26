@@ -5,6 +5,7 @@
 [ext_resource type="Material" uid="uid://csckqvmoko0lv" path="res://shader/PlaceholderMat.tres" id="3_msjbx"]
 [ext_resource type="PackedScene" uid="uid://bs1jk53335xue" path="res://mainCharacter/main_character.tscn" id="4_msjbx"]
 [ext_resource type="PackedScene" uid="uid://by70dultb3ln0" path="res://mainCharacter/player_cam.tscn" id="5_ym0nx"]
+[ext_resource type="Script" uid="uid://dgyyicddslgwl" path="res://scenes/world_scripts/barrier.gd" id="6_b47hq"]
 
 [sub_resource type="Environment" id="Environment_i1acx"]
 background_mode = 1
@@ -12,6 +13,18 @@ background_color = Color(0.45415342, 0.585461, 0.6366403, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_i1acx"]
 size = Vector3(1, 1.7, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mbwms"]
+size = Vector3(2.794609, 4.319027, 0.22570801)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w63q2"]
+size = Vector3(2.8242188, 4.2831726, 0.24072266)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b47hq"]
+size = Vector3(43.469284, 23.803368, 0.22570801)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_21o2a"]
+size = Vector3(43.52043, 23.774704, 0.22570801)
 
 [node name="WorldNode" type="Node3D" unique_id=867699630]
 
@@ -24,7 +37,7 @@ environment = SubResource("Environment_i1acx")
 transform = Transform3D(0.47463256, 0.3586984, -0.80377835, 0, 0.9131934, 0.4075265, 0.8801841, -0.19342531, 0.43343136, 0, 9.22435, 0)
 
 [node name="Roller" parent="." unique_id=128118887 instance=ExtResource("2_am32a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.359762, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.024467468, 12.537397, -0.092930794)
 
 [node name="Ruler" type="MeshInstance3D" parent="." unique_id=289820452]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83479965, 1.3820825)
@@ -35,3 +48,53 @@ mesh = SubResource("BoxMesh_i1acx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.897203, 1.2651589, 0)
 
 [node name="PlayerCam" parent="." unique_id=1450766968 instance=ExtResource("5_ym0nx")]
+
+[node name="BarrierPlayer" type="Node3D" parent="." unique_id=1561266298]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.546509, 0, 0)
+script = ExtResource("6_b47hq")
+player = NodePath("../MainCharacter")
+barrier = NodePath(".")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BarrierPlayer" unique_id=382973362]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89637923, 0)
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BarrierPlayer/StaticBody3D" unique_id=391094893]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37380219, 0.4378662, -0.613)
+shape = SubResource("BoxShape3D_mbwms")
+debug_color = Color(0.82412636, 0.0016583932, 0.9590607, 0.41960785)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="BarrierPlayer" unique_id=2116696054]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BarrierPlayer/StaticBody3D2" unique_id=1454486246]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34423828, 1.3420982, 0.62)
+shape = SubResource("BoxShape3D_w63q2")
+debug_color = Color(0.8123584, 0.0020958055, 0.9832168, 0.41960785)
+
+[node name="BarrierRoller" type="Node3D" parent="." unique_id=1552246110]
+script = ExtResource("6_b47hq")
+player = NodePath("../Roller")
+barrier = NodePath(".")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BarrierRoller" unique_id=312364924]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89637923, 0)
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BarrierRoller/StaticBody3D" unique_id=1105494547]
+transform = Transform3D(0.99934554, 0, 0.036172744, 0, 1, 0, -0.036172744, 0, 0.99934554, -2.250389, 15.755266, 4.7569013)
+shape = SubResource("BoxShape3D_b47hq")
+debug_color = Color(0.82412636, 0.0016583932, 0.9590607, 0.41960785)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="BarrierRoller" unique_id=285264572]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89637923, 0)
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BarrierRoller/StaticBody3D2" unique_id=2128229950]
+transform = Transform3D(0.99950385, 0, -0.031501524, 0, 1, 0, 0.031501524, 0, 0.99950385, -2.182785, 15.839422, -4.6517444)
+shape = SubResource("BoxShape3D_21o2a")
+debug_color = Color(0.82412636, 0.0016583932, 0.9590607, 0.41960785)

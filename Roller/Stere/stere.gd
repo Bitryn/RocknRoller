@@ -10,6 +10,7 @@ var try_run = false
 var engine_runnning = false
 
 var max_speed = 0
+var gear = 0
 
 func _on_body_entered(body: Node3D) -> void:
 	can_use = true
@@ -20,6 +21,8 @@ func _on_body_exited(body: Node3D) -> void:
 
 func _process(delta: float) -> void:
 	
+	$CollisionShape3D/MeshInstance3D/Label3D.text = str(gear)
+	
 	# turn on/off engine 
 	if Input.is_action_pressed("use") and can_use and !engine_runnning: # odpalanie silnika
 		print(run_engine)
@@ -27,6 +30,7 @@ func _process(delta: float) -> void:
 		if run_engine < 2: # odpalasz
 			run_engine += 0.1
 		elif run_engine >= 2: # po przetrzymaniu silnik zaczyna dzialac
+			gear = 0
 			engine_runnning = true
 			using = true
 	elif !Input.is_action_pressed("use") and can_use and try_run: # odpuscisz odpalanie to rozruch od nowa
@@ -35,22 +39,49 @@ func _process(delta: float) -> void:
 	elif Input.is_action_just_pressed("use") and using and engine_runnning: # wylaczenie
 		using = false
 		engine_runnning = false
-		max_speed = 0
-		Roller.speed = max_speed
+		gear = 0
 	elif Input.is_action_just_pressed("use") and engine_runnning and not using: # uzycie kiedy silnik dziala
 		using = true
 	elif !can_use: # jak odejdzisz nie uzywasz silnika
 		using = false
 	
-	if engine_runnning:
-		#print("brrrr  power: " + str(max_speed))
-		Roller.speed = max_speed
+	#if engine_runnning:
+		##print("brrrr  power: " + str(max_speed))
+		#Roller.speed = max_speed
 		
 	
 	# dostowanie mocy 
-	if Input.is_action_pressed("move_up") and using:
-		if max_speed < 10000:
-			max_speed += .5
-	if Input.is_action_pressed("move_down") and using:
-		if max_speed > -10000:
-			max_speed -= .5
+	if Input.is_action_just_pressed("move_up") and using:
+		if gear < 3:
+			gear += 1
+	if Input.is_action_just_pressed("move_down") and using:
+		if gear > -1:
+			gear -= 1
+			
+	
+	match gear:
+		-1:
+			if Roller.force < 1000:
+				if Roller.force > -1200:
+					Roller.force = -1200
+				max_speed = -1280
+				Roller.speed = max_speed
+			else:
+				gear = 0
+		0:
+			max_speed = 0
+			Roller.speed = max_speed
+		1:
+			if Roller.force > -1000:
+				if Roller.force < 1200:
+					Roller.force = 1200
+				max_speed = 1280
+				Roller.speed = max_speed
+			else:
+				gear = 0
+		2:
+			max_speed = 1340
+			Roller.speed = max_speed
+		3:
+			max_speed = 1400
+			Roller.speed = max_speed

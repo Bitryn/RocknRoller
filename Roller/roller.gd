@@ -1,11 +1,13 @@
 extends RigidBody3D
 
-var player_pos
+var player
 var world
 
 var running = false
 var speed = 0
 var force = 0
+
+var lineax
 
 var poz = 0
 
@@ -18,17 +20,20 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	force = move_toward(force, speed, 100 * delta)
 	apply_central_force(transform.basis.x * force)
-	pass
+	lineax = linear_velocity.x
+	
+	
+	if not player == null:
+		player.linear_x = lineax
+	
 
 
 func _on_area_3d_body_entered(body: CharacterBody3D) -> void:
 	print(body)
-	#if body.name == "MainCharacter":
-		#player_pos = body.global_transform
-		#world = body.get_parent()
-		#body.get_parent().remove_child(body)
-		#$".".add_child(body)
-		#body.global_transform = player_pos
+	if body.name == "MainCharacter":
+		player = body
+		
+		
 		
 
 #func _on_area_3d_body_exited(body: CharacterBody3D) -> void:

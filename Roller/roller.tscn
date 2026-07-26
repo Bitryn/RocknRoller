@@ -71,6 +71,9 @@ radius = 4.0351563
 [node name="Roller" type="RigidBody3D" unique_id=1376312120]
 collision_layer = 4
 mass = 100.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -10, 0)
+lock_rotation = true
 script = ExtResource("1_odgv0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=34097537]
@@ -165,6 +168,8 @@ transform = Transform3D(0.48, 0, 0, 0, 0.48, 0, 0, 0, 0.48, 13.605305, -5.325248
 [node name="CollisonZones" type="Node3D" parent="." unique_id=1492759582]
 
 [node name="Area3D" type="Area3D" parent="CollisonZones" unique_id=329131756]
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="CollisonZones/Area3D" unique_id=535016495]
 depth = 4.905

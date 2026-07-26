@@ -123,6 +123,7 @@ use={
 3d_physics/layer_1="other"
 3d_physics/layer_2="player"
 3d_physics/layer_3="roller"
+3d_physics/layer_4="barrier"
 
 [physics]
 
