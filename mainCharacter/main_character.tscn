@@ -29,11 +29,14 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_mbwms"]
+size = Vector3(1.2275391, 2.4249268, 1.9755859)
+
 [node name="MainCharacter" type="CharacterBody3D" unique_id=892675896 node_paths=PackedStringArray("Player_Sprite")]
 collision_layer = 2
 collision_mask = 5
 wall_min_slide_angle = 0.7853982
-floor_max_angle = 1.0471976
+floor_max_angle = 1.3089969
 floor_snap_length = 1.0
 script = ExtResource("1_2g3ql")
 Player_Sprite = NodePath("AnimatedSprite3D")
@@ -47,3 +50,11 @@ texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_i1acx")
 animation = &"Idle"
 frame_progress = 0.96027476
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1693053881]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=775214664]
+shape = SubResource("BoxShape3D_mbwms")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

@@ -1,6 +1,7 @@
 extends Area3D
 
 @export var Roller:RigidBody3D
+@export var tank:Node3D
 
 var can_use = false
 var using = false
@@ -12,6 +13,8 @@ var engine_runnning = false
 var max_speed = 0
 var gear = 0
 
+
+
 func _on_body_entered(body: Node3D) -> void:
 	can_use = true
 
@@ -19,7 +22,7 @@ func _on_body_entered(body: Node3D) -> void:
 func _on_body_exited(body: Node3D) -> void:
 	can_use = false
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	
 	$CollisionShape3D/MeshInstance3D/Label3D.text = str(gear)
 	
@@ -27,7 +30,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("use") and can_use and !engine_runnning: # odpalanie silnika
 		print(run_engine)
 		try_run = true
-		if run_engine < 2: # odpalasz
+		if run_engine < 2 and !(tank.tank_progress == -0.01 or tank.tank_progress == 0 ) : # odpalasz
 			run_engine += 0.1
 		elif run_engine >= 2: # po przetrzymaniu silnik zaczyna dzialac
 			gear = 0
@@ -37,17 +40,19 @@ func _process(delta: float) -> void:
 		try_run = false
 		run_engine = 0
 	elif Input.is_action_just_pressed("use") and using and engine_runnning: # wylaczenie
-		using = false
-		engine_runnning = false
-		gear = 0
+		engine_turn_off()
 	elif Input.is_action_just_pressed("use") and engine_runnning and not using: # uzycie kiedy silnik dziala
 		using = true
 	elif !can_use: # jak odejdzisz nie uzywasz silnika
 		using = false
 	
-	#if engine_runnning:
-		##print("brrrr  power: " + str(max_speed))
-		#Roller.speed = max_speed
+	if engine_runnning and tank.tank_progress > 0.10:
+		tank.tank_progress -= 0.1
+		print(tank.tank_progress)
+	elif snapped(tank.tank_progress, 0.01) == 0:
+		engine_turn_off()
+		tank.tank_progress = -0.01
+		
 		
 	
 	# dostowanie mocy 
@@ -85,3 +90,9 @@ func _process(delta: float) -> void:
 		3:
 			max_speed = 1400
 			Roller.speed = max_speed
+
+func engine_turn_off() -> void:
+	using = false
+	engine_runnning = false
+	gear = 0
+	

@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dsy6kxhhynooo"]
+
+[ext_resource type="Script" uid="uid://bsqmvcfvjoogk" path="res://Roller/FuelTank/tank.gd" id="1_i2iuf"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mbwms"]
+size = Vector3(1, 1, 0.5249634)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mbwms"]
+albedo_color = Color(0.20150173, 0.3829553, 0.48664278, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cw3f1"]
+material = SubResource("StandardMaterial3D_mbwms")
+size = Vector3(0.782, 0.92089844, 0.18433595)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mbwms"]
+size = Vector3(1, 1, 1.9898071)
+
+[node name="tank" type="Node3D" unique_id=772305751]
+script = ExtResource("1_i2iuf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1573484985]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.026031494)
+mesh = SubResource("BoxMesh_mbwms")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=649206131]
+transform = Transform3D(1, 0, 0, 0, 0.001, 0, 0, 0, 1, 0, -0.46467447, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D" unique_id=67157548]
+transform = Transform3D(1.01, 0, 0, 0, 1.0100001, 0, 0, 0, 1.01, 0, 0.46548462, 0.15560268)
+mesh = SubResource("BoxMesh_cw3f1")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=775520518]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=137672158]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.7053528)
+shape = SubResource("BoxShape3D_mbwms")
+debug_color = Color(0.597274, 0.37186736, 1, 0.41960785)
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

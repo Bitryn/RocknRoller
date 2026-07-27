@@ -10,6 +10,9 @@ var climbing = false
 var player_z = 0
 var linear_x = 0
 
+var can_pick = null
+var picked = false
+
 @export var Player_Sprite: AnimatedSprite3D
 
 func _ready() -> void:
@@ -75,4 +78,22 @@ func _physics_process(delta: float) -> void:
 	if climbing and !Input.is_action_pressed("move_left") and !Input.is_action_pressed("move_right"):
 		velocity.x = linear_x
 	
+	if Input.is_action_just_pressed("use") and not can_pick == null and !picked:
+		picked = true
+	elif picked and not can_pick == null:
+		can_pick.global_transform.origin.x = global_transform.origin.x
+		can_pick.global_transform.origin.y = global_transform.origin.y
+	
+	if Input.is_action_just_pressed("drop") and picked:
+		picked = false
+	
 	move_and_slide()
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body.name.begins_with("Fuel") and can_pick == null:
+		can_pick = body
+		
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	if body.name.begins_with("Fuel"):
+		can_pick = null
