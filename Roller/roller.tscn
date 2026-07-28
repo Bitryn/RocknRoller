@@ -197,8 +197,8 @@ Roller = NodePath("..")
 tank = NodePath("../tank")
 
 [node name="tank" parent="." unique_id=772305751 instance=ExtResource("8_x27il")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6473901, -2.1433265, 0)
-tank_progress = 100
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2758503, -2.863136, 0)
+tank_progress = 50
 
 [node name="UpperDoor" parent="." unique_id=271826013 instance=ExtResource("6_l32on")]
 transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 4.6105466, 3.6317413, 0)

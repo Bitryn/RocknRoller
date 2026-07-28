@@ -21,7 +21,9 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	
 	if player_in and fuel_in and Input.is_action_just_pressed("use"):
-		tank_progress += fuel_node.fuel_value
+		if tank_progress + fuel_node.fuel_value <= tank_capacity:
+			tank_progress += fuel_node.fuel_value
+			fuel_node.fuel_value = 0
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:

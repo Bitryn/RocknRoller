@@ -9,6 +9,7 @@ var input_dir
 var climbing = false
 var player_z = 0
 var linear_x = 0
+var velx = 0
 
 var can_pick = null
 var picked = false
@@ -30,7 +31,7 @@ func _process(delta: float) -> void:
 	position.z = player_z
 
 func _physics_process(delta: float) -> void:
-	
+	velx = velocity.x
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -38,9 +39,9 @@ func _physics_process(delta: float) -> void:
 	if direction and is_on_floor() and not climbing:
 		velocity.x = direction.x  * speed
 	elif direction and is_on_floor() and  climbing:
-			velocity.x = direction.x * speed 
+		velocity.x = direction.x  * speed
 	elif direction and climbing and !is_on_floor():
-			velocity.x = direction.x  * speed/3 
+		velocity.x = direction.x * speed/3 + linear_x
 	elif is_on_floor() or climbing:
 		velocity.x = move_toward(velocity.x , 0,  0.11*speed)
 	
