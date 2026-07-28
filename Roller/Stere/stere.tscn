@@ -15,5 +15,10 @@ shape = SubResource("BoxShape3D_mbwms")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=1842847748]
 mesh = SubResource("BoxMesh_mbwms")
 
+[node name="Label3D" type="Label3D" parent="CollisionShape3D/MeshInstance3D" unique_id=43488930]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5081465)
+pixel_size = 0.01
+font_size = 71
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
