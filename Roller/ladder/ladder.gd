@@ -1,21 +1,23 @@
 extends Area3D
 
+# code for ladder
+
 var can_climb = false
 var climb = false
 var player
 
 func _on_body_entered(body: Node3D) -> void:
-	if body.name == "MainCharacter":
-		player = body
-		can_climb = true
-		player.climbing = true
+	if body.name == "MainCharacter": # check is player on ladder
+		player = body # save player node
+		can_climb = true # bool variable
+		player.climbing = true # set player is now climbing
 		print("wspina")
 
 
 func _on_body_exited(body: Node3D) -> void:
-	if body.name == "MainCharacter":
-		can_climb = false
-		player.climbing = false
+	if body.name == "MainCharacter": # check is player leave ladder
+		can_climb = false # bool variable
+		player.climbing = false# set player is not climbing
 		print("przestaje")
 
 #func _physics_process(delta: float) -> void:

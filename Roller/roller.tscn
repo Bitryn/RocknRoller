@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://cxugrxpa654l0" path="res://Roller/ChimneyTop.blend" id="9_j5t1w"]
 [ext_resource type="PackedScene" uid="uid://xrxu84mjt6h2" path="res://Roller/ChimneyBottom.blend" id="10_nb208"]
 [ext_resource type="PackedScene" uid="uid://dkkmr2pufps4h" path="res://Roller/BigWheelDrive.blend" id="11_nb208"]
+[ext_resource type="PackedScene" uid="uid://dh0hh8fw8q3nr" path="res://Roller/Canon/canon.tscn" id="12_ex2hn"]
+[ext_resource type="PackedScene" uid="uid://d40d740x8q0v" path="res://Roller/Canon/canon_control.tscn" id="13_llb22"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1vlh"]
 transparency = 1
@@ -214,5 +216,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.242, 4.641021, -1.3064455)
 
 [node name="BigWheelDrive" parent="." unique_id=22300035 instance=ExtResource("11_nb208")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.720792, -8.188038, -1.5624844)
+
+[node name="Canon" parent="." unique_id=324564860 instance=ExtResource("12_ex2hn")]
+transform = Transform3D(2.695, 0, 0, 0, 2.695, 0, 0, 0, 2.695, 8.506909, 2.9443033, 0)
+
+[node name="CanonControl" parent="." unique_id=87398827 node_paths=PackedStringArray("canon") instance=ExtResource("13_llb22")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.611922, -1.8706408, 0)
+canon = NodePath("../Canon")
 
 [connection signal="body_entered" from="CollisonZones/Area3D" to="." method="_on_area_3d_body_entered"]

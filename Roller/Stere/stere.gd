@@ -55,7 +55,7 @@ func _physics_process(delta: float) -> void:
 		
 		
 	
-	# dostowanie mocy 
+	# gear switching
 	if Input.is_action_just_pressed("move_up") and using:
 		if gear < 3:
 			gear += 1
@@ -74,25 +74,26 @@ func _physics_process(delta: float) -> void:
 				Roller.speed = max_speed # set speed for roller
 			else:
 				gear = 0 # speed not good set 0
-		0:
-			max_speed = 0
-			Roller.speed = max_speed
+		0: # neutral
+			max_speed = 0 # set max pushing force
+			Roller.speed = max_speed # set speed for roller
 		1:
-			if Roller.force > -1000:
-				if Roller.force < 1200:
+			if Roller.force > -1000: # check not going to fast
+				if Roller.force < 1200:  # set force to move x
 					Roller.force = 1200
-				max_speed = 1280
-				Roller.speed = max_speed
+				max_speed = 1280 # set max pushing force
+				Roller.speed = max_speed # set speed for roller
 			else:
-				gear = 0
+				gear = 0 # speed not good set 0
 		2:
-			max_speed = 1340
-			Roller.speed = max_speed
+			max_speed = 1340 # set max pushing force
+			Roller.speed = max_speed # set speed for roller
 		3:
-			max_speed = 1400
-			Roller.speed = max_speed
+			max_speed = 1400 # set max pushing force
+			Roller.speed = max_speed # set speed for roller
 
-func engine_turn_off() -> void:
+func engine_turn_off() -> void: 
+	# disable all live function of engine 
 	using = false
 	engine_runnning = false
 	gear = 0

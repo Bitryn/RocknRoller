@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://d40d740x8q0v"]
+
+[ext_resource type="Script" uid="uid://6l5ohy0lr7kg" path="res://Roller/Canon/canon_control.gd" id="1_4fwkv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w63q2"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_mbwms"]
+material = SubResource("StandardMaterial3D_w63q2")
+size = Vector3(1, 1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onh1n"]
+albedo_color = Color(0.27450982, 0.11372549, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mbwms"]
+material = SubResource("StandardMaterial3D_onh1n")
+top_radius = 0.29833984
+bottom_radius = 0.29833984
+height = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_w63q2"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mbwms"]
+size = Vector3(1.2597656, 2.1864014, 1.5283203)
+
+[node name="CanonControl" type="Node3D" unique_id=87398827]
+script = ExtResource("1_4fwkv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=804894953]
+mesh = SubResource("PrismMesh_mbwms")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1362371249]
+transform = Transform3D(1.910685e-15, 4.371139e-08, 0.9999998, 0.9999998, -4.371139e-08, 0, 4.371138e-08, 1, -4.371138e-08, 0, 0.44825238, 0.055767417)
+mesh = SubResource("CylinderMesh_mbwms")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D2" unique_id=1539070262]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11067091, -0.21862912)
+mesh = SubResource("CylinderMesh_w63q2")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1855808821]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2046710592]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5932007, 0.33891028)
+shape = SubResource("BoxShape3D_mbwms")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
