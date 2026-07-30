@@ -14,6 +14,12 @@ var velx = 0
 var can_pick = null
 var picked = false
 
+#player state on key F
+var interact = true
+var spyglass = false
+var repair = false
+var arbalest = false
+
 @export var Player_Sprite: AnimatedSprite3D
 
 func _ready() -> void:
@@ -21,6 +27,11 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	GlobVar.PlayerPos = position # player position
+	
+	var camera: Camera3D = get_viewport().get_camera_3d()
+	var screen_pos: Vector2 = camera.unproject_position($Node3D.global_position)
+	$Control/ColorRect.position = screen_pos
+	
 	
 	# fliping sprite to move direction
 	if Input.is_action_just_pressed("move_right") :
@@ -80,7 +91,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = linear_x
 	
 	# pick up item || use item/machine
-	if Input.is_action_just_pressed("use") and not can_pick == null and !picked:
+	if Input.is_action_just_pressed("use") and not can_pick == null and !picked and interact:
 		picked = true # set is pickerd
 	elif picked and not can_pick == null:
 		# setting global position of player to picked item
@@ -91,8 +102,37 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("drop") and picked:
 		picked = false # now is not holding anything
 	
-	if Input.is_action_just_pressed("Switch"):
-		pass
+	
+	# switch state for F key
+	if Input.is_action_pressed("Switch"):
+		$Control/ColorRect.visible = true
+		if Input.is_action_just_pressed("choose_1"):
+			interact = true
+			spyglass = false
+			repair = false
+			arbalest = false
+			$Control/ColorRect.color = Color(1.0, 1.0, 1.0, 1.0)
+		if Input.is_action_just_pressed("choose_2"):
+			interact = false
+			spyglass = true
+			repair = false
+			arbalest = false
+			$Control/ColorRect.color = Color(0.0, 1.0, 1.0, 1.0)
+		if Input.is_action_just_pressed("choose_3"):
+			interact = false
+			spyglass = false
+			repair = true
+			arbalest = false
+			$Control/ColorRect.color = Color(0.177, 0.177, 0.177, 1.0)
+		if Input.is_action_just_pressed("choose_4"):
+			interact = false
+			spyglass = false
+			repair = false
+			arbalest = true
+			$Control/ColorRect.color = Color(1.0, 0.0, 0.0, 1.0)
+	else:
+		$Control/ColorRect.visible = false
+	
 	
 	move_and_slide()
 

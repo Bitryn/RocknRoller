@@ -3,6 +3,7 @@ extends Node3D
 @export var tank_capacity = 100
 @export var tank_progress = 0
 
+var player
 
 var player_in = false
 var fuel_in = false
@@ -16,7 +17,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	
 	# use canister to add fuel to tank
-	if player_in and fuel_in and Input.is_action_just_pressed("use"): # check player and cainster in zone | player use 
+	if player_in and fuel_in and Input.is_action_just_pressed("use") and player.interact: # check player and cainster in zone | player use 
 		if tank_progress + fuel_node.fuel_value <= tank_capacity: # check is added fuel not overflow tank
 			tank_progress += fuel_node.fuel_value # add fuel fron canister
 			fuel_node.fuel_value = 0 # set canister fuel value
@@ -25,6 +26,7 @@ func _physics_process(delta: float) -> void:
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.name == "MainCharacter": # check player is in zone
 		player_in = true
+		player = body
 	if body.name.begins_with("Fuel"): # check canister is in zone
 		fuel_in = true
 		fuel_node = body # get canister node

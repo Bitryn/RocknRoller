@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cnuwentnakcm4"]
+
+[ext_resource type="Script" uid="uid://cg7ktn5w50mgq" path="res://Roller/Canon/bullet.gd" id="1_hbdsx"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mbwms"]
+radius = 0.11249686
+
+[sub_resource type="SphereMesh" id="SphereMesh_mbwms"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_w63q2"]
+radius = 0.11047311
+
+[node name="Bullet" type="RigidBody3D" unique_id=1977410021]
+script = ExtResource("1_hbdsx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=641951431]
+shape = SubResource("SphereShape3D_mbwms")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1988240293]
+mesh = SubResource("SphereMesh_mbwms")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1053065233]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1635125893]
+shape = SubResource("SphereShape3D_w63q2")

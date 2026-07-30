@@ -14,11 +14,15 @@ var max_speed = 0
 var gear = 0
 var fuel_consumption = [0.001,0.007,0.01,0.07] #per min | 3,6 | 25,2 | 36 | 252 | to calc x*60*60 = per min if _physics_process 60fps
 
+var player
+
 # to detect useable items
-func _on_body_entered(body: Node3D) -> void:
+func _on_body_entered(body: CharacterBody3D) -> void:
 	can_use = true
+	if body.name == "MainCharacter":
+		player = body
 # to detect useable items
-func _on_body_exited(body: Node3D) -> void:
+func _on_body_exited(body: CharacterBody3D) -> void:
 	can_use = false
 
 func _physics_process(delta: float) -> void:
@@ -27,7 +31,7 @@ func _physics_process(delta: float) -> void:
 	$CollisionShape3D/MeshInstance3D/Label3D.text = str(gear)
 	
 	# turn on/off engine 
-	if Input.is_action_pressed("use") and can_use and !engine_runnning: # odpalanie silnika
+	if Input.is_action_pressed("use") and can_use and !engine_runnning and player.interact: # odpalanie silnika
 		print(run_engine)
 		try_run = true
 		if run_engine < 2 and !(tank.tank_progress == -0.0000001 or tank.tank_progress == 0 ) : # odpalasz
@@ -39,9 +43,9 @@ func _physics_process(delta: float) -> void:
 	elif !Input.is_action_pressed("use") and can_use and try_run: # odpuscisz odpalanie to rozruch od nowa
 		try_run = false
 		run_engine = 0
-	elif Input.is_action_just_pressed("use") and using and engine_runnning: # wylaczenie
+	elif Input.is_action_just_pressed("use") and using and engine_runnning and player.interact: # wylaczenie
 		engine_turn_off()
-	elif Input.is_action_just_pressed("use") and engine_runnning and not using: # uzycie kiedy silnik dziala
+	elif Input.is_action_just_pressed("use") and engine_runnning and not using and player.interact: # uzycie kiedy silnik dziala
 		using = true
 	elif !can_use: # jak odejdzisz nie uzywasz silnika
 		using = false
@@ -56,10 +60,10 @@ func _physics_process(delta: float) -> void:
 		
 	
 	# gear switching
-	if Input.is_action_just_pressed("move_up") and using:
+	if Input.is_action_just_pressed("move_up") and using and player.interact:
 		if gear < 3:
 			gear += 1
-	if Input.is_action_just_pressed("move_down") and using:
+	if Input.is_action_just_pressed("move_down") and using and player.interact:
 		if gear > -1:
 			gear -= 1
 			

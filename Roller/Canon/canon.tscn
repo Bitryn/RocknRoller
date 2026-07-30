@@ -21,3 +21,6 @@ mesh = SubResource("SphereMesh_mbwms")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1621246497]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1413274, 0)
 mesh = SubResource("CylinderMesh_mbwms")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=739876193]
+transform = Transform3D(0.9999999, 0, 0, 0, -4.371138e-08, -0.9999999, 0, 0.9999999, -4.371138e-08, 0, 2.0258114, 0)
