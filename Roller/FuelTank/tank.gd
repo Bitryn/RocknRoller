@@ -8,31 +8,29 @@ var player_in = false
 var fuel_in = false
 var fuel_node
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
+	# visualizing remaining fuel in tank
 	$Node3D.scale.y = tank_progress / tank_capacity
 	
 func _physics_process(delta: float) -> void:
 	
-	if player_in and fuel_in and Input.is_action_just_pressed("use"):
-		tank_progress += fuel_node.fuel_value
+	# use canister to add fuel to tank
+	if player_in and fuel_in and Input.is_action_just_pressed("use"): # check player and cainster in zone | player use 
+		if tank_progress + fuel_node.fuel_value <= tank_capacity: # check is added fuel not overflow tank
+			tank_progress += fuel_node.fuel_value # add fuel fron canister
+			fuel_node.fuel_value = 0 # set canister fuel value
 
-
+# check what is in tank zone
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body.name == "MainCharacter":
+	if body.name == "MainCharacter": # check player is in zone
 		player_in = true
-	if body.name.begins_with("Fuel"):
+	if body.name.begins_with("Fuel"): # check canister is in zone
 		fuel_in = true
-		fuel_node = body
+		fuel_node = body # get canister node
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
-	if body.name == "MainCharacter":
+	if body.name == "MainCharacter": # player leave zone
 		player_in = false
-	if body.name.begins_with("Fuel"):
+	if body.name.begins_with("Fuel"):  # canister leave zone
 		fuel_in = false

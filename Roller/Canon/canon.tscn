@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dh0hh8fw8q3nr"]
+
+[ext_resource type="Script" uid="uid://cp6nbytodqikc" path="res://Roller/Canon/canon.gd" id="1_frsv8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_mbwms"]
+radius = 1.0
+height = 2.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mbwms"]
+top_radius = 0.2
+bottom_radius = 0.3
+height = 3.0
+
+[node name="Canon" type="Node3D" unique_id=324564860]
+transform = Transform3D(1.915, 0, 0, 0, 1.915, 0, 0, 0, 1.915, 0, 0, 0)
+script = ExtResource("1_frsv8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=266518709]
+mesh = SubResource("SphereMesh_mbwms")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1621246497]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1413274, 0)
+mesh = SubResource("CylinderMesh_mbwms")
