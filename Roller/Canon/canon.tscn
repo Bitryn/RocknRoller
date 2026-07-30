@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dh0hh8fw8q3nr"]
 
 [ext_resource type="Script" uid="uid://cp6nbytodqikc" path="res://Roller/Canon/canon.gd" id="1_frsv8"]
+[ext_resource type="PackedScene" uid="uid://xwl6i0iu2sh0" path="res://Roller/Canon/RollerCannon.blend" id="2_vabe5"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_mbwms"]
 radius = 1.0
@@ -16,8 +17,13 @@ transform = Transform3D(1.915, 0, 0, 0, 1.915, 0, 0, 0, 1.915, 0, 0, 0)
 script = ExtResource("1_frsv8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=266518709]
+visible = false
 mesh = SubResource("SphereMesh_mbwms")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1621246497]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1413274, 0)
+visible = false
 mesh = SubResource("CylinderMesh_mbwms")
+
+[node name="RollerCannon" parent="." unique_id=1036303486 instance=ExtResource("2_vabe5")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
