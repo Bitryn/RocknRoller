@@ -5,9 +5,6 @@ var PlayerPos = Vector3(0,0,0)
 
 var InputDir = Vector2(0,0)
 
-var CurrRoutePoints = ["from", "to"] # points in between of which Current route is located on the map
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	InputDir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
