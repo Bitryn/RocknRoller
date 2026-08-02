@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://bdakqqdtjy6dy"]
+
+[ext_resource type="Script" uid="uid://8gmh808ast7q" path="res://MapUI/map_route.gd" id="1_7kysc"]
+[ext_resource type="Texture2D" uid="uid://qr8uxtwiv8w4" path="res://img/circle64.png" id="2_ng015"]
+
+[sub_resource type="Animation" id="Animation_ng015"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_v8l0e"]
+resource_name = "wobble"
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.44),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.1, 0.1), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_61d4e"]
+_data = {
+&"RESET": SubResource("Animation_ng015"),
+&"wobble": SubResource("Animation_v8l0e")
+}
+
+[node name="MapRoute" type="Node2D" unique_id=1384801702 node_paths=PackedStringArray("Point0", "Point1")]
+script = ExtResource("1_7kysc")
+Point0 = NodePath("dummyP0")
+Point1 = NodePath("dummyP1")
+
+[node name="dummyP0" type="Node2D" parent="." unique_id=1432520452]
+position = Vector2(10, 0)
+
+[node name="dummyP1" type="Node2D" parent="." unique_id=95383600]
+position = Vector2(0, 10)
+
+[node name="Timer" type="Timer" parent="." unique_id=1234555444]
+wait_time = 0.5
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1092733518]
+modulate = Color(0.98035556, 0.6765034, 0.21928829, 1)
+texture_filter = 1
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_ng015")
+
+[node name="Anim" type="AnimationPlayer" parent="." unique_id=344141894]
+libraries/ = SubResource("AnimationLibrary_61d4e")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
