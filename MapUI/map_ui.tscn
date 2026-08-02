@@ -2,30 +2,41 @@
 
 [ext_resource type="PackedScene" uid="uid://ci46mfavcyka4" path="res://MapUI/map_point.tscn" id="1_0k8y1"]
 [ext_resource type="Texture2D" uid="uid://c6bdddlst1lbb" path="res://img/WorldRouteMap001.png" id="1_182vf"]
+[ext_resource type="PackedScene" uid="uid://bdakqqdtjy6dy" path="res://MapUI/map_route.tscn" id="3_g3i57"]
 
 [node name="MapScreen" type="Node2D" unique_id=1518283603]
 
 [node name="Cam" type="Camera2D" parent="." unique_id=905083460]
+position = Vector2(574, 1268)
 
 [node name="MapHolder" type="Node2D" parent="." unique_id=1147295706]
 
 [node name="WorldRouteMap001" type="Sprite2D" parent="MapHolder" unique_id=1393163075]
 texture = ExtResource("1_182vf")
 
-[node name="MapPoint001" parent="MapHolder" unique_id=912572370 node_paths=PackedStringArray("Point0") instance=ExtResource("1_0k8y1")]
+[node name="Points" type="Node2D" parent="MapHolder" unique_id=565460666]
+
+[node name="MapPoint001" parent="MapHolder/Points" unique_id=912572370 node_paths=PackedStringArray("Point0") instance=ExtResource("1_0k8y1")]
 position = Vector2(545, 1573)
 Point0 = NodePath("../MapPoint002")
 
-[node name="MapPoint002" parent="MapHolder" unique_id=1320632845 node_paths=PackedStringArray("Point0", "Point1", "Point2") instance=ExtResource("1_0k8y1")]
+[node name="MapPoint002" parent="MapHolder/Points" unique_id=1320632845 node_paths=PackedStringArray("Point0", "Point1", "Point2") instance=ExtResource("1_0k8y1")]
 position = Vector2(605, 1479)
 Point0 = NodePath("../MapPoint001")
 Point1 = NodePath("../MapPoint003")
 Point2 = NodePath("../MapPoint004")
 
-[node name="MapPoint003" parent="MapHolder" unique_id=658295776 node_paths=PackedStringArray("Point0") instance=ExtResource("1_0k8y1")]
+[node name="MapPoint003" parent="MapHolder/Points" unique_id=658295776 node_paths=PackedStringArray("Point0") instance=ExtResource("1_0k8y1")]
 position = Vector2(724, 1397)
 Point0 = NodePath("../MapPoint002")
 
-[node name="MapPoint004" parent="MapHolder" unique_id=671475176 node_paths=PackedStringArray("Point0") instance=ExtResource("1_0k8y1")]
+[node name="MapPoint004" parent="MapHolder/Points" unique_id=671475176 node_paths=PackedStringArray("Point0") instance=ExtResource("1_0k8y1")]
 position = Vector2(520, 1355)
 Point0 = NodePath("../MapPoint002")
+
+[node name="Routes" type="Node2D" parent="MapHolder" unique_id=567491889]
+
+[node name="MapRoute" parent="MapHolder/Routes" unique_id=1384801702 node_paths=PackedStringArray("Point0", "Point1") instance=ExtResource("3_g3i57")]
+position = Vector2(573, 1525)
+Point0 = NodePath("../../Points/MapPoint001")
+Point1 = NodePath("../../Points/MapPoint002")

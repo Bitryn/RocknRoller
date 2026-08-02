@@ -6,7 +6,7 @@ const JUMP_VELOCITY = 6
 
 var speed = 10
 var input_dir
-var climbing = false
+var climbing = 0
 var player_z = 0
 var linear_x = 0
 var velx = 0
@@ -29,6 +29,9 @@ func _process(delta: float) -> void:
 		Player_Sprite.flip_h = true
 		
 	position.z = player_z
+	
+	
+	$DEBUG.text = "Ladders collide: " + str(climbing)
 
 func _physics_process(delta: float) -> void:
 	velx = velocity.x
