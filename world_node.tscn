@@ -53,18 +53,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.094348, 11.981211, 0)
 [node name="PlayerCam" parent="." unique_id=1450766968 instance=ExtResource("5_ym0nx")]
 
 [node name="BarrierPlayer" type="Node3D" parent="." unique_id=1561266298]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.546509, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.546509, 1.6172719, 0)
 script = ExtResource("6_b47hq")
 player = NodePath("../MainCharacter")
 barrier = NodePath(".")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="BarrierPlayer" unique_id=382973362]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89637923, 0)
 collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BarrierPlayer/StaticBody3D" unique_id=391094893]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37380219, 0.4378662, -0.613)
 shape = SubResource("BoxShape3D_mbwms")
 debug_color = Color(0.82412636, 0.0016583932, 0.9590607, 0.41960785)
 
@@ -73,7 +71,6 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BarrierPlayer/StaticBody3D2" unique_id=1454486246]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34423828, 1.3420982, 0.62)
 shape = SubResource("BoxShape3D_w63q2")
 debug_color = Color(0.8123584, 0.0020958055, 0.9832168, 0.41960785)
 
@@ -83,22 +80,20 @@ player = NodePath("../Roller")
 barrier = NodePath(".")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="BarrierRoller" unique_id=312364924]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89637923, 0)
 collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BarrierRoller/StaticBody3D" unique_id=1105494547]
-transform = Transform3D(0.99934554, 0, 0.036172744, 0, 1, 0, -0.036172744, 0, 0.99934554, -2.250389, 15.755266, 4.7569013)
+transform = Transform3D(0.99934554, 0, 0.036172744, 0, 1, 0, -0.036172744, 0, 0.99934554, -2.25, 0, 7.419)
 shape = SubResource("BoxShape3D_b47hq")
 debug_color = Color(0.82412636, 0.0016583932, 0.9590607, 0.41960785)
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="BarrierRoller" unique_id=285264572]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89637923, 0)
 collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BarrierRoller/StaticBody3D2" unique_id=2128229950]
-transform = Transform3D(0.99950385, 0, -0.031501524, 0, 1, 0, 0.031501524, 0, 0.99950385, -2.182785, 15.839422, -4.6517444)
+transform = Transform3D(0.99950385, 0, -0.031501524, 0, 1, 0, 0.031501524, 0, 0.99950385, -2.183, 0, -7.392)
 shape = SubResource("BoxShape3D_21o2a")
 debug_color = Color(0.82412636, 0.0016583932, 0.9590607, 0.41960785)
 

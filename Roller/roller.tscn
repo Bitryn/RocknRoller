@@ -79,7 +79,6 @@ collision_layer = 4
 mass = 100.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -10, 0)
-lock_rotation = true
 script = ExtResource("1_odgv0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=34097537]
@@ -121,7 +120,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.379301, 0.03555298, 0.88244
 mesh = SubResource("BoxMesh_mbwms")
 
 [node name="LeftRamp" type="CollisionPolygon3D" parent="." unique_id=102477205]
-transform = Transform3D(0.92007333, -0.39174622, 0, 0.39174622, 0.92007333, 0, 0, 0, 1, -17.458078, -8.591124, 0)
+transform = Transform3D(0.15195785, 0.98838705, 0, -0.98838705, 0.15195785, 0, 0, 0, 1, -17.458078, -8.591124, 0)
 depth = 5.0
 polygon = PackedVector2Array(-0.25421524, 0.05612564, -6.1388283, -0.06553173, -0.1484108, -0.13968849)
 debug_color = Color(1, 1, 1, 0.41960785)

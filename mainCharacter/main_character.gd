@@ -6,7 +6,7 @@ const JUMP_VELOCITY = 6
 
 var speed = 10
 var input_dir
-var climbing = false
+var climbing = 0
 var player_z = 0
 var linear_x = 0
 var velx = 0

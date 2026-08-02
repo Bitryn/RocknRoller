@@ -57,7 +57,8 @@ func _physics_process(delta: float) -> void:
 		engine_turn_off() # turn off func
 		tank.tank_progress = -0.0000001 # for end engine running check
 		
-		
+	if !player == null and global_position.distance_to(player.global_position) > 150 :
+		engine_turn_off()
 	
 	# gear switching
 	if Input.is_action_just_pressed("move_up") and using and player.interact:
