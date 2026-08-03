@@ -20,6 +20,8 @@ var spyglass = false
 var repair = false
 var arbalest = false
 
+
+
 @export var Player_Sprite: AnimatedSprite3D
 
 func _ready() -> void:
