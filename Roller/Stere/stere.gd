@@ -21,6 +21,7 @@ func _on_body_entered(body: CharacterBody3D) -> void:
 	can_use = true
 	if body.name == "MainCharacter":
 		player = body
+		
 # to detect useable items
 func _on_body_exited(body: CharacterBody3D) -> void:
 	can_use = false

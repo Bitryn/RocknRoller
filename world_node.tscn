@@ -48,7 +48,7 @@ material_override = ExtResource("3_msjbx")
 mesh = SubResource("BoxMesh_i1acx")
 
 [node name="MainCharacter" parent="." unique_id=892675896 instance=ExtResource("4_msjbx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.094348, 11.981211, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.593015, 5.7534466, 0)
 
 [node name="PlayerCam" parent="." unique_id=1450766968 instance=ExtResource("5_ym0nx")]
 

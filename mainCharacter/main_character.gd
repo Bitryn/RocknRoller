@@ -24,6 +24,7 @@ var arbalest = false
 
 func _ready() -> void:
 	player_z = position.z
+	interact = true
 	
 func _process(delta: float) -> void:
 	GlobVar.PlayerPos = position # player position
