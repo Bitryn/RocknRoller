@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+#hgggg
 
 const speed_array = [6,25]
 const JUMP_VELOCITY = 6
@@ -20,14 +21,25 @@ var spyglass = false
 var repair = false
 var arbalest = false
 
+var reload = false
+var reload_timer = 0
+var bullet_spawnpoimt
+@onready var bullet_scene = preload("res://Roller/Canon/bullet.tscn")
+
+var camera
+
 @export var Player_Sprite: AnimatedSprite3D
+
 
 func _ready() -> void:
 	player_z = position.z
 	interact = true
+	camera = $"../PlayerCam"
 	
 func _process(delta: float) -> void:
 	GlobVar.PlayerPos = position # player position
+	
+	bullet_spawnpoimt = $bullet_spawn.global_transform
 	
 	var camera: Camera3D = get_viewport().get_camera_3d()
 	var screen_pos: Vector2 = camera.unproject_position($Node3D.global_position)
@@ -68,11 +80,14 @@ func _physics_process(delta: float) -> void:
 		
 	
 	# sprint
-	if Input.is_action_pressed("sprint"):
-		speed = speed_array[1]
-	else:
-		speed = speed_array[0]
-		
+	if reload and arbalest:
+		speed = speed_array[0] * .5	
+	else:	
+		if Input.is_action_pressed("sprint"):
+			speed = speed_array[1]
+		else:
+			speed = speed_array[0]
+	
 		
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
@@ -137,6 +152,41 @@ func _physics_process(delta: float) -> void:
 	else:
 		$Control/ColorRect.visible = false
 	
+	# arbalest
+	if Input.is_action_just_pressed("use") and arbalest and !reload:
+		# shoot 
+		var bullet = bullet_scene.instantiate()
+		add_sibling(bullet)
+		bullet.global_transform = bullet_spawnpoimt
+		var direct = bullet_spawnpoimt.basis * Vector3.FORWARD
+		bullet.linear_vtelocity = direct * 50
+		reload = true
+		#reload ( 2s and half speed and block sprint
+	elif reload and arbalest:
+		reload_timer += delta
+		if reload_timer > 2 :
+			reload_timer = 0
+			reload = false
+		
+	# spyglass
+	if Input.is_action_just_pressed("use") and spyglass:
+		if !camera.spyglass:
+			camera.spyglass = true
+			camera.ZoomDist = 30
+			camera.Teleport()
+		elif camera.spyglass:
+			camera.spyglass = false
+			camera.ZoomDist = 20
+			camera.Teleport()
+		
+	
+	if Input.is_action_just_pressed("use") and repair:
+		# get node
+		# maybe by area3d or other colliders 
+		# repair
+		# if node.durabi < node.max_durabi
+		# 	node.durabi += .1
+		pass
 	
 	move_and_slide()
 
