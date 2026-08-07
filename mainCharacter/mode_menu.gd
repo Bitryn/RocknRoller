@@ -24,11 +24,17 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Switch"):
 		visible = !Active
-		if Active:
-			pass # switch of interactions here!
+		
+		if Active && Input.is_action_just_pressed("Switch") && ChosenOpt !=0:
+			GlobVar.PlayerActionMode = ChosenOpt
+			print("menu chosen Action: ", ChosenOpt)
+			GlobSig.ActionModeSwitch.emit()
+			
+		
+		ChosenOpt =0
 		Active = !Active
 	
-	if GlobVar.InputDir.length()>0.3:
+	if GlobVar.InputDir.length()>0.3 && Active:
 		Choose()
 	
 	match ChosenOpt:

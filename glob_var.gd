@@ -6,6 +6,9 @@ var PlayerPos = Vector3(0,0,0)
 var InputDir = Vector2(0,0)
 
 var CurrRoutePoints = ["from", "to"] # points in between of which Current route is located on the map
+var CurrRoute = ""
+
+var PlayerActionMode = 4 # 1 - 4
 
 
 # Called when the node enters the scene tree for the first time.

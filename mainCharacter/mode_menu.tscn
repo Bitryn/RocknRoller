@@ -47,3 +47,13 @@ texture = ExtResource("2_vegsi")
 [node name="d" type="Label" parent="." unique_id=85269219]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="Info" type="Label" parent="." unique_id=202544614]
+offset_left = 277.0
+offset_top = 612.0
+offset_right = 827.0
+offset_bottom = 704.0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 1
+theme_override_font_sizes/font_size = 28
+text = "Choose an option and press switch again"

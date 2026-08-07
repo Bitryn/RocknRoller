@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://8ae5vsbtlh46" path="res://enemy/Bird/big_bird_enemy.tscn" id="1_aeo23"]
 [ext_resource type="PackedScene" uid="uid://bkw1658hm6l7v" path="res://models/BambooTree01.blend" id="2_wbrl3"]
+[ext_resource type="PackedScene" uid="uid://fx3kltislhcl" path="res://models/DirectionSign.blend" id="3_xl2qr"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_i1acx"]
 
@@ -55,3 +56,6 @@ transform = Transform3D(0.51560724, 0, -0.85682505, 0, 1, 0, 0.85682505, 0, 0.51
 
 [node name="BambooTree06" parent="." unique_id=214166587 instance=ExtResource("2_wbrl3")]
 transform = Transform3D(0.6853677, 0, 0.72819716, 0, 1, 0, -0.72819716, 0, 0.6853677, 21.845573, 3.8146973e-06, -11.714045)
+
+[node name="DirectionSign" parent="." unique_id=1823613779 instance=ExtResource("3_xl2qr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.55383, 0, 6.380787)
