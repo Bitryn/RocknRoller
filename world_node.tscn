@@ -109,4 +109,5 @@ process_mode = 4
 visible = false
 Lightning = true
 
-[node name="ModeMenu" parent="." unique_id=2127508239 instance=ExtResource("9_3ywo4")]
+[node name="ModeMenu" parent="." unique_id=2127508239 node_paths=PackedStringArray("player") instance=ExtResource("9_3ywo4")]
+player = NodePath("../MainCharacter")
