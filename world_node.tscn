@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dgyyicddslgwl" path="res://scenes/world_scripts/barrier.gd" id="6_b47hq"]
 [ext_resource type="PackedScene" uid="uid://bj7j58dmoofn8" path="res://Fuel/fuel.tscn" id="7_21o2a"]
 [ext_resource type="PackedScene" uid="uid://b1mgc8clsqihw" path="res://WeatherNodes/rain_node.tscn" id="8_4eb2h"]
+[ext_resource type="PackedScene" uid="uid://gtoujpq10asq" path="res://mainCharacter/mode_menu.tscn" id="9_3ywo4"]
 
 [sub_resource type="Environment" id="Environment_i1acx"]
 background_mode = 1
@@ -107,3 +108,5 @@ fuel_value = 50
 process_mode = 4
 visible = false
 Lightning = true
+
+[node name="ModeMenu" parent="." unique_id=2127508239 instance=ExtResource("9_3ywo4")]

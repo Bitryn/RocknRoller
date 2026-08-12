@@ -28,6 +28,7 @@ var bullet_spawnpoimt
 
 var camera
 
+
 @export var Player_Sprite: AnimatedSprite3D
 
 

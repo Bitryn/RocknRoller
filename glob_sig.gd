@@ -1,11 +1,18 @@
 extends Node
 
+signal ActionModeSwitch() 
+#^^^  this one has to be connected to a mode switch function 
+#     in maincharacter script, said function takes mode from var in GlobVar
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+#signal PlayerJumped(SPname)
+#signal PlayerChose(ID)
+#signal PantheonFeel(Em) #emotion to emit particles
+## call with arguments: P, N (positive and negative)
+#signal GameEnd() #end the game
+
+
+### VVV !
+#Globsig.PlayerJumped.connect(PlayerJ)
+#func PlayerJ(SPname):

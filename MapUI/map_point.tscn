@@ -3,9 +3,14 @@
 [ext_resource type="Script" uid="uid://xflkpgmung32" path="res://MapUI/map_point.gd" id="1_e1ya5"]
 [ext_resource type="Texture2D" uid="uid://bj6atha6nh26y" path="res://img/PointCutterBullet.png" id="1_e7s06"]
 
-[node name="MapPoint" type="Node2D" unique_id=912572370]
+[sub_resource type="CircleShape2D" id="CircleShape2D_i1acx"]
+
+[node name="MapPoint" type="Area2D" unique_id=1070159896 groups=["MapPoint"]]
 script = ExtResource("1_e1ya5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1329590022]
 scale = Vector2(2, 2)
 texture = ExtResource("1_e7s06")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1751002162]
+shape = SubResource("CircleShape2D_i1acx")

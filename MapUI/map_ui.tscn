@@ -2,9 +2,23 @@
 
 [ext_resource type="PackedScene" uid="uid://ci46mfavcyka4" path="res://MapUI/map_point.tscn" id="1_0k8y1"]
 [ext_resource type="Texture2D" uid="uid://c6bdddlst1lbb" path="res://img/WorldRouteMap001.png" id="1_182vf"]
+[ext_resource type="Script" uid="uid://bdagw6aoxxcfu" path="res://MapUI/map_ui.gd" id="1_bpf2t"]
 [ext_resource type="PackedScene" uid="uid://bdakqqdtjy6dy" path="res://MapUI/map_route.tscn" id="3_g3i57"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_m1vlh"]
+radius = 40.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i1acx"]
+blend_mode = 1
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g3i57"]
+load_path = "res://.godot/imported/MapAim.png-264754a203fa5afb013f930508a081a1.ctex"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i1acx"]
+radius = 15.0
+
 [node name="MapScreen" type="Node2D" unique_id=1518283603]
+script = ExtResource("1_bpf2t")
 
 [node name="Cam" type="Camera2D" parent="." unique_id=905083460]
 position = Vector2(574, 1268)
@@ -40,3 +54,28 @@ Point0 = NodePath("../MapPoint002")
 position = Vector2(573, 1525)
 Point0 = NodePath("../../Points/MapPoint001")
 Point1 = NodePath("../../Points/MapPoint002")
+
+[node name="Aim" type="CharacterBody2D" parent="." unique_id=1436262922]
+position = Vector2(767, 1342)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Aim" unique_id=417830615]
+shape = SubResource("CircleShape2D_m1vlh")
+
+[node name="Spr" type="Sprite2D" parent="Aim" unique_id=1853780487]
+material = SubResource("CanvasItemMaterial_i1acx")
+scale = Vector2(1.5, 1.5)
+texture = SubResource("CompressedTexture2D_g3i57")
+
+[node name="Area" type="Area2D" parent="Aim" unique_id=2030671798]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Aim/Area" unique_id=711593948]
+shape = SubResource("CircleShape2D_i1acx")
+
+[node name="Blocker" type="StaticBody2D" parent="." unique_id=69413385]
+position = Vector2(289, 829)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocker" unique_id=1472062506]
+polygon = PackedVector2Array(853, -402, 931, -80, 900, 257, 775, 569, 510, 836, 88, 933, -261, 910, -555, 784, -854, 451, -956, 88, -949, -225, -854, -511, -614, -770, -81, -992, 466, -869, 711, -673, 826, -425, 904, -425, 890, -536, 729, -902, 257, -1147, -806, -948, -1189, 135, -603, 1001, 643, 1031, 1166, 94)
+
+[connection signal="area_entered" from="Aim/Area" to="." method="_on_area_area_entered"]
+[connection signal="area_exited" from="Aim/Area" to="." method="_on_area_area_exited"]

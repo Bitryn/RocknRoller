@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://gtoujpq10asq"]
+
+[ext_resource type="Script" uid="uid://b56d4cjjpmepr" path="res://mainCharacter/mode_menu.gd" id="1_m8ven"]
+[ext_resource type="Texture2D" uid="uid://dkxq5v722sx5u" path="res://img/PopUpActionStar.png" id="2_vegsi"]
+[ext_resource type="Texture2D" uid="uid://8ht1h664gqtd" path="res://img/PopUpActionArbalet.png" id="3_8xqat"]
+[ext_resource type="Texture2D" uid="uid://bke7rl1tbkmmv" path="res://img/PopUpActionFix.png" id="4_nsiv5"]
+[ext_resource type="Texture2D" uid="uid://bpco8nidi6f14" path="res://img/PopUpActionSpyglass.png" id="5_33flr"]
+[ext_resource type="Texture2D" uid="uid://b540lvdwl3i6c" path="res://img/PopUpActionUse.png" id="6_15hq8"]
+
+[node name="ModeMenu" type="Node2D" unique_id=2127508239]
+script = ExtResource("1_m8ven")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1694848545]
+visible = false
+offset_right = 1200.0
+offset_bottom = 900.0
+color = Color(0, 0, 0, 0.36862746)
+
+[node name="Core" type="Node2D" parent="." unique_id=234135488]
+position = Vector2(553, 359)
+
+[node name="Arbalet" type="Sprite2D" parent="Core" unique_id=662360876]
+position = Vector2(0, 100)
+scale = Vector2(4, 4)
+texture = ExtResource("3_8xqat")
+
+[node name="Fix" type="Sprite2D" parent="Core" unique_id=2146213759]
+position = Vector2(100, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("4_nsiv5")
+
+[node name="SpyGlass" type="Sprite2D" parent="Core" unique_id=1083829909]
+position = Vector2(-100, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("5_33flr")
+
+[node name="Hand" type="Sprite2D" parent="Core" unique_id=1943656933]
+position = Vector2(0, -100)
+scale = Vector2(4, 4)
+texture = ExtResource("6_15hq8")
+
+[node name="Star" type="Sprite2D" parent="Core" unique_id=1379145570]
+position = Vector2(-350, -232)
+scale = Vector2(4, 4)
+texture = ExtResource("2_vegsi")
+
+[node name="d" type="Label" parent="." unique_id=85269219]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Info" type="Label" parent="." unique_id=202544614]
+offset_left = 277.0
+offset_top = 612.0
+offset_right = 827.0
+offset_bottom = 704.0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 1
+theme_override_font_sizes/font_size = 28
+text = "Choose an option and press switch again"
