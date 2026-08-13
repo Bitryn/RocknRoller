@@ -131,7 +131,7 @@ func _physics_process(delta: float) -> void:
 		add_sibling(bullet)
 		bullet.global_transform = bullet_spawnpoimt
 		var direct = bullet_spawnpoimt.basis * Vector3.FORWARD
-		#bullet.linear_vtelocity = direct * 50
+		bullet.linear_velocity = direct * 20
 		reload = true
 		#reload ( 2s and half speed and block sprint
 	elif reload and arbalest:
@@ -145,19 +145,20 @@ func _physics_process(delta: float) -> void:
 		if !camera.spyglass:
 			camera.spyglass = true
 			camera.CamMode = 'spy'
-			camera.ZoomDist = 30
+			camera.ZoomDist = 24
 			camera.Teleport()
 			can_move = false
+			camera.player_pos = [global_position.x,global_position.y]
 		elif camera.spyglass:
 			camera.spyglass = false
 			camera.CamMode = "track" 
-			camera.ZoomDist = 20
+			camera.ZoomDist = 18
 			camera.Teleport()
 			can_move = true
 	elif !spyglass and camera.spyglass:
 		camera.spyglass = false
 		camera.CamMode = "track" 
-		camera.ZoomDist = 20
+		camera.ZoomDist = 18
 		camera.Teleport()
 		can_move = true
 		
