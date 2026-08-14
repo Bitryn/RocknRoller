@@ -99,7 +99,7 @@ shape = SubResource("BoxShape3D_21o2a")
 debug_color = Color(0.82412636, 0.0016583932, 0.9590607, 0.41960785)
 
 [node name="Fuel" parent="." unique_id=1392909589 instance=ExtResource("7_21o2a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.697, 4.056, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.697, 4.056, -0.43374366)
 mass = 0.014
 lock_rotation = true
 fuel_value = 50

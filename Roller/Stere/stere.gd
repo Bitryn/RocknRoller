@@ -3,6 +3,8 @@ extends Area3D
 @export var Roller:RigidBody3D
 @export var tank:Node3D
 
+@onready var ster_dur = $"../RepairZones"
+
 var can_use = false
 var using = false
 
@@ -78,6 +80,7 @@ func _physics_process(delta: float) -> void:
 					Roller.force = -1200
 				max_speed = -1280 # set max pushing force
 				Roller.speed = max_speed # set speed for roller
+				ster_dur.ster_dur[1] -= .05 # lose dur when engine work
 			else:
 				gear = 0 # speed not good set 0
 		0: # neutral
@@ -89,14 +92,26 @@ func _physics_process(delta: float) -> void:
 					Roller.force = 1200
 				max_speed = 1280 # set max pushing force
 				Roller.speed = max_speed # set speed for roller
+				ster_dur.ster_dur[1] -= .05 # lose dur when engine work
 			else:
 				gear = 0 # speed not good set 0
 		2:
 			max_speed = 1340 # set max pushing force
 			Roller.speed = max_speed # set speed for roller
+			ster_dur.ster_dur[1] -= .1 # lose dur when engine work
 		3:
 			max_speed = 1400 # set max pushing force
 			Roller.speed = max_speed # set speed for roller
+			ster_dur.ster_dur[1] -= .15 # lose dur when engine work
+	
+	# when Ster broke 
+	if ster_dur.ster_dur[1] < 0 and !ster_dur.ster_dur[1] == 0:
+		ster_dur.ster_dur[1] = 0
+		engine_turn_off() # turn off engine
+	elif ster_dur.ster_dur[1] == 0: # broken cant start engine
+		run_engine = 0
+
+
 
 func engine_turn_off() -> void: 
 	# disable all live function of engine 

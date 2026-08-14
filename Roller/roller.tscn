@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dh0hh8fw8q3nr" path="res://Roller/Canon/canon.tscn" id="12_ex2hn"]
 [ext_resource type="PackedScene" uid="uid://d40d740x8q0v" path="res://Roller/Canon/canon_control.tscn" id="13_llb22"]
 [ext_resource type="Script" uid="uid://yl2i8xa63t18" path="res://Roller/Ramp/close_ramp.gd" id="15_knf4l"]
+[ext_resource type="Script" uid="uid://cs8eia8sxjsp4" path="res://Roller/repair_zones.gd" id="16_qtdid"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_knf4l"]
 friction = 0.6
@@ -100,6 +101,18 @@ size = Vector3(0.5, 0.5, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_onh1n"]
 size = Vector3(0.61816406, 0.60546875, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qtdid"]
+size = Vector3(1.7148438, 1.7675781, 4.3779297)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3mx1d"]
+size = Vector3(1.7189941, 2.0151367, 3.399414)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_78p18"]
+size = Vector3(1.6418457, 1.5917969, 2.6895752)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_84biw"]
+size = Vector3(1.2597656, 1, 2.8931274)
 
 [node name="Roller" type="RigidBody3D" unique_id=1376312120]
 collision_layer = 4
@@ -294,8 +307,55 @@ mesh = SubResource("BoxMesh_84biw")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CloseRamp" unique_id=1960721060]
 shape = SubResource("BoxShape3D_onh1n")
 
+[node name="RepairZones" type="Node3D" parent="." unique_id=718909010]
+script = ExtResource("16_qtdid")
+
+[node name="LeftWheel" type="Area3D" parent="RepairZones" unique_id=1556565738]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.745383, -7.9953694, 0)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RepairZones/LeftWheel" unique_id=466315662]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.6889648)
+shape = SubResource("BoxShape3D_qtdid")
+
+[node name="RightWheel" type="Area3D" parent="RepairZones" unique_id=1284684919]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.237612, -10.326121, 0)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RepairZones/RightWheel" unique_id=694962426]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06375885, 0.6350851, 1.199707)
+shape = SubResource("BoxShape3D_3mx1d")
+
+[node name="Canon" type="Area3D" parent="RepairZones" unique_id=1548961668]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.496922, 4.4254804, 0)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RepairZones/Canon" unique_id=1285417404]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06359863, -0.29589844, 0.8447876)
+shape = SubResource("BoxShape3D_78p18")
+
+[node name="Ster" type="Area3D" parent="RepairZones" unique_id=2008866586]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1506252, -4.69101, 0)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RepairZones/Ster" unique_id=670315545]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08201313, 0.023432255, 0.9465637)
+shape = SubResource("BoxShape3D_84biw")
+
 [connection signal="body_entered" from="RightRamp/Area3D" to="RightRamp" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="LeftRamp/Area3D" to="LeftRamp" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="CollisonZones/Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="CloseRamp" to="CloseRamp" method="_on_body_entered"]
 [connection signal="body_exited" from="CloseRamp" to="CloseRamp" method="_on_body_exited"]
+[connection signal="body_entered" from="RepairZones/LeftWheel" to="RepairZones" method="_on_left_wheel_body_entered"]
+[connection signal="body_exited" from="RepairZones/LeftWheel" to="RepairZones" method="_on_left_wheel_body_exited"]
+[connection signal="body_entered" from="RepairZones/RightWheel" to="RepairZones" method="_on_right_wheel_body_entered"]
+[connection signal="body_exited" from="RepairZones/RightWheel" to="RepairZones" method="_on_right_wheel_body_exited"]
+[connection signal="body_entered" from="RepairZones/Canon" to="RepairZones" method="_on_canon_body_entered"]
+[connection signal="body_exited" from="RepairZones/Canon" to="RepairZones" method="_on_canon_body_exited"]
+[connection signal="body_entered" from="RepairZones/Ster" to="RepairZones" method="_on_ster_body_entered"]
+[connection signal="body_exited" from="RepairZones/Ster" to="RepairZones" method="_on_ster_body_exited"]
