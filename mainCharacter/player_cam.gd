@@ -31,36 +31,56 @@ func _physics_process(delta: float) -> void:
 			position +=  Vector3(Cam2PlayerPos.x * CamSpeed * delta, Cam2PlayerPos.y * CamSpeed * delta + .2,0) # przesuniecie wyskosci tutaj w Y
 		"spy":
 			if player_pos[0] - 70 < global_position.x: #check distance
-				if Input.is_action_pressed("ui_left"): # BTN press check
-					InputDir.x = -Input.get_action_strength("ui_left") # add minus to move left
+				if Input.is_action_pressed("move_left_WSAD") or Input.is_action_pressed("move_left_Arrow"): # BTN press check
+					if GlobVar.WSAD:
+						InputDir.x = -Input.get_action_strength("move_left_WSAD") # add minus to move left
+					if GlobVar.ARROW:
+						InputDir.x = -Input.get_action_strength("move_left_Arrow") # add minus to move left
 			elif InputDir.x < 0: # while BTN not holding nothing moving
 				InputDir.x = 0
 					
 			if  global_position.x < player_pos[0] + 70: #check distance
-				if Input.is_action_pressed("ui_right"): # BTN press check
-					InputDir.x = Input.get_action_strength("ui_right") # move right
+				if Input.is_action_pressed("move_right_WSAD") or Input.is_action_pressed("move_right_Arrow"): # BTN press check
+					if GlobVar.WSAD:
+						InputDir.x = Input.get_action_strength("move_right_WSAD") # move right
+					if GlobVar.ARROW:
+						InputDir.x = Input.get_action_strength("move_right_Arrow") # move right
 			elif InputDir.x > 0: # while BTN not holding nothing moving
 				InputDir.x = 0
 			
 			# while nothing or both BTN pressed 
-			if !Input.get_action_strength("ui_left") and !Input.get_action_strength("ui_right") or Input.get_action_strength("ui_left") and Input.get_action_strength("ui_right"):
-				InputDir.x = 0
+			if GlobVar.WSAD:
+				if !Input.get_action_strength("move_left_WSAD") and !Input.get_action_strength("move_right_WSAD") or Input.get_action_strength("move_left_WSAD") and Input.get_action_strength("move_right_WSAD"):
+					InputDir.x = 0
+			if GlobVar.ARROW:
+				if !Input.get_action_strength("move_left_Arrow") and !Input.get_action_strength("move_right_Arrow") or Input.get_action_strength("move_left_Arrow") and Input.get_action_strength("move_right_Arrow"):
+					InputDir.x = 0
 				
 			if player_pos[1] < global_position.y: #check distance
-				if Input.is_action_pressed("ui_down"): # BTN press check
-					InputDir.y = -Input.get_action_strength("ui_down") # add minus to move down
+				if Input.is_action_pressed("move_down_WSAD") or Input.is_action_pressed("move_down_Arrow"): # BTN press check
+					if GlobVar.WSAD:
+						InputDir.y = -Input.get_action_strength("move_down_WSAD") # add minus to move down
+					if GlobVar.ARROW:
+						InputDir.y = -Input.get_action_strength("move_down_Arrow") # add minus to move down
 			elif InputDir.y < 0: # while BTN not holding nothing moving
 				InputDir.y = 0
 			
 			if global_position.y < player_pos[1] + 40: #check distance
-				if Input.is_action_pressed("ui_up"): # BTN press check
-					InputDir.y = Input.get_action_strength("ui_up") # move up
+				if Input.is_action_pressed("move_up_WSAD") or Input.is_action_pressed("move_up_Arrow"): # BTN press check
+					if GlobVar.WSAD:
+						InputDir.y = Input.get_action_strength("move_up_WSAD") # move up
+					if GlobVar.ARROW:
+						InputDir.y = Input.get_action_strength("move_up_Arrow") # move up
 			elif InputDir.y > 0: # while BTN not holding nothing moving
 				InputDir.y = 0
 			
 			# while nothing or both BTN pressed 
-			if !Input.get_action_strength("ui_up") and !Input.get_action_strength("ui_down") or Input.get_action_strength("ui_up") and Input.get_action_strength("ui_down"):
-				InputDir.y = 0
+			if GlobVar.WSAD:
+				if !Input.get_action_strength("move_up_WSAD") and !Input.get_action_strength("move_down_WSAD") or Input.get_action_strength("move_up_WSAD") and Input.get_action_strength("move_down_WSAD"):
+					InputDir.y = 0
+			if GlobVar.ARROW:
+				if !Input.get_action_strength("move_up_Arrow") and !Input.get_action_strength("move_down_Arrow") or Input.get_action_strength("move_up_Arrow") and Input.get_action_strength("move_down_Arrow"):
+					InputDir.y = 0
 			
 			# moving cam
 			position += Vector3( InputDir.x , InputDir.y,0)*delta  * 50

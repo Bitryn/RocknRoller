@@ -10,13 +10,14 @@ var CurrRoute = ""
 
 var PlayerActionMode = 4 # 1 - 4
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	InputDir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	pass # Replace with function body.
+var WSAD = true
+var ARROW = false
+var PAD = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	InputDir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	if WSAD:
+		InputDir = Input.get_vector("move_left_WSAD", "move_right_WSAD", "move_up_WSAD", "move_down_WSAD")
+	if ARROW:
+		InputDir = Input.get_vector("move_left_Arrow", "move_right_Arrow", "move_up_Arrow", "move_down_Arrow")

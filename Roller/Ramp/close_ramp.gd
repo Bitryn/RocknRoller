@@ -11,7 +11,7 @@ var player
 func _physics_process(delta: float) -> void:
 	
 	# use BTN to close ramps
-	if Input.is_action_just_pressed("use") and player_in and player.interact :
+	if Input.is_action_just_pressed("use_WSAD") and player_in and player.interact or Input.is_action_just_pressed("use_Arrow") and player_in and player.interact:
 		rampL.close_ramp()
 		rampR.close_ramp()
 		pass

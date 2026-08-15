@@ -50,9 +50,9 @@ func _process(delta: float) -> void:
 	
 	
 	# fliping sprite to move direction
-	if Input.is_action_just_pressed("move_right") :
+	if Input.is_action_just_pressed("move_right_WSAD") or Input.is_action_just_pressed("move_right_Arrow"):
 		Player_Sprite.flip_h = false
-	elif Input.is_action_just_pressed("move_left") :
+	elif Input.is_action_just_pressed("move_left_WSAD") or Input.is_action_just_pressed("move_left_Arrow") :
 		Player_Sprite.flip_h = true
 		
 	position.z = player_z
@@ -66,7 +66,10 @@ func _physics_process(delta: float) -> void:
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	if GlobVar.WSAD:
+		input_dir = Input.get_vector("move_left_WSAD", "move_right_WSAD", "move_up_WSAD", "move_down_WSAD")
+	if GlobVar.ARROW:
+		input_dir = Input.get_vector("move_left_Arrow", "move_right_Arrow", "move_up_Arrow", "move_down_Arrow")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, 0)).normalized()
 	if direction and is_on_floor() and not climbing and can_move : # when normally walking 
 		velocity.x = direction.x  * speed
@@ -95,27 +98,27 @@ func _physics_process(delta: float) -> void:
 	
 		
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		velocity.x = direction.x * speed/1.8 # slow down player when is in air
 		
 	
 	# Climbing
-	if Input.is_action_pressed("move_up") and climbing: # climb up
+	if Input.is_action_pressed("move_up_WSAD") and climbing or Input.is_action_pressed("move_up_Arrow") and climbing: # climb up
 		velocity.y = 3
 	
-	if Input.is_action_pressed("move_down") and climbing: # climb down
+	if Input.is_action_pressed("move_down_WSAD") and climbing or Input.is_action_pressed("move_down_Arrow") and climbing: # climb down
 		velocity.y = -2
 	
-	if !Input.is_action_pressed("move_up") and !Input.is_action_pressed("move_down") and climbing: # stay on ladder
+	if !Input.is_action_pressed("move_up_WSAD") and !Input.is_action_pressed("move_down_WSAD") and climbing or !Input.is_action_pressed("move_up_Arrow") and !Input.is_action_pressed("move_down_Arrow") and climbing: # stay on ladder
 		velocity.y = 0
-	elif Input.is_action_pressed("move_up") and Input.is_action_pressed("move_down") and climbing: # stay when 2 buttons is pressed
+	elif Input.is_action_pressed("move_up_WSAD") and Input.is_action_pressed("move_down_WSAD") and climbing or Input.is_action_pressed("move_up_Arrow") and Input.is_action_pressed("move_down_Arrow") and climbing: # stay when 2 buttons is pressed
 		velocity.y = 0
-	if climbing and !Input.is_action_pressed("move_left") and !Input.is_action_pressed("move_right"): # when roller moving player stay in one place when on ladder
+	if climbing and !Input.is_action_pressed("move_left_WSAD") and !Input.is_action_pressed("move_right_WSAD") or climbing and !Input.is_action_pressed("move_left_Arrow") and !Input.is_action_pressed("move_right_Arrow"): # when roller moving player stay in one place when on ladder
 		velocity.x = linear_x
 	
 	# pick up item || use item/machine
-	if Input.is_action_just_pressed("use") and not can_pick == null and !picked and interact:
+	if Input.is_action_just_pressed("use_WSAD") and not can_pick == null and !picked and interact or Input.is_action_just_pressed("use_Arrow") and not can_pick == null and !picked and interact:
 		picked = true # set is pickerd
 	elif picked and not can_pick == null:
 		# setting global position of player to picked item
@@ -128,7 +131,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 	# arbalest
-	if Input.is_action_just_pressed("use") and arbalest and !reload:
+	if Input.is_action_just_pressed("use_WSAD") and arbalest and !reload or Input.is_action_just_pressed("use_Arrow") and arbalest and !reload:
 		# shoot 
 		var bullet = bullet_scene.instantiate() # get bullet scene
 		add_sibling(bullet) # add bullet to world scene
@@ -148,7 +151,7 @@ func _physics_process(delta: float) -> void:
 			reload = false
 		
 	# spyglass
-	if Input.is_action_just_pressed("use") and spyglass:
+	if Input.is_action_just_pressed("use_WSAD") and spyglass or Input.is_action_just_pressed("use_Arrow") and spyglass:
 		if !camera.spyglass: # check spyglass is off
 			camera.spyglass = true # set spyglass is on
 			camera.CamMode = 'spy' # change camera mode
@@ -170,7 +173,7 @@ func _physics_process(delta: float) -> void:
 		can_move = true # player can move
 		
 	
-	if Input.is_action_pressed("use") and repair:
+	if Input.is_action_pressed("use_WSAD") and repair or Input.is_action_pressed("use_Arrow") and repair:
 		# get durability controler
 		var dur = $"../Roller/RepairZones" 
 		dur.repair(1) # repair(power)   more power = repair quickly

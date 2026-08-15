@@ -17,7 +17,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	
 	# use canister to add fuel to tank
-	if player_in and fuel_in and Input.is_action_just_pressed("use") and player.interact: # check player and cainster in zone | player use 
+	if player_in and fuel_in and Input.is_action_just_pressed("use_WSAD") and player.interact or player_in and fuel_in and Input.is_action_just_pressed("use_Arrow") and player.interact: # check player and cainster in zone | player use 
 		if tank_progress + fuel_node.fuel_value <= tank_capacity: # check is added fuel not overflow tank
 			tank_progress += fuel_node.fuel_value # add fuel fron canister
 			fuel_node.fuel_value = 0 # set canister fuel value
