@@ -26,6 +26,7 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Switch"):
 		visible = !Active
+		player.can_move = !player.can_move
 		
 		if Active && Input.is_action_just_pressed("Switch") && ChosenOpt !=0:
 			GlobVar.PlayerActionMode = ChosenOpt

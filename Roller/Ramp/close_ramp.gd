@@ -11,10 +11,16 @@ var player
 func _physics_process(delta: float) -> void:
 	
 	# use BTN to close ramps
-	if Input.is_action_just_pressed("use_WSAD") and player_in and player.interact or Input.is_action_just_pressed("use_Arrow") and player_in and player.interact:
-		rampL.close_ramp()
-		rampR.close_ramp()
-		pass
+	if GlobVar.WSAD:
+		if Input.is_action_just_pressed("use_WSAD") and player_in and player.interact:
+			rampL.close_ramp()
+			rampR.close_ramp()
+			pass
+	if GlobVar.ARROW:
+		if Input.is_action_just_pressed("use_Arrow") and player_in and player.interact:
+			rampL.close_ramp()
+			rampR.close_ramp()
+			pass
 
 
 func _on_body_entered(body: Node3D) -> void:

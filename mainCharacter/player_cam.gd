@@ -31,19 +31,21 @@ func _physics_process(delta: float) -> void:
 			position +=  Vector3(Cam2PlayerPos.x * CamSpeed * delta, Cam2PlayerPos.y * CamSpeed * delta + .2,0) # przesuniecie wyskosci tutaj w Y
 		"spy":
 			if player_pos[0] - 70 < global_position.x: #check distance
-				if Input.is_action_pressed("move_left_WSAD") or Input.is_action_pressed("move_left_Arrow"): # BTN press check
-					if GlobVar.WSAD:
-						InputDir.x = -Input.get_action_strength("move_left_WSAD") # add minus to move left
-					if GlobVar.ARROW:
-						InputDir.x = -Input.get_action_strength("move_left_Arrow") # add minus to move left
+				if GlobVar.WSAD:
+					if Input.is_action_pressed("move_left_WSAD") : # BTN press check
+							InputDir.x = -Input.get_action_strength("move_left_WSAD") # add minus to move left
+				if GlobVar.ARROW:
+					if Input.is_action_pressed("move_left_Arrow"): # BTN press check
+							InputDir.x = -Input.get_action_strength("move_left_Arrow") # add minus to move left
 			elif InputDir.x < 0: # while BTN not holding nothing moving
 				InputDir.x = 0
 					
 			if  global_position.x < player_pos[0] + 70: #check distance
-				if Input.is_action_pressed("move_right_WSAD") or Input.is_action_pressed("move_right_Arrow"): # BTN press check
-					if GlobVar.WSAD:
-						InputDir.x = Input.get_action_strength("move_right_WSAD") # move right
-					if GlobVar.ARROW:
+				if GlobVar.WSAD:
+					if Input.is_action_pressed("move_right_WSAD") : # BTN press check
+							InputDir.x = Input.get_action_strength("move_right_WSAD") # move right
+				if GlobVar.ARROW:
+					if Input.is_action_pressed("move_right_Arrow"): # BTN press check
 						InputDir.x = Input.get_action_strength("move_right_Arrow") # move right
 			elif InputDir.x > 0: # while BTN not holding nothing moving
 				InputDir.x = 0
@@ -57,19 +59,21 @@ func _physics_process(delta: float) -> void:
 					InputDir.x = 0
 				
 			if player_pos[1] < global_position.y: #check distance
-				if Input.is_action_pressed("move_down_WSAD") or Input.is_action_pressed("move_down_Arrow"): # BTN press check
-					if GlobVar.WSAD:
+				if GlobVar.WSAD:
+					if Input.is_action_pressed("move_down_WSAD") : # BTN press check
 						InputDir.y = -Input.get_action_strength("move_down_WSAD") # add minus to move down
-					if GlobVar.ARROW:
+				if GlobVar.ARROW:
+					if Input.is_action_pressed("move_down_Arrow"): # BTN press check
 						InputDir.y = -Input.get_action_strength("move_down_Arrow") # add minus to move down
 			elif InputDir.y < 0: # while BTN not holding nothing moving
 				InputDir.y = 0
 			
 			if global_position.y < player_pos[1] + 40: #check distance
-				if Input.is_action_pressed("move_up_WSAD") or Input.is_action_pressed("move_up_Arrow"): # BTN press check
-					if GlobVar.WSAD:
+				if GlobVar.WSAD:
+					if Input.is_action_pressed("move_up_WSAD") : # BTN press check
 						InputDir.y = Input.get_action_strength("move_up_WSAD") # move up
-					if GlobVar.ARROW:
+				if GlobVar.ARROW:
+					if Input.is_action_pressed("move_up_Arrow"): # BTN press check
 						InputDir.y = Input.get_action_strength("move_up_Arrow") # move up
 			elif InputDir.y > 0: # while BTN not holding nothing moving
 				InputDir.y = 0

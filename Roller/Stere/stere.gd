@@ -34,24 +34,44 @@ func _physics_process(delta: float) -> void:
 	$CollisionShape3D/MeshInstance3D/Label3D.text = str(gear)
 	
 	# turn on/off engine 
-	if Input.is_action_pressed("use_WSAD") and can_use and !engine_runnning and player.interact or Input.is_action_pressed("use_Arrow") and can_use and !engine_runnning and player.interact: # odpalanie silnika
-		print(run_engine)
-		try_run = true
-		if run_engine < 2 and !(tank.tank_progress == -0.0000001 or tank.tank_progress == 0 ) : # odpalasz
-			run_engine += 0.1
-		elif run_engine >= 2: # po przetrzymaniu silnik zaczyna dzialac
-			gear = 0
-			engine_runnning = true
+	if GlobVar.WSAD:
+		if Input.is_action_pressed("use_WSAD") and can_use and !engine_runnning and player.interact : # odpalanie silnika
+			print(run_engine)
+			try_run = true
+			if run_engine < 2 and !(tank.tank_progress == -0.0000001 or tank.tank_progress == 0 ) : # odpalasz
+				run_engine += 0.1
+			elif run_engine >= 2: # po przetrzymaniu silnik zaczyna dzialac
+				gear = 0
+				engine_runnning = true
+				using = true
+		elif !Input.is_action_pressed("use_WSAD") and can_use and try_run : # odpuscisz odpalanie to rozruch od nowa
+			try_run = false
+			run_engine = 0
+		elif Input.is_action_just_pressed("use_WSAD") and using and engine_runnning and player.interact : # wylaczenie
+			engine_turn_off()
+		elif Input.is_action_just_pressed("use_WSAD") and engine_runnning and not using and player.interact : # uzycie kiedy silnik dziala
 			using = true
-	elif !Input.is_action_pressed("use_WSAD") and can_use and try_run or !Input.is_action_pressed("use_Arrow") and can_use and try_run: # odpuscisz odpalanie to rozruch od nowa
-		try_run = false
-		run_engine = 0
-	elif Input.is_action_just_pressed("use_WSAD") and using and engine_runnning and player.interact or Input.is_action_just_pressed("use_Arrow") and using and engine_runnning and player.interact: # wylaczenie
-		engine_turn_off()
-	elif Input.is_action_just_pressed("use_WSAD") and engine_runnning and not using and player.interact or Input.is_action_just_pressed("use_Arrow") and engine_runnning and not using and player.interact: # uzycie kiedy silnik dziala
-		using = true
-	elif !can_use: # jak odejdzisz nie uzywasz silnika
-		using = false
+		elif !can_use: # jak odejdzisz nie uzywasz silnika
+			using = false
+	if GlobVar.ARROW:
+		if Input.is_action_pressed("use_Arrow") and can_use and !engine_runnning and player.interact: # odpalanie silnika
+			print(run_engine)
+			try_run = true
+			if run_engine < 2 and !(tank.tank_progress == -0.0000001 or tank.tank_progress == 0 ) : # odpalasz
+				run_engine += 0.1
+			elif run_engine >= 2: # po przetrzymaniu silnik zaczyna dzialac
+				gear = 0
+				engine_runnning = true
+				using = true
+		elif !Input.is_action_pressed("use_Arrow") and can_use and try_run: # odpuscisz odpalanie to rozruch od nowa
+			try_run = false
+			run_engine = 0
+		elif Input.is_action_just_pressed("use_Arrow") and using and engine_runnning and player.interact: # wylaczenie
+			engine_turn_off()
+		elif Input.is_action_just_pressed("use_Arrow") and engine_runnning and not using and player.interact: # uzycie kiedy silnik dziala
+			using = true
+		elif !can_use: # jak odejdzisz nie uzywasz silnika
+			using = false
 	
 	# engine running
 	if engine_runnning and tank.tank_progress > 0: # have fuel
@@ -64,12 +84,20 @@ func _physics_process(delta: float) -> void:
 		engine_turn_off()
 	
 	# gear switching
-	if Input.is_action_just_pressed("move_up_WSAD") and using and player.interact or Input.is_action_just_pressed("move_up_Arrow") and using and player.interact:
-		if gear < 3:
-			gear += 1
-	if Input.is_action_just_pressed("move_down_WSAD") and using and player.interact or Input.is_action_just_pressed("move_down_Arrow") and using and player.interact:
-		if gear > -1:
-			gear -= 1
+	if GlobVar.WSAD:
+		if Input.is_action_just_pressed("move_up_WSAD") and using and player.interact:
+			if gear < 3:
+				gear += 1
+		if Input.is_action_just_pressed("move_down_WSAD") and using and player.interact:
+			if gear > -1:
+				gear -= 1
+	if GlobVar.ARROW:
+		if Input.is_action_just_pressed("move_up_Arrow") and using and player.interact:
+			if gear < 3:
+				gear += 1
+		if Input.is_action_just_pressed("move_down_Arrow") and using and player.interact:
+			if gear > -1:
+				gear -= 1
 			
 	
 	# switch for gears
