@@ -64,3 +64,11 @@ func Choose():
 	if range(-90,0).has( int(InDir) ):
 		ChosenOpt = 4
 	pass
+
+#func MultiVarSwitch():
+	#match GlobVar.PlayerActionMode:
+		#1:
+			#interact = true
+			#spyglass = false
+			#repair = false
+			#arbalest = false

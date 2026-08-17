@@ -26,7 +26,8 @@ var arbalest = false
 
 func _ready() -> void:
 	player_z = position.z
-	
+	GlobSig.ActionModeSwitch.connect(MultiVarSwitch)
+
 func _process(delta: float) -> void:
 	GlobVar.PlayerPos = position # player position
 	
@@ -140,6 +141,20 @@ func _physics_process(delta: float) -> void:
 	
 	
 	move_and_slide()
+
+func MultiVarSwitch():
+	repair   = false
+	arbalest = false
+	spyglass = false
+	interact = false
+	print("Interacton mode reset")
+	match GlobVar.PlayerActionMode: #fix arba spy inter
+		1: repair   = true
+		2: arbalest = true
+		3: spyglass = true
+		4: interact = true
+	print("Interacton mode set: ", GlobVar.PlayerActionMode)
+
 
 # Checking player picking/use zone
 func _on_area_3d_body_entered(body: Node3D) -> void:
