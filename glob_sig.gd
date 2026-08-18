@@ -3,6 +3,7 @@ extends Node
 signal ActionModeSwitch() 
 #^^^  this one has to be connected to a mode switch function 
 #     in maincharacter script, said function takes mode from var in GlobVar
+# >>  MultiVarSwitch(): 
 
 
 
