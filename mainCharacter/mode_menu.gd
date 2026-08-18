@@ -1,6 +1,8 @@
 extends Node2D
 
-var ChosenOpt = 3 # 0 - 4, five positions
+@export var player = CharacterBody3D
+
+var ChosenOpt = 4 # 0 - 4, five positions
 # 0 is center - not choosable, 1 right,2 down ...
 
 var Speed = Vector2(0,0)
@@ -57,12 +59,16 @@ func _process(delta: float) -> void:
 func Choose():
 	if range(0,90).has( int(InDir) ):
 		ChosenOpt = 1
+		player.changeFoption(ChosenOpt)
 	if range(90,180).has( int(InDir) ):
 		ChosenOpt = 2
+		player.changeFoption(ChosenOpt)
 	if range(180, 270).has( int(InDir) )  || range(-180,-90).has( int(InDir) ) :
 		ChosenOpt = 3
+		player.changeFoption(ChosenOpt)
 	if range(-90,0).has( int(InDir) ):
 		ChosenOpt = 4
+		player.changeFoption(ChosenOpt)
 	pass
 
 #func MultiVarSwitch():

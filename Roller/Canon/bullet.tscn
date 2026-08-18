@@ -26,3 +26,5 @@ mesh = SubResource("SphereMesh_mbwms")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1635125893]
 shape = SubResource("SphereShape3D_w63q2")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

@@ -14,6 +14,11 @@
 [ext_resource type="PackedScene" uid="uid://dkkmr2pufps4h" path="res://Roller/BigWheelDrive.blend" id="11_nb208"]
 [ext_resource type="PackedScene" uid="uid://dh0hh8fw8q3nr" path="res://Roller/Canon/canon.tscn" id="12_ex2hn"]
 [ext_resource type="PackedScene" uid="uid://d40d740x8q0v" path="res://Roller/Canon/canon_control.tscn" id="13_llb22"]
+[ext_resource type="Script" uid="uid://yl2i8xa63t18" path="res://Roller/Ramp/close_ramp.gd" id="15_knf4l"]
+[ext_resource type="Script" uid="uid://cs8eia8sxjsp4" path="res://Roller/repair_zones.gd" id="16_qtdid"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_knf4l"]
+friction = 0.6
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1vlh"]
 transparency = 1
@@ -39,6 +44,12 @@ size = Vector3(1.9203491, 0.080322266, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_w63q2"]
 size = Vector3(3.682495, 0.09716797, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4k1o7"]
+size = Vector3(5.886627, 0.055786133, 1.6673584)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_knf4l"]
+size = Vector3(5.1974335, 0.080322266, 1)
 
 [sub_resource type="Animation" id="Animation_qvt2u"]
 resource_name = "LightWave"
@@ -81,14 +92,39 @@ _data = {
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_w63q2"]
 radius = 4.0351563
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8jda6"]
+albedo_color = Color(1, 0.011764706, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_84biw"]
+material = SubResource("StandardMaterial3D_8jda6")
+size = Vector3(0.5, 0.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_onh1n"]
+size = Vector3(0.61816406, 0.60546875, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qtdid"]
+size = Vector3(1.7148438, 1.7675781, 4.3779297)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3mx1d"]
+size = Vector3(1.7189941, 2.0151367, 3.399414)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_78p18"]
+size = Vector3(1.6418457, 1.5917969, 2.6895752)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_84biw"]
+size = Vector3(1.2597656, 1, 2.8931274)
+
 [node name="Roller" type="RigidBody3D" unique_id=1376312120]
 collision_layer = 4
+collision_mask = 17
 mass = 100.0
+physics_material_override = SubResource("PhysicsMaterial_knf4l")
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -10, 0)
 script = ExtResource("1_odgv0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=34097537]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009153366, 0, 0)
 material_override = SubResource("StandardMaterial3D_m1vlh")
 mesh = SubResource("QuadMesh_i1acx")
 
@@ -122,6 +158,7 @@ transform = Transform3D(0.9988787, -0.047343403, 0, 0.047343403, 0.9988787, 0, 0
 polygon = PackedVector2Array(4.4010963, 0.11307049, 0.074064255, 0.13329029, 0.074064255, -0.19022655)
 debug_color = Color(1, 1, 1, 0.41960785)
 script = ExtResource("3_4k1o7")
+close = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RightRamp" unique_id=433806945]
 transform = Transform3D(0.9999998, -3.7252903e-09, 0, 3.7252903e-09, 0.9999998, 0, 0, 0, 1, 2.0519753, 0.05106449, 0.36614513)
@@ -140,14 +177,28 @@ transform = Transform3D(1, -3.1665425e-07, 0, 3.1665425e-07, 1, 0, 0, 0, 1, -0.6
 shape = SubResource("BoxShape3D_w63q2")
 
 [node name="LeftRamp" type="CollisionPolygon3D" parent="." unique_id=102477205]
-transform = Transform3D(0.15195785, 0.98838705, 0, -0.98838705, 0.15195785, 0, 0, 0, 1, -17.458078, -8.591124, 0)
+transform = Transform3D(0.9999795, 0.0064225346, 0, -0.0064225346, 0.9999795, 0, 0, 0, 1, -17.458078, -8.591124, 0)
 depth = 5.0
 polygon = PackedVector2Array(-0.25421524, 0.05612564, -6.1388283, -0.06553173, -0.1484108, -0.13968849)
 debug_color = Color(1, 1, 1, 0.41960785)
+script = ExtResource("3_4k1o7")
+left_ramp = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="LeftRamp" unique_id=183134052]
 transform = Transform3D(1.6146704, -0.020857602, 0, 0.033685565, 0.99978256, 0, 0, 0, 1, -3.1670551, -0.058655262, 0)
 mesh = SubResource("BoxMesh_w63q2")
+
+[node name="Area3D" type="Area3D" parent="LeftRamp" unique_id=478239533]
+transform = Transform3D(1.0000002, -9.313226e-10, 0, 9.313226e-10, 1.0000002, 0, 0, 0, 1, 4.1268578, -0.029362679, 0)
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftRamp/Area3D" unique_id=401508905]
+transform = Transform3D(0.9997893, -0.020524373, 0, 0.020524373, 0.9997893, 0, 0, 0, 1, -7.384983, 0.07327461, 0)
+shape = SubResource("BoxShape3D_4k1o7")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="LeftRamp/Area3D" unique_id=1373105626]
+transform = Transform3D(1, 6.984919e-08, 0, -6.984919e-08, 1, 0, 0, 0, 1, -7.726362, -0.20604706, 0)
+shape = SubResource("BoxShape3D_knf4l")
 
 [node name="FrontSpotLight" type="SpotLight3D" parent="." unique_id=11137498]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 12.761497, -2.0405397, 4.1331596)
@@ -219,7 +270,8 @@ tank = NodePath("../tank")
 
 [node name="tank" parent="." unique_id=772305751 instance=ExtResource("8_x27il")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2758503, -2.863136, 0)
-tank_progress = 50
+tank_capacity = 10000
+tank_progress = 5000
 
 [node name="UpperDoor" parent="." unique_id=271826013 instance=ExtResource("6_l32on")]
 transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 4.6105466, 3.6317413, 0)
@@ -243,6 +295,67 @@ transform = Transform3D(2.695, 0, 0, 0, 2.695, 0, 0, 0, 2.695, 8.506909, 2.94430
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.611922, -1.8706408, 0)
 canon = NodePath("../Canon")
 
+[node name="CloseRamp" type="Area3D" parent="." unique_id=144696855]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.635434, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("15_knf4l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CloseRamp" unique_id=1075073540]
+mesh = SubResource("BoxMesh_84biw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CloseRamp" unique_id=1960721060]
+shape = SubResource("BoxShape3D_onh1n")
+
+[node name="RepairZones" type="Node3D" parent="." unique_id=718909010]
+script = ExtResource("16_qtdid")
+
+[node name="LeftWheel" type="Area3D" parent="RepairZones" unique_id=1556565738]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.745383, -7.9953694, 0)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RepairZones/LeftWheel" unique_id=466315662]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.6889648)
+shape = SubResource("BoxShape3D_qtdid")
+
+[node name="RightWheel" type="Area3D" parent="RepairZones" unique_id=1284684919]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.237612, -10.326121, 0)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RepairZones/RightWheel" unique_id=694962426]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06375885, 0.6350851, 1.199707)
+shape = SubResource("BoxShape3D_3mx1d")
+
+[node name="Canon" type="Area3D" parent="RepairZones" unique_id=1548961668]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.496922, 4.4254804, 0)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RepairZones/Canon" unique_id=1285417404]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06359863, -0.29589844, 0.8447876)
+shape = SubResource("BoxShape3D_78p18")
+
+[node name="Ster" type="Area3D" parent="RepairZones" unique_id=2008866586]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1506252, -4.69101, 0)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RepairZones/Ster" unique_id=670315545]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08201313, 0.023432255, 0.9465637)
+shape = SubResource("BoxShape3D_84biw")
+
 [connection signal="body_entered" from="RightRamp/Area3D" to="RightRamp" method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="RightRamp/Area3D" to="RightRamp" method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="LeftRamp/Area3D" to="LeftRamp" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="CollisonZones/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="CloseRamp" to="CloseRamp" method="_on_body_entered"]
+[connection signal="body_exited" from="CloseRamp" to="CloseRamp" method="_on_body_exited"]
+[connection signal="body_entered" from="RepairZones/LeftWheel" to="RepairZones" method="_on_left_wheel_body_entered"]
+[connection signal="body_exited" from="RepairZones/LeftWheel" to="RepairZones" method="_on_left_wheel_body_exited"]
+[connection signal="body_entered" from="RepairZones/RightWheel" to="RepairZones" method="_on_right_wheel_body_entered"]
+[connection signal="body_exited" from="RepairZones/RightWheel" to="RepairZones" method="_on_right_wheel_body_exited"]
+[connection signal="body_entered" from="RepairZones/Canon" to="RepairZones" method="_on_canon_body_entered"]
+[connection signal="body_exited" from="RepairZones/Canon" to="RepairZones" method="_on_canon_body_exited"]
+[connection signal="body_entered" from="RepairZones/Ster" to="RepairZones" method="_on_ster_body_entered"]
+[connection signal="body_exited" from="RepairZones/Ster" to="RepairZones" method="_on_ster_body_exited"]
