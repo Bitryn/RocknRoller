@@ -2,7 +2,7 @@ extends Node2D
 
 @export var player = CharacterBody3D
 
-var ChosenOpt = 3 # 0 - 4, five positions
+var ChosenOpt = 4 # 0 - 4, five positions
 # 0 is center - not choosable, 1 right,2 down ...
 
 var Speed = Vector2(0,0)
@@ -71,3 +71,11 @@ func Choose():
 		ChosenOpt = 4
 		player.changeFoption(ChosenOpt)
 	pass
+
+#func MultiVarSwitch():
+	#match GlobVar.PlayerActionMode:
+		#1:
+			#interact = true
+			#spyglass = false
+			#repair = false
+			#arbalest = false
