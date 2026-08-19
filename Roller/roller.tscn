@@ -90,7 +90,7 @@ _data = {
 }
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_w63q2"]
-radius = 4.0351563
+radius = 4.5859375
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8jda6"]
 albedo_color = Color(1, 0.011764706, 0, 1)
@@ -115,12 +115,15 @@ size = Vector3(1.6418457, 1.5917969, 2.6895752)
 size = Vector3(1.2597656, 1, 2.8931274)
 
 [node name="Roller" type="RigidBody3D" unique_id=1376312120]
+physics_interpolation_mode = 2
 collision_layer = 4
 collision_mask = 17
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_knf4l")
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -10, 0)
+can_sleep = false
+continuous_cd = true
 script = ExtResource("1_odgv0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=34097537]
@@ -211,27 +214,34 @@ spot_angle = 20.0
 libraries/ = SubResource("AnimationLibrary_odgv0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1764526061]
+physics_interpolation_mode = 2
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -12.733007, -7.806964, 6)
 shape = SubResource("CylinderShape3D_w63q2")
 
 [node name="Big Wheel" parent="CollisionShape3D" unique_id=1349785421 instance=ExtResource("2_3lxdo")]
+physics_interpolation_mode = 2
 transform = Transform3D(1.08, 0, 0, 0, -4.72083e-08, 1.08, 0, -1.08, -4.72083e-08, 0, 0, 0)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=2077473682]
+physics_interpolation_mode = 2
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -12.733, -7.807, -6)
 shape = SubResource("CylinderShape3D_w63q2")
 
 [node name="Big Wheel4" parent="CollisionShape3D2" unique_id=878266931 instance=ExtResource("2_3lxdo")]
+physics_interpolation_mode = 2
 transform = Transform3D(1.08, 0, 0, 0, -4.72083e-08, 1.08, 0, -1.08, -4.72083e-08, 0, 0, 0)
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=1984344388]
+physics_interpolation_mode = 2
 transform = Transform3D(0.48, 0, 0, 0, -2.0981465e-08, -0.48, 0, 0.48, -2.0981465e-08, 10.27875, -10.200675, 6)
 shape = SubResource("CylinderShape3D_w63q2")
 
 [node name="Big Wheel2" parent="CollisionShape3D3" unique_id=440858859 instance=ExtResource("2_3lxdo")]
+physics_interpolation_mode = 2
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 1, 0, -1, -4.3711385e-08, 0, 0, 0)
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=783732289]
+physics_interpolation_mode = 2
 transform = Transform3D(0.48, 0, 0, 0, -2.0981465e-08, -0.48, 0, 0.48, -2.0981465e-08, 10.279, -10.201, -6)
 shape = SubResource("CylinderShape3D_w63q2")
 

@@ -195,6 +195,7 @@ use_Arrow={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+jolt_physics_3d/simulation/position_steps=5
 3d/default_gravity_vector=Vector3(0, -1.268, 0)
 
 [rendering]

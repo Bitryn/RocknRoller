@@ -41,7 +41,7 @@ transform = Transform3D(0.47463256, 0.3586984, -0.80377835, 0, 0.9131934, 0.4075
 visible = false
 
 [node name="Roller" parent="." unique_id=128118887 instance=ExtResource("2_am32a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.024467468, 12.537397, -0.092930794)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.537, 0)
 
 [node name="Ruler" type="MeshInstance3D" parent="." unique_id=289820452]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83479965, 1.3820825)
@@ -49,7 +49,7 @@ material_override = ExtResource("3_msjbx")
 mesh = SubResource("BoxMesh_i1acx")
 
 [node name="MainCharacter" parent="." unique_id=892675896 instance=ExtResource("4_msjbx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.593015, 5.7534466, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.120249, 5.753, 0)
 
 [node name="PlayerCam" parent="." unique_id=1450766968 instance=ExtResource("5_ym0nx")]
 

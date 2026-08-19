@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 	
 	InDir = rad_to_deg( GlobVar.InputDir.angle() ) + 45
 	
-	if Input.is_action_just_pressed("Switch"):
+	if Input.is_action_just_pressed("Switch") and !GlobVar.block_pop:
 		visible = !Active
 		player.can_move = !player.can_move
 		
@@ -60,16 +60,12 @@ func _process(delta: float) -> void:
 func Choose():
 	if range(0,90).has( int(InDir) ):
 		ChosenOpt = 1
-		player.changeFoption(ChosenOpt)
 	if range(90,180).has( int(InDir) ):
 		ChosenOpt = 2
-		player.changeFoption(ChosenOpt)
 	if range(180, 270).has( int(InDir) )  || range(-180,-90).has( int(InDir) ) :
 		ChosenOpt = 3
-		player.changeFoption(ChosenOpt)
 	if range(-90,0).has( int(InDir) ):
 		ChosenOpt = 4
-		player.changeFoption(ChosenOpt)
 	pass
 
 #func MultiVarSwitch():

@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://c5d6h5nssb5og"]
 
+[ext_resource type="Script" uid="uid://dahpt3r4pkrfw" path="res://mainCharacter/player_cam.gd" id="2_78awf"]
 [ext_resource type="Script" uid="uid://dgyyicddslgwl" path="res://scenes/world_scripts/barrier.gd" id="2_qbsmt"]
 [ext_resource type="PackedScene" uid="uid://bs1jk53335xue" path="res://mainCharacter/main_character.tscn" id="3_cpr0p"]
 [ext_resource type="PackedScene" uid="uid://c2t50hms4g7k1" path="res://Roller/roller.tscn" id="4_78awf"]
+[ext_resource type="PackedScene" uid="uid://gtoujpq10asq" path="res://mainCharacter/mode_menu.tscn" id="5_s0nni"]
 
 [sub_resource type="Gradient" id="Gradient_78awf"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -32,7 +34,7 @@ _shader_parameters = {
 &"depth_blur": null,
 &"enable_macro_variation": null,
 &"enable_projection": null,
-&"flat_terrain_normals": null,
+&"flat_terrain_normals": false,
 &"macro_variation1": null,
 &"macro_variation2": null,
 &"macro_variation_slope": null,
@@ -45,6 +47,7 @@ _shader_parameters = {
 &"projection_threshold": null
 }
 world_background = 0
+show_region_grid = true
 show_checkered = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_400sg"]
@@ -86,8 +89,12 @@ transform = Transform3D(1, 0, 0, 0, 0.9077775, 0.4194521, 0, -0.4194521, 0.90777
 data_directory = "res://dd"
 material = SubResource("Terrain3DMaterial_kiw3p")
 assets = SubResource("Terrain3DAssets_qy1jj")
+show_grid = true
+collision_mode = 3
 collision_shape_size = 24
+show_region_grid = true
 show_checkered = true
+physics_interpolation_mode = 2
 top_level = true
 metadata/_edit_lock_ = true
 
@@ -117,11 +124,8 @@ debug_color = Color(0.0014741134, 11.815647, 13.012639, 1)
 [node name="MainCharacter" parent="." unique_id=892675896 instance=ExtResource("3_cpr0p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.459717, 8.584419, 85.59041)
 
-[node name="Camera3D" type="Camera3D" parent="MainCharacter" unique_id=1750741855]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20.024063)
-
 [node name="Roller" parent="." unique_id=1376312120 instance=ExtResource("4_78awf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.36465, 12.744083, 85.59041)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.36465, 14.40694, 85.59041)
 
 [node name="BarrierRoller" type="Node3D" parent="." unique_id=1425424834]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.538, 13, 85.59)
@@ -148,3 +152,10 @@ collision_mask = 4
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, -2.1829987, 7.452709, -2.7544403)
 shape = SubResource("BoxShape3D_78awf")
 debug_color = Color(0.82412636, 0.0016583932, 0.9590607, 0.41960785)
+
+[node name="PlayerCam" type="Camera3D" parent="." unique_id=1750741855]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.46, 8.584, 133.684)
+script = ExtResource("2_78awf")
+
+[node name="ModeMenu" parent="." unique_id=2127508239 node_paths=PackedStringArray("player") instance=ExtResource("5_s0nni")]
+player = NodePath("../MainCharacter")

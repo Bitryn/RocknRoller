@@ -16,7 +16,9 @@ var player_pos = [0,0]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Cam2PlayerPos = GlobVar.PlayerPos
 	ZoomDist = 18
+	
 	Teleport()
 	pass # Replace with function body.
 
@@ -25,10 +27,11 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	
 	Cam2PlayerPos = GlobVar.PlayerPos - position
+	Cam2PlayerPos.z = Cam2PlayerPos.z + ZoomDist
 	
 	match CamMode:
 		"track":
-			position +=  Vector3(Cam2PlayerPos.x * CamSpeed * delta, Cam2PlayerPos.y * CamSpeed * delta + .2,0) # przesuniecie wyskosci tutaj w Y
+			position +=  Vector3(Cam2PlayerPos.x * CamSpeed * delta, Cam2PlayerPos.y * CamSpeed * delta + .2,Cam2PlayerPos.z) # przesuniecie wyskosci tutaj w Y
 		"spy":
 			if player_pos[0] - 70 < global_position.x: #check distance
 				if GlobVar.WSAD:
@@ -91,4 +94,4 @@ func _physics_process(delta: float) -> void:
 
 
 func Teleport():
-	position = Vector3(GlobVar.PlayerPos.x, GlobVar.PlayerPos.y, ZoomDist)
+	position = Vector3(GlobVar.PlayerPos.x, GlobVar.PlayerPos.y, GlobVar.PlayerPos.y + ZoomDist)

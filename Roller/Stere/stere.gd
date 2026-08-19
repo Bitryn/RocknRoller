@@ -103,10 +103,10 @@ func _physics_process(delta: float) -> void:
 	# switch for gears
 	match gear:   # force > 1234 roller start moving
 		-1: # reverse | wsteczny
-			if Roller.force < 1000: # check not going to fast
-				if Roller.force > -1200: # set force to move -x
-					Roller.force = -1200
-				max_speed = -1280 # set max pushing force
+			if Roller.force < 500: # check not going to fast
+				if Roller.force > -800: # set force to move -x
+					Roller.force = -800
+				max_speed = -900 # set max pushing force
 				Roller.speed = max_speed # set speed for roller
 				ster_dur.ster_dur[1] -= .05 # lose dur when engine work
 			else:
@@ -115,20 +115,20 @@ func _physics_process(delta: float) -> void:
 			max_speed = 0 # set max pushing force
 			Roller.speed = max_speed # set speed for roller
 		1:
-			if Roller.force > -1000: # check not going to fast
-				if Roller.force < 1200:  # set force to move x
-					Roller.force = 1200
-				max_speed = 1280 # set max pushing force
+			if Roller.force > -500: # check not going to fast
+				if Roller.force < 800:  # set force to move x
+					Roller.force = 800
+				max_speed = 900 # set max pushing force
 				Roller.speed = max_speed # set speed for roller
 				ster_dur.ster_dur[1] -= .05 # lose dur when engine work
 			else:
 				gear = 0 # speed not good set 0
 		2:
-			max_speed = 1340 # set max pushing force
+			max_speed = 1000 # set max pushing force
 			Roller.speed = max_speed # set speed for roller
 			ster_dur.ster_dur[1] -= .1 # lose dur when engine work
 		3:
-			max_speed = 1400 # set max pushing force
+			max_speed = 1100 # set max pushing force
 			Roller.speed = max_speed # set speed for roller
 			ster_dur.ster_dur[1] -= .15 # lose dur when engine work
 	

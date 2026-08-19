@@ -23,10 +23,12 @@ func _physics_process(delta: float) -> void:
 		if player_in and Input.is_action_just_pressed("move_down_WSAD") and player.interact:
 			player_using = false # player not usnig canon
 			player.can_move = true # can move when not using canon
+			GlobVar.block_pop = false # unlock pop menu
 	if GlobVar.ARROW:
 		if player_in and Input.is_action_just_pressed("move_down_Arrow") and player.interact:
 			player_using = false # player not usnig canon
 			player.can_move = true # can move when not using canon
+			GlobVar.block_pop = false # unlock pop menu
 	
 	# canon rotation right
 	if GlobVar.WSAD:
@@ -80,10 +82,12 @@ func _physics_process(delta: float) -> void:
 		if player_in and Input.is_action_just_pressed("use_WSAD") and player.interact:
 			player_using = true # set player is using
 			player.can_move = false # cant move while using canon
+			GlobVar.block_pop = true # lock pop menu
 	if GlobVar.ARROW:
 		if player_in and Input.is_action_just_pressed("use_Arrow") and player.interact:
 			player_using = true # set player is usi
 			player.can_move = false # cant move while using canon
+			GlobVar.block_pop = true # lock pop menu
 	
 	# when relaoding
 	if reload:

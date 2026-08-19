@@ -13,11 +13,16 @@ var poz = 0
 
 func _ready() -> void:
 	poz = position.z
+	
 
 #func _process(delta: float) -> void:
 	#position.z = poz
 
 func _physics_process(delta: float) -> void:
+	
+	rotation.x = 0
+	rotation.y = 0
+	
 	force = move_toward(force, speed, 100 * delta) # force in time going up 
 	apply_central_force(transform.basis.x * force) # use force to push roller
 	lineax = linear_velocity.x # get velocity for player

@@ -14,6 +14,7 @@ var WSAD = true
 var ARROW = false
 var PAD = false
 
+var block_pop = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

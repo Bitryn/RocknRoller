@@ -37,7 +37,8 @@ var camera
 func _ready() -> void:
 	player_z = position.z # get player Z pos
 	interact = true # set state for F key
-	camera = $"../PlayerCam" # get camera
+	camera = $"../PlayerCam" # get 
+	GlobVar.PlayerPos = position
 	
 	GlobSig.ActionModeSwitch.connect(MultiVarSwitch)
 
@@ -94,7 +95,7 @@ func _physics_process(delta: float) -> void:
 		if not climbing:
 			velocity.y += get_gravity().y * delta
 			
-		
+	
 	
 	# sprint
 	if reload and arbalest:
@@ -107,16 +108,16 @@ func _physics_process(delta: float) -> void:
 	
 		
 	# Handle jump.
-	if Input.is_action_just_pressed("Jump") and is_on_floor():
+	if Input.is_action_just_pressed("Jump") and is_on_floor() and can_move:
 		velocity.y = JUMP_VELOCITY
 		velocity.x = direction.x * speed/1.8 # slow down player when is in air
 		
 	
 	# Climbing
 	if GlobVar.WSAD:
-		if Input.is_action_pressed("move_up_WSAD") and climbing: # climb up
+		if Input.is_action_pressed("move_up_WSAD") and climbing and can_move: # climb up
 			velocity.y = 3
-		if Input.is_action_pressed("move_down_WSAD") and climbing : # climb down
+		if Input.is_action_pressed("move_down_WSAD") and climbing and can_move: # climb down
 			velocity.y = -2
 		if !Input.is_action_pressed("move_up_WSAD") and !Input.is_action_pressed("move_down_WSAD") and climbing : # stay on ladder
 			velocity.y = 0
@@ -125,9 +126,9 @@ func _physics_process(delta: float) -> void:
 		if climbing and !Input.is_action_pressed("move_left_WSAD") and !Input.is_action_pressed("move_right_WSAD") : # when roller moving player stay in one place when on ladder
 			velocity.x = linear_x
 	if GlobVar.ARROW:
-		if Input.is_action_pressed("move_up_Arrow") and climbing: # climb up
+		if Input.is_action_pressed("move_up_Arrow") and climbing and can_move: # climb up
 			velocity.y = 3
-		if Input.is_action_pressed("move_down_Arrow") and climbing: # climb down
+		if Input.is_action_pressed("move_down_Arrow") and climbing and can_move: # climb down
 			velocity.y = -2
 		if !Input.is_action_pressed("move_up_Arrow") and !Input.is_action_pressed("move_down_Arrow") and climbing: # stay on ladder
 			velocity.y = 0
@@ -135,6 +136,11 @@ func _physics_process(delta: float) -> void:
 			velocity.y = 0
 		if climbing and !Input.is_action_pressed("move_left_Arrow") and !Input.is_action_pressed("move_right_Arrow"): # when roller moving player stay in one place when on ladder
 			velocity.x = linear_x
+	
+	
+	if !can_move and (velocity.y > 0 or velocity.y < 0) and climbing:
+		print('stop')
+		velocity.y = 0
 	
 	# pick up item || use item/machine
 	if GlobVar.WSAD:
@@ -252,8 +258,6 @@ func _physics_process(delta: float) -> void:
 			# get durability controler
 			var dur = $"../Roller/RepairZones" 
 			dur.repair(1) # repair(power)   more power = repair quickly
-		
-		
 	
 	move_and_slide()
 
@@ -282,25 +286,25 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body.name.begins_with("Fuel"):
 		can_pick = null # nothing to pick
 
-func changeFoption(opt:int) -> void:
-	match opt:
-		1:
-			interact = false
-			spyglass = false
-			repair = true
-			arbalest = false
-		2:
-			interact = false
-			spyglass = false
-			repair = false
-			arbalest = true
-		3:
-			interact = false
-			spyglass = true
-			repair = false
-			arbalest = false
-		4:
-			interact = true
-			spyglass = false
-			repair = false
-			arbalest = false
+#func changeFoption(opt:int) -> void:
+	#match opt:
+		#1:
+			#interact = false
+			#spyglass = false
+			#repair = true
+			#arbalest = false
+		#2:
+			#interact = false
+			#spyglass = false
+			#repair = false
+			#arbalest = true
+		#3:
+			#interact = false
+			#spyglass = true
+			#repair = false
+			#arbalest = false
+		#4:
+			#interact = true
+			#spyglass = false
+			#repair = false
+			#arbalest = false
