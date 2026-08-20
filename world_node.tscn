@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://c2t50hms4g7k1" path="res://Roller/roller.tscn" id="2_am32a"]
 [ext_resource type="Material" uid="uid://csckqvmoko0lv" path="res://shader/PlaceholderMat.tres" id="3_msjbx"]
 [ext_resource type="PackedScene" uid="uid://bs1jk53335xue" path="res://mainCharacter/main_character.tscn" id="4_msjbx"]
-[ext_resource type="PackedScene" uid="uid://by70dultb3ln0" path="res://mainCharacter/player_cam.tscn" id="5_ym0nx"]
+[ext_resource type="PackedScene" uid="uid://by70dultb3ln0" path="res://mainCharacter/playerCamera/player_cam.tscn" id="5_ym0nx"]
 [ext_resource type="Script" uid="uid://dgyyicddslgwl" path="res://scenes/world_scripts/barrier.gd" id="6_b47hq"]
 [ext_resource type="PackedScene" uid="uid://bj7j58dmoofn8" path="res://Fuel/fuel.tscn" id="7_21o2a"]
 [ext_resource type="PackedScene" uid="uid://b1mgc8clsqihw" path="res://WeatherNodes/rain_node.tscn" id="8_4eb2h"]
-[ext_resource type="PackedScene" uid="uid://gtoujpq10asq" path="res://mainCharacter/mode_menu.tscn" id="9_3ywo4"]
+[ext_resource type="PackedScene" uid="uid://gtoujpq10asq" path="res://mainCharacter/popMenu/mode_menu.tscn" id="9_3ywo4"]
 
 [sub_resource type="Environment" id="Environment_i1acx"]
 background_mode = 1

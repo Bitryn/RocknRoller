@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 # player movement
-const speed_array = [6,25]
+const speed_array = [6,10]
 const JUMP_VELOCITY = 6
 var speed = 10
 var can_move = true
@@ -48,22 +48,13 @@ func _process(delta: float) -> void:
 	
 	bullet_spawnpoimt = $bullet_spawn.global_transform # get bullet spawnpoint
 	
-	var camera: Camera3D = get_viewport().get_camera_3d() 
-	var screen_pos: Vector2 = camera.unproject_position($Node3D.global_position)
-	$Control/ColorRect.position = screen_pos
 	
 	
 	# fliping sprite to move direction
 	if GlobVar.WSAD:
-		if Input.is_action_just_pressed("move_right_WSAD"):
-			Player_Sprite.flip_h = false
-		elif Input.is_action_just_pressed("move_left_WSAD"):
-			Player_Sprite.flip_h = true
+		flip_sprite("move_left_WSAD","move_right_WSAD")
 	if GlobVar.ARROW:
-		if Input.is_action_just_pressed("move_right_Arrow"):
-			Player_Sprite.flip_h = false
-		elif Input.is_action_just_pressed("move_left_Arrow") :
-			Player_Sprite.flip_h = true
+		flip_sprite("move_left_Arrow","move_right_Arrow")
 		
 	position.z = player_z
 	
@@ -106,158 +97,31 @@ func _physics_process(delta: float) -> void:
 		else:
 			speed = speed_array[0]
 	
-		
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and is_on_floor() and can_move:
 		velocity.y = JUMP_VELOCITY
 		velocity.x = direction.x * speed/1.8 # slow down player when is in air
-		
 	
-	# Climbing
-	if GlobVar.WSAD:
-		if Input.is_action_pressed("move_up_WSAD") and climbing and can_move: # climb up
-			velocity.y = 3
-		if Input.is_action_pressed("move_down_WSAD") and climbing and can_move: # climb down
-			velocity.y = -2
-		if !Input.is_action_pressed("move_up_WSAD") and !Input.is_action_pressed("move_down_WSAD") and climbing : # stay on ladder
-			velocity.y = 0
-		elif Input.is_action_pressed("move_up_WSAD") and Input.is_action_pressed("move_down_WSAD") and climbing : # stay when 2 buttons is pressed
-			velocity.y = 0
-		if climbing and !Input.is_action_pressed("move_left_WSAD") and !Input.is_action_pressed("move_right_WSAD") : # when roller moving player stay in one place when on ladder
-			velocity.x = linear_x
-	if GlobVar.ARROW:
-		if Input.is_action_pressed("move_up_Arrow") and climbing and can_move: # climb up
-			velocity.y = 3
-		if Input.is_action_pressed("move_down_Arrow") and climbing and can_move: # climb down
-			velocity.y = -2
-		if !Input.is_action_pressed("move_up_Arrow") and !Input.is_action_pressed("move_down_Arrow") and climbing: # stay on ladder
-			velocity.y = 0
-		elif Input.is_action_pressed("move_up_Arrow") and Input.is_action_pressed("move_down_Arrow") and climbing: # stay when 2 buttons is pressed
-			velocity.y = 0
-		if climbing and !Input.is_action_pressed("move_left_Arrow") and !Input.is_action_pressed("move_right_Arrow"): # when roller moving player stay in one place when on ladder
-			velocity.x = linear_x
-	
-	
-	if !can_move and (velocity.y > 0 or velocity.y < 0) and climbing:
-		print('stop')
-		velocity.y = 0
-	
-	# pick up item || use item/machine
-	if GlobVar.WSAD:
-		if Input.is_action_just_pressed("use_WSAD") and not can_pick == null and !picked and interact:
-			picked = true # set is pickerd
-		elif picked and not can_pick == null:
-			# setting global position of player to picked item
-			can_pick.global_transform.origin.x = global_transform.origin.x
-			can_pick.global_transform.origin.y = global_transform.origin.y
-	if GlobVar.ARROW:
-		if Input.is_action_just_pressed("use_Arrow") and not can_pick == null and !picked and interact:
-			picked = true # set is pickerd
-		elif picked and not can_pick == null:
-			# setting global position of player to picked item
-			can_pick.global_transform.origin.x = global_transform.origin.x
-			can_pick.global_transform.origin.y = global_transform.origin.y
+	if GlobVar.WSAD: # for WSAD controls
+		climb("move_up_WSAD","move_down_WSAD","move_left_WSAD","move_right_WSAD") # Climbing
+		pick_up("use_WSAD") # pick up item || use item/machine
+		use_arbalest("use_WSAD", delta) # shot rock || arbalest
+		use_spyglass("use_WSAD") # spyglass
+		use_repair("use_WSAD") # repair
+	if GlobVar.ARROW: # for ARROW controls
+		climb("move_up_Arrow","move_down_Arrow","move_left_Arrow","move_right_Arrow") # Climbing
+		pick_up("use_Arrow") # pick up item || use item/machine
+		use_arbalest("use_Arrow", delta) # shot rock || arbalest
+		use_spyglass("use_Arrow") # spyglass
+		use_repair("use_Arrow") # repair
 	
 	# drop item
 	if Input.is_action_just_pressed("drop") and picked:
 		picked = false # now is not holding anything
 	
-	
-	# arbalest
-	if GlobVar.WSAD:
-		if Input.is_action_just_pressed("use_WSAD") and arbalest and !reload:
-			# shoot 
-			var bullet = bullet_scene.instantiate() # get bullet scene
-			add_sibling(bullet) # add bullet to world scene
-			bullet.global_transform = bullet_spawnpoimt # get position
-			var direct = bullet_spawnpoimt.basis * Vector3.FORWARD # get direction
-			if Player_Sprite.flip_h == true: # left direction
-				direct *= -1
-			if Player_Sprite.flip_h == false: # right direction
-				direct = abs(direct)
-			bullet.linear_velocity = direct * 20 # speed of shooted rock
-			reload = true # reload state
-		# when reload
-		elif reload and arbalest:
-			reload_timer += delta # timer
-			if reload_timer > 2 : # after 2 sec reloaded
-				reload_timer = 0
-				reload = false
-	if GlobVar.ARROW:
-		if Input.is_action_just_pressed("use_Arrow") and arbalest and !reload:
-			# shoot 
-			var bullet = bullet_scene.instantiate() # get bullet scene
-			add_sibling(bullet) # add bullet to world scene
-			bullet.global_transform = bullet_spawnpoimt # get position
-			var direct = bullet_spawnpoimt.basis * Vector3.FORWARD # get direction
-			if Player_Sprite.flip_h == true: # left direction
-				direct *= -1
-			if Player_Sprite.flip_h == false: # right direction
-				direct = abs(direct)
-			bullet.linear_velocity = direct * 20 # speed of shooted rock
-			reload = true # reload state
-		# when reload
-		elif reload and arbalest:
-			reload_timer += delta # timer
-			if reload_timer > 2 : # after 2 sec reloaded
-				reload_timer = 0
-				reload = false
-		
-	# spyglass
-	if GlobVar.WSAD:
-		if Input.is_action_just_pressed("use_WSAD") and spyglass:
-			if !camera.spyglass: # check spyglass is off
-				camera.spyglass = true # set spyglass is on
-				camera.CamMode = 'spy' # change camera mode
-				camera.ZoomDist = 24 # set camera zoom
-				camera.Teleport() # move camera to player
-				can_move = false # player cant move
-				camera.player_pos = [global_position.x,global_position.y] # send player pos for cam borders
-			elif camera.spyglass: # if spyglass is on
-				camera.spyglass = false # turn off 
-				camera.CamMode = "track" # set to follow player
-				camera.ZoomDist = 18 # set camera zoom
-				camera.Teleport() # move camera to player
-				can_move = true # player can move
-		elif !spyglass and camera.spyglass: # when state for F is change and spyglass is on
-			camera.spyglass = false # turn off
-			camera.CamMode = "track" # set to follow player
-			camera.ZoomDist = 18 # set camera zoom
-			camera.Teleport() # move camera to player
-			can_move = true # player can move
-	if GlobVar.ARROW:
-		if Input.is_action_just_pressed("use_Arrow") and spyglass:
-			if !camera.spyglass: # check spyglass is off
-				camera.spyglass = true # set spyglass is on
-				camera.CamMode = 'spy' # change camera mode
-				camera.ZoomDist = 24 # set camera zoom
-				camera.Teleport() # move camera to player
-				can_move = false # player cant move
-				camera.player_pos = [global_position.x,global_position.y] # send player pos for cam borders
-			elif camera.spyglass: # if spyglass is on
-				camera.spyglass = false # turn off 
-				camera.CamMode = "track" # set to follow player
-				camera.ZoomDist = 18 # set camera zoom
-				camera.Teleport() # move camera to player
-				can_move = true # player can move
-		elif !spyglass and camera.spyglass: # when state for F is change and spyglass is on
-			camera.spyglass = false # turn off
-			camera.CamMode = "track" # set to follow player
-			camera.ZoomDist = 18 # set camera zoom
-			camera.Teleport() # move camera to player
-			can_move = true # player can move
-		
-	# repair 
-	if GlobVar.WSAD:
-		if Input.is_action_pressed("use_WSAD") and repair:
-			# get durability controler
-			var dur = $"../Roller/RepairZones" 
-			dur.repair(1) # repair(power)   more power = repair quickly
-	if GlobVar.ARROW:
-		if Input.is_action_pressed("use_Arrow") and repair:
-			# get durability controler
-			var dur = $"../Roller/RepairZones" 
-			dur.repair(1) # repair(power)   more power = repair quickly
+	# stop climb when cant move
+	if !can_move and (velocity.y > 0 or velocity.y < 0) and climbing:
+		velocity.y = 0
 	
 	move_and_slide()
 
@@ -273,7 +137,19 @@ func MultiVarSwitch():
 		3: spyglass = true
 		4: interact = true
 	print("Interacton mode set: ", GlobVar.PlayerActionMode)
-
+	
+# Fclimbing
+func climb(up:String,down:String,left:String,right:String):
+		if Input.is_action_pressed(up) and climbing and can_move: # climb up
+			velocity.y = 3
+		if Input.is_action_pressed(down) and climbing and can_move: # climb down
+			velocity.y = -2
+		if !Input.is_action_pressed(up) and !Input.is_action_pressed(down) and climbing : # stay on ladder
+			velocity.y = 0
+		elif Input.is_action_pressed(up) and Input.is_action_pressed(down) and climbing : # stay when 2 buttons is pressed
+			velocity.y = 0
+		if climbing and !Input.is_action_pressed(left) and !Input.is_action_pressed(right) : # when roller moving player stay in one place when on ladder
+			velocity.x = linear_x
 
 # Checking player picking/use zone
 func _on_area_3d_body_entered(body: Node3D) -> void:
@@ -286,25 +162,71 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body.name.begins_with("Fuel"):
 		can_pick = null # nothing to pick
 
-#func changeFoption(opt:int) -> void:
-	#match opt:
-		#1:
-			#interact = false
-			#spyglass = false
-			#repair = true
-			#arbalest = false
-		#2:
-			#interact = false
-			#spyglass = false
-			#repair = false
-			#arbalest = true
-		#3:
-			#interact = false
-			#spyglass = true
-			#repair = false
-			#arbalest = false
-		#4:
-			#interact = true
-			#spyglass = false
-			#repair = false
-			#arbalest = false
+# Fpick up item || use item/machine
+func pick_up(input:String):
+	if Input.is_action_just_pressed(input) and not can_pick == null and !picked and interact:
+		picked = true # set is pickerd
+	elif picked and not can_pick == null:
+		# setting global position of player to picked item
+		can_pick.global_transform.origin.x = global_transform.origin.x
+		can_pick.global_transform.origin.y = global_transform.origin.y
+
+# Farbalest
+func use_arbalest(input:String,delta):
+		if Input.is_action_just_pressed(input) and arbalest and !reload:
+			# shoot 
+			var bullet = bullet_scene.instantiate() # get bullet scene
+			add_sibling(bullet) # add bullet to world scene
+			bullet.global_transform = bullet_spawnpoimt # get position
+			var direct = bullet_spawnpoimt.basis * Vector3.FORWARD # get direction
+			if Player_Sprite.flip_h == true: # left direction
+				direct *= -1
+			if Player_Sprite.flip_h == false: # right direction
+				direct = abs(direct)
+			bullet.linear_velocity = direct * 20 # speed of shooted rock
+			reload = true # reload state
+		# when reload
+		elif reload and arbalest:
+			reload_timer += delta # timer
+			if reload_timer > 2 : # after 2 sec reloaded
+				reload_timer = 0
+				reload = false
+
+# Fspyglass
+func use_spyglass(input:String):
+		if Input.is_action_just_pressed(input) and spyglass:
+			if !camera.spyglass: # check spyglass is off
+				camera.spyglass = true # set spyglass is on
+				camera.CamMode = 'spy' # change camera mode
+				camera.ZoomDist = 24 # set camera zoom
+				camera.Teleport() # move camera to player
+				can_move = false # player cant move
+				camera.player_pos = [global_position.x,global_position.y] # send player pos for cam borders
+			elif camera.spyglass: # if spyglass is on
+				camera.spyglass = false # turn off 
+				camera.CamMode = "track" # set to follow player
+				camera.ZoomDist = 18 # set camera zoom
+				camera.Teleport() # move camera to player
+				can_move = true # player can move
+		elif !spyglass and camera.spyglass: # when state for F is change and spyglass is on
+			camera.spyglass = false # turn off
+			camera.CamMode = "track" # set to follow player
+			camera.ZoomDist = 18 # set camera zoom
+			camera.Teleport() # move camera to player
+			can_move = true # player can move
+
+# Frepair
+func use_repair(input:String):
+		if Input.is_action_pressed(input) and repair:
+			# get durability controler
+			var dur = $"../Roller/RepairZones" 
+			dur.repair(1,$RepairProgress) # repair(power, progressBar)   more power = repair quickly
+		else:
+			$RepairProgress.visible = false
+
+# Flip sprite
+func flip_sprite(left: String, right:String):
+		if Input.is_action_just_pressed(right):
+			Player_Sprite.flip_h = false
+		elif Input.is_action_just_pressed(left):
+			Player_Sprite.flip_h = true

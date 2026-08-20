@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dt3nh78u2ij16" path="res://mainCharacter/main_character.gd" id="1_2g3ql"]
 [ext_resource type="Texture2D" uid="uid://c4oj6pa21wwj5" path="res://mainCharacter/WADEK_Sheet_L_Stand_Idle.png" id="2_exv1e"]
+[ext_resource type="PackedScene" uid="uid://2bcg14vhse6a" path="res://mainCharacter/repairProgress/repair_progress.tscn" id="3_vedcc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i1acx"]
 radius = 0.4
@@ -56,20 +57,6 @@ frame_progress = 0.96027476
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=775214664]
 shape = SubResource("BoxShape3D_mbwms")
 
-[node name="Control" type="Control" parent="." unique_id=1739178039]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 80.0
-offset_bottom = 80.0
-
-[node name="ColorRect" type="ColorRect" parent="Control" unique_id=1052947253]
-visible = false
-layout_mode = 0
-offset_left = 960.0
-offset_top = 540.0
-offset_right = 1010.0
-offset_bottom = 590.0
-
 [node name="Node3D" type="Node3D" parent="." unique_id=2075647032]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.263278, 1.5534906, 0)
 
@@ -81,6 +68,9 @@ outline_size = 24
 
 [node name="bullet_spawn" type="Node3D" parent="." unique_id=2126200877]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="RepairProgress" parent="." unique_id=68425666 instance=ExtResource("3_vedcc")]
+visible = false
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
