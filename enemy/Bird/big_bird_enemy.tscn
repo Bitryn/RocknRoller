@@ -13,7 +13,7 @@ step = 0.02
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Head:rotation")
+tracks/0/path = NodePath("body/Head:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -25,7 +25,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Head:position")
+tracks/1/path = NodePath("body/Head:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -37,7 +37,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("WR:rotation")
+tracks/2/path = NodePath("body/WR:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -49,7 +49,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("WR:position")
+tracks/3/path = NodePath("body/WR:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -61,7 +61,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("WL:rotation")
+tracks/4/path = NodePath("body/WL:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -73,7 +73,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("WL:position")
+tracks/5/path = NodePath("body/WL:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -88,7 +88,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Head:rotation")
+tracks/0/path = NodePath("body/Head:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -100,7 +100,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Head:position")
+tracks/1/path = NodePath("body/Head:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -112,7 +112,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("WR:rotation")
+tracks/2/path = NodePath("body/WR:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -124,7 +124,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("WR:position")
+tracks/3/path = NodePath("body/WR:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -136,7 +136,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("WL:rotation")
+tracks/4/path = NodePath("body/WL:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -148,7 +148,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("WL:position")
+tracks/5/path = NodePath("body/WL:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -186,50 +186,110 @@ texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i1acx"]
 
-[node name="BigBirdEnemy" type="Area3D" unique_id=1484725836]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mbwms"]
+radius = 30.0
+
+[sub_resource type="Curve3D" id="Curve3D_a3xto"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 3, 0, -5, 0, 0, 0, -3, 0, 0, 0, 0, 5, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_uwmcv"]
+closed = true
+_data = {
+"points": PackedVector3Array(0.0034478903, 0.502326, 0, 0, -0.5, 0, -2, 0, 0, -0.5, 0, 0, 0.5, 0, 0, 0, -1, 0, 0, -0.5, 0, 0, 0.5, 0, 2, 0, 0, 0.5, 0, 0, -0.5013075, 2.3841858e-07, 0, 0, 1, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[sub_resource type="BoxMesh" id="BoxMesh_mbwms"]
+
+[node name="BigBirdEnemy" type="Node3D" unique_id=1789893852]
 script = ExtResource("1_uwmcv")
 
-[node name="AnimP" type="AnimationPlayer" parent="." unique_id=782486088]
+[node name="body" type="Area3D" parent="." unique_id=418204471]
+transform = Transform3D(1, 0, 0, 0, 0.99999815, 0, 0, 0, 0.99999815, -0.701081, 0.8644959, 0)
+collision_mask = 7
+
+[node name="AnimP" type="AnimationPlayer" parent="body" unique_id=782486088]
+root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_mcxwg")
 
-[node name="Head" type="MeshInstance3D" parent="." unique_id=634254553]
+[node name="Head" type="MeshInstance3D" parent="body" unique_id=634254553]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4966656, 0.35741794, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_uyufj")
 mesh = SubResource("PlaneMesh_i1acx")
 
-[node name="Body" type="MeshInstance3D" parent="." unique_id=1376802359]
+[node name="Body" type="MeshInstance3D" parent="body" unique_id=1376802359]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.16823381)
 visible = false
 material_override = SubResource("StandardMaterial3D_65sfv")
 mesh = SubResource("PlaneMesh_i1acx")
 
-[node name="WR" type="Node3D" parent="." unique_id=1722082620]
+[node name="WR" type="Node3D" parent="body" unique_id=1722082620]
 transform = Transform3D(-1, 0, 0, 0, 1, -8.742278e-08, 0, 8.742278e-08, 1, -0.3151213, 0.26032555, -0.31757188)
 visible = false
 
-[node name="WingR" type="MeshInstance3D" parent="WR" unique_id=293016321]
+[node name="WingR" type="MeshInstance3D" parent="body/WR" unique_id=293016321]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.68466216, 0.012844861, 0)
 material_override = SubResource("StandardMaterial3D_c304g")
 mesh = SubResource("PlaneMesh_i1acx")
 
-[node name="WL" type="Node3D" parent="." unique_id=384244296]
+[node name="WL" type="Node3D" parent="body" unique_id=384244296]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07897681, 0.2843807, -0.10255605)
 visible = false
 
-[node name="WingL" type="MeshInstance3D" parent="WL" unique_id=575713065]
+[node name="WingL" type="MeshInstance3D" parent="body/WL" unique_id=575713065]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7129738, 0.006575525, -0.21501583)
 material_override = SubResource("StandardMaterial3D_c304g")
 mesh = SubResource("PlaneMesh_i1acx")
 
-[node name="BirdIdle" parent="." unique_id=1352622653 instance=ExtResource("4_pk4of")]
+[node name="BirdIdle" parent="body" unique_id=1352622653 instance=ExtResource("4_pk4of")]
 
-[node name="Coll" type="CollisionShape3D" parent="." unique_id=320531323]
+[node name="Coll" type="CollisionShape3D" parent="body" unique_id=320531323]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13942528, 0.23191392, 0)
 shape = SubResource("BoxShape3D_i1acx")
+
+[node name="detectZone" type="Area3D" parent="body" unique_id=109573035]
+transform = Transform3D(1, 0, 0, 0, 1.0000018, 0, 0, 0, 1.0000018, 0.701081, -0.8644974, 0)
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="body/detectZone" unique_id=1025316545]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_mbwms")
 
 [node name="Flapper" type="Timer" parent="." unique_id=1134986741]
 wait_time = 0.5
 autostart = true
 
+[node name="LeftRight" type="Path3D" parent="." unique_id=1077289051]
+curve = SubResource("Curve3D_a3xto")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="LeftRight" unique_id=28727494]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57702315, 0.17242008, 0)
+progress = 5.0
+rotation_mode = 0
+
+[node name="Circle" type="Path3D" parent="LeftRight/PathFollow3D" unique_id=1877306307]
+curve = SubResource("Curve3D_uwmcv")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="LeftRight/PathFollow3D/Circle" unique_id=1124742749]
+transform = Transform3D(1, 0, 0, 0, 0.99999815, 0, 0, 0, 0.99999815, -2, 0, 0)
+rotation_mode = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LeftRight/PathFollow3D/Circle/PathFollow3D" unique_id=417410551]
+transform = Transform3D(1, 0, 0, 0, 1.0000018, 0, 0, 0, 1.0000018, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_mbwms")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LeftRight/PathFollow3D" unique_id=1967394347]
+visible = false
+mesh = SubResource("BoxMesh_mbwms")
+
+[connection signal="body_entered" from="body/detectZone" to="." method="_on_detect_zone_body_entered"]
+[connection signal="body_exited" from="body/detectZone" to="." method="_on_detect_zone_body_exited"]
 [connection signal="timeout" from="Flapper" to="." method="_on_flapper_timeout"]

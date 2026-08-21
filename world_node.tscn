@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bj7j58dmoofn8" path="res://Fuel/fuel.tscn" id="7_21o2a"]
 [ext_resource type="PackedScene" uid="uid://b1mgc8clsqihw" path="res://WeatherNodes/rain_node.tscn" id="8_4eb2h"]
 [ext_resource type="PackedScene" uid="uid://gtoujpq10asq" path="res://mainCharacter/popMenu/mode_menu.tscn" id="9_3ywo4"]
+[ext_resource type="PackedScene" uid="uid://8ae5vsbtlh46" path="res://enemy/Bird/big_bird_enemy.tscn" id="10_j5p5i"]
 
 [sub_resource type="Environment" id="Environment_i1acx"]
 background_mode = 1
@@ -35,6 +36,7 @@ size = Vector3(43.52043, 23.774704, 0.22570801)
 environment = SubResource("Environment_i1acx")
 
 [node name="TestRoute" parent="." unique_id=1114604292 instance=ExtResource("1_ugkh2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009599686, -0.05523491, 0.0008010864)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1353875520]
 transform = Transform3D(0.47463256, 0.3586984, -0.80377835, 0, 0.9131934, 0.4075265, 0.8801841, -0.19342531, 0.43343136, 0, 9.22435, 0)
@@ -111,3 +113,6 @@ Lightning = true
 
 [node name="ModeMenu" parent="." unique_id=2127508239 node_paths=PackedStringArray("player") instance=ExtResource("9_3ywo4")]
 player = NodePath("../MainCharacter")
+
+[node name="BigBirdEnemy" parent="." unique_id=1789893852 instance=ExtResource("10_j5p5i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.34229, 12.46591, 0)

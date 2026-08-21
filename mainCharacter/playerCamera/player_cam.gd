@@ -28,11 +28,12 @@ func _physics_process(delta: float) -> void:
 	
 	Cam2PlayerPos = GlobVar.PlayerPos - position
 	Cam2PlayerPos.z = Cam2PlayerPos.z + ZoomDist
-	
+	#print(position)
 	match CamMode:
 		"track":
 			position +=  Vector3(Cam2PlayerPos.x * CamSpeed * delta, Cam2PlayerPos.y * CamSpeed * delta + .2,Cam2PlayerPos.z) # przesuniecie wyskosci tutaj w Y
 		"spy":
+			
 			if GlobVar.WSAD:
 				spy_mode("move_left_WSAD","move_right_WSAD","move_up_WSAD","move_down_WSAD")
 			if GlobVar.ARROW:
