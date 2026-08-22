@@ -3,7 +3,7 @@ extends Camera3D
 
 var ZoomDist = 0 #BIT distance of camera from a players 'plane' changes for drama and spyglass usage
 var Cam2PlayerPos = Vector3(0,0,0) #BIT difference of positions Player <-> Camera
-var CamSpeed = 3
+var CamSpeed = 8
 var CamMode = "track" 
 var InputDir = Vector2(0,0)
 var spyglass = false
@@ -17,7 +17,8 @@ var player_pos = [0,0]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Cam2PlayerPos = GlobVar.PlayerPos
-	ZoomDist = 18
+	ZoomDist = GlobVar.DEFcamDISTANCE
+	Cam2PlayerPos.z = Cam2PlayerPos.z + ZoomDist
 	
 	Teleport()
 	pass # Replace with function body.
@@ -26,12 +27,14 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	
-	Cam2PlayerPos = GlobVar.PlayerPos - position
-	Cam2PlayerPos.z = Cam2PlayerPos.z + ZoomDist
+	Cam2PlayerPos.x = GlobVar.PlayerPos.x - global_position.x
+	Cam2PlayerPos.y = GlobVar.PlayerPos.y - global_position.y
+	
 	#print(position)
 	match CamMode:
 		"track":
-			position +=  Vector3(Cam2PlayerPos.x * CamSpeed * delta, Cam2PlayerPos.y * CamSpeed * delta + .2,Cam2PlayerPos.z) # przesuniecie wyskosci tutaj w Y
+			global_position.x += Cam2PlayerPos.x * CamSpeed * delta 
+			global_position.y += Cam2PlayerPos.y * CamSpeed * delta + .2
 		"spy":
 			
 			if GlobVar.WSAD:
@@ -40,7 +43,7 @@ func _physics_process(delta: float) -> void:
 				spy_mode("move_left_ARROW","move_right_ARROW","move_up_ARROW","move_down_Arrow")
 				
 			# moving cam
-			position += Vector3( InputDir.x , InputDir.y,0)*delta  * 50
+			global_position += Vector3( InputDir.x , InputDir.y,0)*delta  * 50
 
 
 func spy_mode(left:String,right:String,up:String,down:String):
@@ -77,4 +80,4 @@ func spy_mode(left:String,right:String,up:String,down:String):
 				InputDir.y = 0
 
 func Teleport():
-	position = Vector3(GlobVar.PlayerPos.x, GlobVar.PlayerPos.y, GlobVar.PlayerPos.y + ZoomDist)
+	global_position = Vector3(GlobVar.PlayerPos.x, GlobVar.PlayerPos.y, GlobVar.PlayerPos.z + ZoomDist)# 

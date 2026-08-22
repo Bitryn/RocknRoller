@@ -11,6 +11,8 @@ var lineax
 
 var poz = 0
 
+@onready var durabilityControl = $RepairZones
+
 func _ready() -> void:
 	poz = position.z
 	
@@ -19,6 +21,10 @@ func _ready() -> void:
 	#position.z = poz
 
 func _physics_process(delta: float) -> void:
+	
+	GlobVar.attackable_parts[0] = $CollisionShape3D.global_position
+	GlobVar.attackable_parts[1] = $CollisionShape3D3.global_position
+	GlobVar.attackable_parts[2] = $Canon.global_position
 	
 	rotation.x = 0
 	rotation.y = 0
@@ -36,13 +42,11 @@ func _physics_process(delta: float) -> void:
 func _on_area_3d_body_entered(body: CharacterBody3D) -> void:
 	if body.name == "MainCharacter": # check is player in roller
 		player = body # save player node
+		GlobVar.PlayerInRoller = true
 		
 		
 		
 
-#func _on_area_3d_body_exited(body: CharacterBody3D) -> void:
-	#if body.name == "MainCharacter":
-		#player_pos = body.global_transform
-		#body.get_parent().remove_child(body)
-		#world.add_child(body)
-		#body.global_transform = player_pos
+func _on_area_3d_body_exited(body: CharacterBody3D) -> void:
+	if body.name == "MainCharacter":
+		GlobVar.PlayerInRoller = false

@@ -115,4 +115,4 @@ Lightning = true
 player = NodePath("../MainCharacter")
 
 [node name="BigBirdEnemy" parent="." unique_id=1789893852 instance=ExtResource("10_j5p5i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.34229, 12.46591, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.777004, 28.62274, 0)

@@ -50,6 +50,28 @@ func repair(rep_strng: float, progressNode):
 			progressNode.visible = true
 
 
+func damage(element:int,procentage:bool,damagee:float):
+	match element:
+		0:
+			if !procentage:
+				left_wheel_dur[1] -= damagee
+			else:
+				var dmg = left_wheel_dur[0] * damagee
+				left_wheel_dur[1] -= dmg
+		1:
+			if !procentage:
+				right_wheel_dur[1] -= damagee
+			else:
+				var dmg = right_wheel_dur[0] * damagee
+				right_wheel_dur[1] -= dmg
+		2:
+			if !procentage:
+				canon_dur[1] -= damagee
+			else:
+				var dmg = canon_dur[0] * damagee
+				canon_dur[1] -= dmg
+
+
 func _on_left_wheel_body_entered(body: Node3D) -> void:
 	if body.name == "MainCharacter":
 		opt = 1

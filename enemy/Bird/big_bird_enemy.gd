@@ -20,6 +20,11 @@ var chasing = false
 var attacking = false
 var returning = false
 
+var bird_attack_speed = 8
+var what_chasing = 0   # 1 = roller  2 = player
+var what_attack = 0
+var what_element = null
+
 var timer = 0
 
 func _physics_process(delta: float) -> void:
@@ -28,14 +33,17 @@ func _physics_process(delta: float) -> void:
 	if !attacking and !returning: # idle
 		bird_body.global_position = path_progress.global_position # go to point on setted path
 	elif attacking: # attack
-		if player == null:
-			bird_body.global_position = bird_body.global_position.move_toward(last_pos_player,10*delta) # fly toward last player position
-			if bird_body.global_position.distance_to(last_pos_player) < 1: # when near last player position start returning
-				returning = true # returninig on
-				attacking = false # attacking off
-		if player !=null:
-			bird_body.global_position = bird_body.global_position.move_toward(player.global_position,10*delta) # fly toward player
-			if bird_body.global_position.distance_to(player.global_position) < 1: # when near player start returning
+		if what_attack == 1:
+			if roller == null:
+				do_attack(delta,last_pos_roller,true)
+			if roller !=null:
+				do_attack(delta,GlobVar.attackable_parts[what_element],true)
+		elif what_attack == 2:
+			if player == null:
+				do_attack(delta,last_pos_player,false)
+			if player !=null:
+				do_attack(delta,player.global_position,false)
+			if GlobVar.PlayerInRoller:
 				returning = true # returninig on
 				attacking = false # attacking off
 	elif returning: # returninig
@@ -56,13 +64,21 @@ func _physics_process(delta: float) -> void:
 		chasing = false # stop chasing
 	
 	# move main node above player/roller
-	if chasing and player!=null:
+	if chasing and roller != null:
+		global_position.x = move_toward(global_position.x,roller.global_position.x,4*delta) # follow player X
+		global_position.y = move_toward(global_position.y,roller.global_position.y + 20,4*delta) # follow player X
+		what_chasing = 1
+	elif chasing and player != null and roller == null:
 		global_position.x = move_toward(global_position.x,player.global_position.x,4*delta) # follow player X
+		global_position.y = move_toward(global_position.y,player.global_position.y + 12,4*delta) # follow player X
+		what_chasing = 2
 	
 	# when attack
 	if chasing and !attacking and !returning: # only chasing nothing else
 		timer += delta
 		if timer > 4: # after some time go attack
+			what_attack = what_chasing
+			what_element = randi_range(0,2)
 			timer = 0
 			attacking = true # attack ON
 
@@ -70,6 +86,14 @@ func _physics_process(delta: float) -> void:
 # Animation
 func _on_flapper_timeout() -> void:
 	$body/BirdIdle/AnimationPlayer.play("ArmatureAction")
+
+func do_attack(delta,attackTo,roler:bool):
+	bird_body.global_position = bird_body.global_position.move_toward(attackTo,bird_attack_speed*delta) # fly toward last player position
+	if bird_body.global_position.distance_to(attackTo) < 1: # when near last player position start returning
+		if roler:
+			roller.durabilityControl.damage(what_element,false,10)
+		returning = true # returninig on
+		attacking = false # attacking off
 
 # FOV detect 
 func _on_detect_zone_body_entered(body: Node3D) -> void:

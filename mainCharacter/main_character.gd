@@ -38,16 +38,15 @@ func _ready() -> void:
 	player_z = position.z # get player Z pos
 	interact = true # set state for F key
 	camera = $"../PlayerCam" # get 
-	GlobVar.PlayerPos = position
+	GlobVar.PlayerPos = global_position
 	
 	GlobSig.ActionModeSwitch.connect(MultiVarSwitch)
 
 
 func _process(delta: float) -> void:
-	GlobVar.PlayerPos = position # player position in global
+	GlobVar.PlayerPos = global_position # player position in global
 	
 	bullet_spawnpoimt = $bullet_spawn.global_transform # get bullet spawnpoint
-	
 	
 	
 	# fliping sprite to move direction
@@ -198,20 +197,20 @@ func use_spyglass(input:String):
 			if !camera.spyglass: # check spyglass is off
 				camera.spyglass = true # set spyglass is on
 				camera.CamMode = 'spy' # change camera mode
-				camera.ZoomDist = 24 # set camera zoom
+				camera.ZoomDist = GlobVar.SPYcamDISTANCE # set camera zoom
 				camera.Teleport() # move camera to player
 				can_move = false # player cant move
 				camera.player_pos = [global_position.x,global_position.y] # send player pos for cam borders
 			elif camera.spyglass: # if spyglass is on
 				camera.spyglass = false # turn off 
 				camera.CamMode = "track" # set to follow player
-				camera.ZoomDist = 18 # set camera zoom
+				camera.ZoomDist = GlobVar.DEFcamDISTANCE # set camera zoom
 				camera.Teleport() # move camera to player
 				can_move = true # player can move
 		elif !spyglass and camera.spyglass: # when state for F is change and spyglass is on
 			camera.spyglass = false # turn off
 			camera.CamMode = "track" # set to follow player
-			camera.ZoomDist = 18 # set camera zoom
+			camera.ZoomDist = GlobVar.DEFcamDISTANCE # set camera zoom
 			camera.Teleport() # move camera to player
 			can_move = true # player can move
 
