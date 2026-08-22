@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ctr7as4tr4vbc" path="res://test_route.tscn" id="1_ugkh2"]
 [ext_resource type="PackedScene" uid="uid://c2t50hms4g7k1" path="res://Roller/roller.tscn" id="2_am32a"]
+[ext_resource type="PackedScene" uid="uid://trdq0ssymxau" path="res://Routes/route_test_01.tscn" id="2_j5p5i"]
 [ext_resource type="Material" uid="uid://csckqvmoko0lv" path="res://shader/PlaceholderMat.tres" id="3_msjbx"]
 [ext_resource type="PackedScene" uid="uid://bs1jk53335xue" path="res://mainCharacter/main_character.tscn" id="4_msjbx"]
 [ext_resource type="PackedScene" uid="uid://by70dultb3ln0" path="res://mainCharacter/player_cam.tscn" id="5_ym0nx"]
@@ -9,10 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://bj7j58dmoofn8" path="res://Fuel/fuel.tscn" id="7_21o2a"]
 [ext_resource type="PackedScene" uid="uid://b1mgc8clsqihw" path="res://WeatherNodes/rain_node.tscn" id="8_4eb2h"]
 [ext_resource type="PackedScene" uid="uid://gtoujpq10asq" path="res://mainCharacter/mode_menu.tscn" id="9_3ywo4"]
+[ext_resource type="PackedScene" uid="uid://cqyqfo5pifrgo" path="res://WeatherNodes/sun_node.tscn" id="11_3e8q1"]
+[ext_resource type="AudioStream" uid="uid://cwiavmapjr6p7" path="res://SFX/12. Burning Man.mp3" id="12_113ax"]
 
 [sub_resource type="Environment" id="Environment_i1acx"]
 background_mode = 1
-background_color = Color(0.3513318, 0.46822876, 0.51401436, 1)
+background_color = Color(0.26754728, 0.6610438, 0.75072306, 1)
+background_energy_multiplier = 0.3
 
 [sub_resource type="BoxMesh" id="BoxMesh_i1acx"]
 size = Vector3(1, 1.7, 1)
@@ -34,7 +38,12 @@ size = Vector3(43.52043, 23.774704, 0.22570801)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=350873145]
 environment = SubResource("Environment_i1acx")
 
-[node name="TestRoute" parent="." unique_id=1114604292 instance=ExtResource("1_ugkh2")]
+[node name="TempRouteHolder" type="Node" parent="." unique_id=1895583830]
+
+[node name="TestRoute" parent="TempRouteHolder" unique_id=1114604292 instance=ExtResource("1_ugkh2")]
+visible = false
+
+[node name="RouteTest01" parent="TempRouteHolder" unique_id=1682364151 instance=ExtResource("2_j5p5i")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1353875520]
 transform = Transform3D(0.47463256, 0.3586984, -0.80377835, 0, 0.9131934, 0.4075265, 0.8801841, -0.19342531, 0.43343136, 0, 9.22435, 0)
@@ -50,6 +59,12 @@ mesh = SubResource("BoxMesh_i1acx")
 
 [node name="MainCharacter" parent="." unique_id=892675896 instance=ExtResource("4_msjbx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.593015, 5.7534466, 0)
+
+[node name="RainNode" parent="MainCharacter" unique_id=1542721520 instance=ExtResource("8_4eb2h")]
+Lightning = true
+
+[node name="SunNode" parent="MainCharacter" unique_id=1618392058 instance=ExtResource("11_3e8q1")]
+Rotation = Vector2(20, 20)
 
 [node name="PlayerCam" parent="." unique_id=1450766968 instance=ExtResource("5_ym0nx")]
 
@@ -104,10 +119,13 @@ mass = 0.014
 lock_rotation = true
 fuel_value = 50
 
-[node name="RainNode" parent="." unique_id=1542721520 instance=ExtResource("8_4eb2h")]
-process_mode = 4
-visible = false
-Lightning = true
-
 [node name="ModeMenu" parent="." unique_id=2127508239 node_paths=PackedStringArray("player") instance=ExtResource("9_3ywo4")]
 player = NodePath("../MainCharacter")
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=1193452898]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+light_color = Color(0.6522215, 0.7704798, 0.8247193, 1)
+light_energy = 0.4
+
+[node name="BGtheme" type="AudioStreamPlayer" parent="." unique_id=1226672024]
+stream = ExtResource("12_113ax")
