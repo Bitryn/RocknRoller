@@ -10,7 +10,7 @@ func _ready() -> void:
 	if Lightning:
 		$Timer.start()
 	
-	$Drops.process_material.direction = RainVec
+	$GPUParticles3D.process_material.direction = RainVec
 	pass # Replace with function body.
 
 
