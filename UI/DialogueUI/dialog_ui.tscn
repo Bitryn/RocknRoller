@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://ckxed0pdq45av"]
+
+[ext_resource type="Script" uid="uid://cumy05q0kftdi" path="res://UI/DialogueUI/dialog_ui.gd" id="1_8pb1b"]
+[ext_resource type="Script" uid="uid://vypvaiku0q4t" path="res://UI/DialogueUI/Add_Dialogue.gd" id="2_nd03t"]
+[ext_resource type="Script" uid="uid://dq5roj3uy7wd0" path="res://UI/DialogueUI/Dialogue_Answers.gd" id="3_m42h3"]
+[ext_resource type="Script" uid="uid://utsa7d0dawgv" path="res://UI/DialogueUI/Answer_group.gd" id="4_6hrni"]
+
+[sub_resource type="Resource" id="Resource_8pb1b"]
+script = ExtResource("2_nd03t")
+text = "jest jakis tekst"
+answer = true
+metadata/_custom_type_script = "uid://vypvaiku0q4t"
+
+[sub_resource type="Resource" id="Resource_m42h3"]
+script = ExtResource("3_m42h3")
+text = "000000"
+metadata/_custom_type_script = "uid://dq5roj3uy7wd0"
+
+[sub_resource type="Resource" id="Resource_6hrni"]
+script = ExtResource("3_m42h3")
+text = "11111111"
+metadata/_custom_type_script = "uid://dq5roj3uy7wd0"
+
+[sub_resource type="Resource" id="Resource_u0rpj"]
+script = ExtResource("4_6hrni")
+answers = Array[ExtResource("3_m42h3")]([SubResource("Resource_m42h3"), SubResource("Resource_6hrni")])
+metadata/_custom_type_script = "uid://utsa7d0dawgv"
+
+[node name="DialogUI" type="Control" unique_id=647319310]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8pb1b")
+dialogue = Array[ExtResource("2_nd03t")]([SubResource("Resource_8pb1b")])
+answers_arararar = Array[ExtResource("4_6hrni")]([SubResource("Resource_u0rpj")])
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=707762451]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 500.0
+offset_right = 944.0
+offset_bottom = 800.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect" unique_id=864524908]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 780.0
+offset_bottom = 280.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sollicitudin mauris eu leo tristique pulvinar. Cras imperdiet iaculis ipsum vel viverra. Cras nec dignissim massa, quis ullamcorper felis. Proin volutpat nec erat id rhoncus. Aenean sit amet libero quis urna egestas fringilla ut nec mi. Cras suscipit arcu at commodo tincidunt. Nulla consequat orci risus, a scelerisque dui dictum ut. Nulla porttitor tristique augue nec convallis.cula tellus dapibus at. Cras consequat metus quis pellentesque interdum. Duis feugiat consectetur magna, id ultrices mi mattis sit amet. Duis vulputate ante velit. Maecenas facilisis quam a nulla venenatis, nec ornare nibh vehicula. Fusce quis metus porttitor, eleifend massa at, pharetra sem. Donec et ligula ipsum. Nulla interdum gravida est ut tempus. Nullam nec dignissim elit. Nullam eget nunc id arcu commodo scelerisque at id ipsum. Integer semper nisl in est varius convallis. Etiam malesuada elementum turpis, sed rutrum metus cursus eget. Praesent est ex, viverra sit amet risus quis, convallis cursus tellus."
+fit_content = true
+scroll_active = false
+visible_characters = 1059
+visible_ratio = 0.9990566
+
+[node name="BTNnode" type="VBoxContainer" parent="." unique_id=1607972127]
+layout_mode = 0
+offset_left = 924.0
+offset_top = 500.0
+offset_right = 1124.0
+offset_bottom = 932.0
+theme_override_constants/separation = 20
+
+[node name="Button" type="Button" parent="BTNnode" unique_id=243899922]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "adsdasdasdasdawdasdawd awdasd awdasd awdasd wasdawdas dawdasdawdajh kjhkh kkh hkhkjhk kjh khk jkhjkh   hj hk hkhj hkhkkhhkkh  hk hk hkkh kh hkh k hkh khj k"
+alignment = 0
+autowrap_mode = 3
+
+[node name="Button2" type="Button" parent="BTNnode" unique_id=2088735429]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "adsdasdasdasdawdasdawd awdasd awdasd awdasd wasdawdas dawdasdawda"
+alignment = 0
+autowrap_mode = 3
+
+[node name="Button3" type="Button" parent="BTNnode" unique_id=916489541]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "adsdasdasdasdawdasdawd awdasd awdasd awdasd wasdawdas dawdasdawda"
+alignment = 0
+autowrap_mode = 3

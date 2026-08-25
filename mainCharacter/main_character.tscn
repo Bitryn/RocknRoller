@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://dt3nh78u2ij16" path="res://mainCharacter/main_character.gd" id="1_2g3ql"]
 [ext_resource type="Texture2D" uid="uid://c4oj6pa21wwj5" path="res://mainCharacter/WADEK_Sheet_L_Stand_Idle.png" id="2_exv1e"]
 [ext_resource type="PackedScene" uid="uid://2bcg14vhse6a" path="res://mainCharacter/repairProgress/repair_progress.tscn" id="3_vedcc"]
+[ext_resource type="PackedScene" uid="uid://ckxed0pdq45av" path="res://UI/DialogueUI/dialog_ui.tscn" id="4_b3bh6"]
+[ext_resource type="Script" uid="uid://vypvaiku0q4t" path="res://UI/DialogueUI/Add_Dialogue.gd" id="5_owqkl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i1acx"]
 radius = 0.4
@@ -32,6 +34,18 @@ animations = [{
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mbwms"]
 size = Vector3(1.2275391, 2.4249268, 1.9755859)
+
+[sub_resource type="Resource" id="Resource_mbwms"]
+script = ExtResource("5_owqkl")
+text = "asdasdasd teak askdaks askdak skaksa jest ajksi tekst co ma sie wyswietlac tylko coraz szybciej z kazdym kliknieciem to dziala czemuOó"
+next_dialogue = 1
+metadata/_custom_type_script = "uid://vypvaiku0q4t"
+
+[sub_resource type="Resource" id="Resource_w63q2"]
+script = ExtResource("5_owqkl")
+text = "po prostu koljena opcja gdzie odpoweidzi cie cofaja do pierwszej czy cos takiego"
+answer = true
+metadata/_custom_type_script = "uid://vypvaiku0q4t"
 
 [node name="MainCharacter" type="CharacterBody3D" unique_id=892675896 node_paths=PackedStringArray("Player_Sprite")]
 collision_layer = 2
@@ -71,6 +85,9 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0
 
 [node name="RepairProgress" parent="." unique_id=68425666 instance=ExtResource("3_vedcc")]
 visible = false
+
+[node name="DialogUI" parent="." unique_id=647319310 instance=ExtResource("4_b3bh6")]
+dialogue = Array[ExtResource("5_owqkl")]([SubResource("Resource_mbwms"), SubResource("Resource_w63q2")])
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
