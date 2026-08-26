@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
-	$Aim.velocity =   GlobVar.InputDir * delta * (5000 + (15000* int(Input.is_action_pressed("sprint") )))     
+	$Aim.velocity =   GlobVar.InputDir * delta * (9000 + (11000* int(Input.is_action_pressed("sprint") )))     
 	$Aim.move_and_slide()
 
 

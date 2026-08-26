@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://d40d740x8q0v" path="res://Roller/Canon/canon_control.tscn" id="13_llb22"]
 [ext_resource type="Script" uid="uid://yl2i8xa63t18" path="res://Roller/Ramp/close_ramp.gd" id="15_knf4l"]
 [ext_resource type="Script" uid="uid://cs8eia8sxjsp4" path="res://Roller/repair_zones.gd" id="16_qtdid"]
+[ext_resource type="Texture2D" uid="uid://dlonp3wgv6f3j" path="res://img/map icon.png" id="17_3mx1d"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_knf4l"]
 friction = 0.6
@@ -286,7 +287,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.242, 5.857522, -1.3064455)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.242, 4.641021, -1.3064455)
 
 [node name="BigWheelDrive" parent="." unique_id=22300035 instance=ExtResource("11_nb208")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.720792, -8.188038, -1.5624844)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -12.720792, -8.144775, -2.0156646)
 
 [node name="Canon" parent="." unique_id=324564860 instance=ExtResource("12_ex2hn")]
 transform = Transform3D(2.695, 0, 0, 0, 2.695, 0, 0, 0, 2.695, 8.506909, 2.9443033, 0)
@@ -345,6 +346,10 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RepairZones/Ster" unique_id=670315545]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08201313, 0.023432255, 0.9465637)
 shape = SubResource("BoxShape3D_84biw")
+
+[node name="Map icon" type="Sprite3D" parent="." unique_id=311557066]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 8.99066, -4.2855396, -0.29622555)
+texture = ExtResource("17_3mx1d")
 
 [connection signal="body_entered" from="RightRamp/Area3D" to="RightRamp" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="LeftRamp/Area3D" to="LeftRamp" method="_on_area_3d_body_entered"]

@@ -51,9 +51,20 @@ Point0 = NodePath("../MapPoint002")
 [node name="Routes" type="Node2D" parent="MapHolder" unique_id=567491889]
 
 [node name="MapRoute" parent="MapHolder/Routes" unique_id=1384801702 node_paths=PackedStringArray("Point0", "Point1") instance=ExtResource("3_g3i57")]
-position = Vector2(573, 1525)
+position = Vector2(563, 1519)
 Point0 = NodePath("../../Points/MapPoint001")
 Point1 = NodePath("../../Points/MapPoint002")
+rName = "test01"
+
+[node name="MapRoute2" parent="MapHolder/Routes" unique_id=1653733840 node_paths=PackedStringArray("Point0", "Point1") instance=ExtResource("3_g3i57")]
+position = Vector2(681, 1465)
+Point0 = NodePath("../../Points/MapPoint002")
+Point1 = NodePath("../../Points/MapPoint003")
+
+[node name="MapRoute3" parent="MapHolder/Routes" unique_id=1591972964 node_paths=PackedStringArray("Point0", "Point1") instance=ExtResource("3_g3i57")]
+position = Vector2(565, 1409)
+Point0 = NodePath("../../Points/MapPoint002")
+Point1 = NodePath("../../Points/MapPoint004")
 
 [node name="Aim" type="CharacterBody2D" parent="." unique_id=1436262922]
 position = Vector2(767, 1342)

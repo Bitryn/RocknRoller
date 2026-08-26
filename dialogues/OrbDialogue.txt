@@ -1,0 +1,28 @@
+0 Joey,joey look at this fucking orb!
+    A pretty... pretty cool orb i admit
+        0A Nifty, huh
+        AA Let's circleback[back to zero]
+        AB It's the same color as you... and everything else for that matter[End]
+        AC [if you were to ponder upon the orb...]
+            0AC [you both are charmed by the qualities of orb, you 
+            dont see anything beyond it. It would all be 
+            romantical if not for the orbs indifference]
+            ACA [End the conversation]
+    B I'm more worried about the weather
+        0B Which is?
+        BA It's absent!!!
+            0BA Maybe, but maybe we can get different results 
+            if you venture beyond
+            BAA And what was that supposed to mean?
+                0BAA There is a stand point right behind me, in the wall, take it!
+                BAAA Ok...[End]
+    C There are more important matters at hand
+        0C What kind?
+        CA We are currently in a placeholder situation
+            0CA ??
+            CAA Our chances of survival are tragically low
+                0CAA ...And yet we live in longing...
+                CAAA And hope, we may still have that[End]
+            CAB Our time is as short as can be[End]
+                
+
