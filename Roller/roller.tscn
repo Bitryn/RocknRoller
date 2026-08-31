@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bhomf8ijx6vfi" path="res://Roller/ladder/ladder.tscn" id="4_ls1n8"]
 [ext_resource type="PackedScene" uid="uid://cu5oig6wg03wy" path="res://Roller/Stere/stere.tscn" id="5_mlrg5"]
 [ext_resource type="PackedScene" uid="uid://0v2ldp3jtpr4" path="res://Roller/UpperDoor.blend" id="6_l32on"]
+[ext_resource type="PackedScene" uid="uid://cy8ed64g8uyt8" path="res://Roller/GearUI/gear_ui.tscn" id="7_78p18"]
 [ext_resource type="PackedScene" uid="uid://dehj3g8l0pwbr" path="res://Roller/UpperDoorHole.blend" id="7_x27il"]
 [ext_resource type="PackedScene" uid="uid://dsy6kxhhynooo" path="res://Roller/FuelTank/tank.tscn" id="8_x27il"]
 [ext_resource type="PackedScene" uid="uid://cxugrxpa654l0" path="res://Roller/ChimneyTop.blend" id="9_j5t1w"]
@@ -268,6 +269,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.237, -4.67, 0)
 collision_mask = 3
 Roller = NodePath("..")
 tank = NodePath("../tank")
+
+[node name="GearUI" parent="Stere" unique_id=1275495918 instance=ExtResource("7_78p18")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7591817, 0.2814312, 2.887989)
 
 [node name="tank" parent="." unique_id=772305751 instance=ExtResource("8_x27il")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2758503, -2.863136, 0)

@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://cy8ed64g8uyt8"]
+
+[ext_resource type="Texture2D" uid="uid://c012riun6apf0" path="res://img/Speedometer.png" id="1_usyew"]
+[ext_resource type="Script" uid="uid://8g0ary21jjtp" path="res://Roller/GearUI/gear_ui.gd" id="2_v1lhm"]
+[ext_resource type="FontFile" uid="uid://crlquxmj5cefo" path="res://fonts/squarefont/Square.ttf" id="3_acfcw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i1acx"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.96114784, 0.6983424, 7.70092e-07, 1)
+albedo_texture = ExtResource("1_usyew")
+detail_blend_mode = 1
+texture_filter = 0
+
+[node name="GearUI" type="Sprite3D" unique_id=1275495918]
+material_override = SubResource("StandardMaterial3D_i1acx")
+pixel_size = 0.05
+texture = ExtResource("1_usyew")
+script = ExtResource("2_v1lhm")
+
+[node name="a" type="Label3D" parent="." unique_id=608479866]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.073207766)
+transparency = 0.8
+modulate = Color(0.9130943, 0.7112827, 0, 1)
+text = "a"
+font = ExtResource("3_acfcw")
+font_size = 256
+outline_size = 8
+
+[node name="b" type="Label3D" parent="." unique_id=2099938080]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.073207766)
+modulate = Color(0.9130943, 0.7112827, 0, 1)
+text = "b"
+font = ExtResource("3_acfcw")
+font_size = 256
+outline_size = 8
+
+[node name="c" type="Label3D" parent="." unique_id=1298072484]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -0.073207766)
+transparency = 0.8
+modulate = Color(0.9130943, 0.7112827, 0, 1)
+text = "c"
+font = ExtResource("3_acfcw")
+font_size = 256
+outline_size = 8
